@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    Button dimensions-->
+    <dimen name="round_corners">40dp</dimen>
+
+</resources>

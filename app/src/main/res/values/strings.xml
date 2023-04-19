@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Where to Eat</string>
+    <string name="find_my_location">Find my location</string>
+    <string name="min_radius_distance">0.5 km</string>
+    <string name="max_radius_distance">50 km</string>
+    <string name="cheap_price_range">Cheap price range</string>
+    <string name="inexpensive_price_range">Inexpensive price range</string>
+    <string name="reasonable_price_range">Reasonable price range</string>
+    <string name="expensive_price_range">Expensive price range</string>
+    <string name="radius_range_slider">Radius range slider</string>
+    <string name="find_a_place_to_eat">Find a place to eat</string>
+    <string name="gps_icon">Gps icon</string>
+</resources>
