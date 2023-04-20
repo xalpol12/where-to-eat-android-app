@@ -10,4 +10,9 @@
     <string name="radius_range_slider">Radius range slider</string>
     <string name="find_a_place_to_eat">Find a place to eat</string>
     <string name="gps_icon">Gps icon</string>
+    <string name="title_activity_place">PlaceActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="rating_value">4.4</string>
+    <string name="title_value">Lorem Ipsum</string>
 </resources>
