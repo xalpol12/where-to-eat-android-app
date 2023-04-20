@@ -2,5 +2,6 @@
 <resources>
 <!--    Button dimensions-->
     <dimen name="round_corners">40dp</dimen>
+    <dimen name="round_corners_small">15dp</dimen>
 
 </resources>

@@ -30,7 +30,10 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/find_location_button"
+            style="@style/button_standard_style"
             android:alpha="0.6"
+            android:backgroundTint="@color/secondary"
+            android:backgroundTintMode="add"
             android:paddingLeft="25dp"
             android:paddingRight="25dp"
             android:text="@string/find_my_location"
@@ -41,8 +44,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_icon"
-            style="@style/button_standard_style" />
+            app:layout_constraintTop_toBottomOf="@+id/search_icon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -62,6 +64,9 @@
             android:layout_marginEnd="40dp"
             android:backgroundTint="@color/secondary"
             android:contentDescription="@string/radius_range_slider"
+            android:valueFrom="0.5"
+            android:valueTo="50"
+            android:stepSize="0.1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -104,60 +109,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radius_layout">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/price_1_button"
+            style="@style/button_small_rounded"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:alpha="1"
             android:backgroundTint="@color/secondary"
-            android:hint="@string/cheap_price_range"
-            app:icon="@drawable/ic_coin_1"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:iconTint="@color/primary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:drawableStart="@drawable/ic_coin_1"
+            android:paddingLeft="13dp"
+            android:paddingRight="13dp"
+            />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/price_2_button"
+            style="@style/button_small_rounded"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:backgroundTint="@color/black"
-            android:hint="@string/inexpensive_price_range"
-            app:icon="@drawable/ic_coin_2"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:iconTint="@color/primary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="108dp" />
+            android:backgroundTint="@color/secondary"
+            android:drawableStart="@drawable/ic_coin_2"
+            android:paddingLeft="13dp"
+            android:paddingRight="13dp"
+            />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/price_3_button"
+            style="@style/button_small_rounded"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:backgroundTint="@color/black"
-            android:hint="@string/reasonable_price_range"
-            app:icon="@drawable/ic_coin_3"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:iconTint="@color/primary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="195dp" />
+            android:backgroundTint="@color/secondary"
+            android:drawableStart="@drawable/ic_coin_3"
+            android:paddingLeft="13dp"
+            android:paddingRight="13dp"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/price_4_button"
+            style="@style/button_small_rounded"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:backgroundTint="@color/black"
-            android:hint="@string/expensive_price_range"
-            app:icon="@drawable/ic_coin_4"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:iconTint="@color/primary"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="285dp" />
+            android:backgroundTint="@color/secondary"
+            android:drawableStart="@drawable/ic_coin_4"
+            android:paddingLeft="13dp"
+            android:paddingRight="13dp"
+            />
 
     </com.google.android.flexbox.FlexboxLayout>
 
@@ -173,31 +166,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/price_option_layout">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/place_type_restaurant"
+            style="@style/button_small_rounded"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:alpha="1"
             android:backgroundTint="@color/secondary"
-            app:icon="@drawable/ic_restaurant"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:iconTint="@color/primary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:drawableStart="@drawable/ic_restaurant"
+            android:paddingLeft="19dp"
+            android:paddingRight="19dp"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/place_type_bakery"
+            style="@style/button_small_rounded"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:alpha="1"
             android:backgroundTint="@color/secondary"
-            app:icon="@drawable/ic_cake"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:iconTint="@color/primary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:drawableStart="@drawable/ic_cake"
+            android:paddingLeft="21dp"
+            android:paddingRight="21dp"/>
 
     </com.google.android.flexbox.FlexboxLayout>
 
@@ -214,31 +201,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/place_type_layout">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/place_type_cafe"
+            style="@style/button_small_rounded"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:alpha="1"
             android:backgroundTint="@color/secondary"
-            app:icon="@drawable/ic_cafe"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:iconTint="@color/primary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:drawableStart="@drawable/ic_cafe"
+            android:paddingLeft="19dp"
+            android:paddingRight="19dp"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/place_type_pub"
+            style="@style/button_small_rounded"
             android:layout_width="75dp"
             android:layout_height="75dp"
-            android:alpha="1"
             android:backgroundTint="@color/secondary"
-            app:icon="@drawable/ic_beer"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:iconTint="@color/primary"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:drawableStart="@drawable/ic_beer"
+            android:paddingLeft="26dp"
+            android:paddingRight="26dp"
+             />
 
     </com.google.android.flexbox.FlexboxLayout>
 
