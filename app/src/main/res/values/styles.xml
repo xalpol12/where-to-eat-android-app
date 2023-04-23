@@ -34,4 +34,10 @@
         <item name="android:background">@color/black_overlay</item>
     </style>
 
+    <style name="text_style">
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/secondary</item>
+    </style>
+
 </resources>

@@ -8,8 +8,8 @@
 
     <LinearLayout
         android:id="@+id/place_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,16 +24,15 @@
 
         <TextView
             android:id="@+id/place_name"
+            style="@style/text_style"
             android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:fontFamily="@font/inter"
-            android:gravity="center"
+            android:layout_height="wrap_content"
             android:text="@string/title_value"
-            android:textColor="@color/secondary"
             android:textSize="22sp"
             android:textStyle="bold" />
 
         <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/rating_flexbox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:justifyContent="center">
@@ -59,10 +58,38 @@
         </com.google.android.flexbox.FlexboxLayout>
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/rating_count"
+            style="@style/text_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="@string/dolor_sit_amet"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/address"
+            style="@style/text_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/p_wiejska_42_pozna" />
+
+        <TextView
+            android:id="@+id/distance"
+            style="@style/text_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/_0_5_km_away"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/text_style"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="24dp"
+            android:text="@string/open_now"
+            android:textColor="@color/accent"
+            android:textSize="11sp" />
 
     </LinearLayout>
 

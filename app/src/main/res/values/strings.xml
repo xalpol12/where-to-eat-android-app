@@ -16,4 +16,8 @@
     <string name="rating_value">4.4</string>
     <string name="title_value">Lorem Ipsum</string>
     <string name="go_there">Go there</string>
+    <string name="dolor_sit_amet">dolor sit amet</string>
+    <string name="p_wiejska_42_pozna">Półwiejska 42, Poznań</string>
+    <string name="_0_5_km_away">0.5 km away</string>
+    <string name="open_now">Open now</string>
 </resources>
