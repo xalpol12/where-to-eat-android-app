@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Brovaria",
+        "placeId": "id1",
+        "rating": 4.4,
+        "photoReference": "test1",
+        "vicinity": "Stary Rynek 73-74, Poznań",
+        "openNow": false,
+        "userRatingsTotal": 2227
+    },
+    {
+        "name": "Matii Robata & Sushi",
+        "placeId": "id2",
+        "rating": 4.7,
+        "photoReference": "test2",
+        "vicinity": "Półwiejska 42, Poznań",
+        "openNow": false,
+        "userRatingsTotal": 2548
+    }
+]

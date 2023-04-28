@@ -1,0 +1,10 @@
+{    
+    "location" : {
+        "lat" : 52.40389796246586, 
+        "lng" : 16.95350439308018
+        },
+    "distance" : 3000,
+    "minPrice" : "1",
+    "maxPrice" : "3",
+    "type" : "CAFE"
+}

@@ -1,0 +1,865 @@
+[
+    {
+        "formattedAddress": null,
+        "geometry": {
+            "bounds": null,
+            "location": {
+                "lat": 52.408034,
+                "lng": 16.9323671
+            },
+            "locationType": null,
+            "viewport": {
+                "northeast": {
+                    "lat": 52.4092655302915,
+                    "lng": 16.9334431302915
+                },
+                "southwest": {
+                    "lat": 52.4065675697085,
+                    "lng": 16.9307451697085
+                }
+            }
+        },
+        "name": "Brovaria",
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+        "placeId": "ChIJ1ZUWpDhbBEcR--j66OkzlXw",
+        "scope": "GOOGLE",
+        "rating": 4.4,
+        "types": [
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "openingHours": {
+            "openNow": false,
+            "periods": null,
+            "specialDays": null,
+            "type": null,
+            "weekdayText": null
+        },
+        "photos": [
+            {
+                "photoReference": "AUjq9jnFGpt4i-U044P62Zhm85Zc0QEPTpdviyxqQAAyvOIeBEBiiNotairw0j5Sp0IN_Zm1Yp2TlpAG28s1mLjTmYwamwaNlS8UHtM6ZoJbASejC1nBfB9NrkaImVSzvOUcppdzMdxaVG1W3KFSkcpu6g0WPVKXXH0cS1Yv2Kn7rGELUjik",
+                "height": 1133,
+                "width": 1700,
+                "htmlAttributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/111223107668605434030\">Brovaria</a>"
+                ]
+            }
+        ],
+        "vicinity": "Stary Rynek 73-74, Poznań",
+        "permanentlyClosed": false,
+        "userRatingsTotal": 2227,
+        "businessStatus": "OPERATIONAL"
+    },
+    {
+        "formattedAddress": null,
+        "geometry": {
+            "bounds": null,
+            "location": {
+                "lat": 52.40150449999999,
+                "lng": 16.9269235
+            },
+            "locationType": null,
+            "viewport": {
+                "northeast": {
+                    "lat": 52.4024778302915,
+                    "lng": 16.9288688802915
+                },
+                "southwest": {
+                    "lat": 52.3997798697085,
+                    "lng": 16.9261709197085
+                }
+            }
+        },
+        "name": "Matii Robata & Sushi",
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+        "placeId": "ChIJ34V1CztbBEcRKTimkAWn1Mc",
+        "scope": "GOOGLE",
+        "rating": 4.7,
+        "types": [
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "openingHours": {
+            "openNow": false,
+            "periods": null,
+            "specialDays": null,
+            "type": null,
+            "weekdayText": null
+        },
+        "photos": [
+            {
+                "photoReference": "AUjq9jnNnTWDGr827-BxPodkmCyvoFqumyIWQ8-4_eGMrtTd6ZSA4GipsJev3AOSxNjeyuQljdjnWnul7jLCx2HAopWBnzKW69-joRN4JrzO4-jPq8iQ4tI8f1ewf6y3MebCETUeU8bEBphJKRdXS7oakqKe32udyLkuH5of24jknoq8Eed6",
+                "height": 632,
+                "width": 942,
+                "htmlAttributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/108222402878218091800\">Matii Robata &amp; Sushi</a>"
+                ]
+            }
+        ],
+        "vicinity": "Półwiejska 42, Poznań",
+        "permanentlyClosed": false,
+        "userRatingsTotal": 2548,
+        "businessStatus": "OPERATIONAL"
+    },
+    {
+        "formattedAddress": null,
+        "geometry": {
+            "bounds": null,
+            "location": {
+                "lat": 52.4110411,
+                "lng": 16.9121023
+            },
+            "locationType": null,
+            "viewport": {
+                "northeast": {
+                    "lat": 52.4125418302915,
+                    "lng": 16.9130855802915
+                },
+                "southwest": {
+                    "lat": 52.4098438697085,
+                    "lng": 16.9103876197085
+                }
+            }
+        },
+        "name": "GOKO Restauracja Japońska",
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+        "placeId": "ChIJiS_OcEBbBEcRA7VecgAGFMM",
+        "scope": "GOOGLE",
+        "rating": 4.1,
+        "types": [
+            "meal_takeaway",
+            "restaurant",
+            "food",
+            "store",
+            "point_of_interest",
+            "establishment"
+        ],
+        "openingHours": {
+            "openNow": false,
+            "periods": null,
+            "specialDays": null,
+            "type": null,
+            "weekdayText": null
+        },
+        "photos": [
+            {
+                "photoReference": "AUjq9jlxROCHI4UTXScnangqQ2yb_q8giBF7L974_EyJINTXbKZjeYUk6VqY_tRu0onMN47rcuewFRZv9Mz9BsUeMAkIS2WOCAb9QIHHb978Tucc-WL07LLufn_BZEHaqPRytSoD5szUuFKId_1TcC5_Fe66_vHtQqQMkL-5ETavS_XM-rhc",
+                "height": 6656,
+                "width": 13312,
+                "htmlAttributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/101679192192879625211\">GOKO TAKEAWAY</a>"
+                ]
+            }
+        ],
+        "vicinity": "Jana Henryka Dąbrowskiego 7, Poznań",
+        "permanentlyClosed": false,
+        "userRatingsTotal": 488,
+        "businessStatus": "OPERATIONAL"
+    },
+    {
+        "formattedAddress": null,
+        "geometry": {
+            "bounds": null,
+            "location": {
+                "lat": 52.40773249999999,
+                "lng": 16.9309066
+            },
+            "locationType": null,
+            "viewport": {
+                "northeast": {
+                    "lat": 52.40913688029148,
+                    "lng": 16.9322440302915
+                },
+                "southwest": {
+                    "lat": 52.40643891970849,
+                    "lng": 16.9295460697085
+                }
+            }
+        },
+        "name": "Zielona Weranda",
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+        "placeId": "ChIJBUn2SD9bBEcRThe9iausrn8",
+        "scope": "GOOGLE",
+        "rating": 4.4,
+        "types": [
+            "restaurant",
+            "cafe",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "openingHours": {
+            "openNow": true,
+            "periods": null,
+            "specialDays": null,
+            "type": null,
+            "weekdayText": null
+        },
+        "photos": [
+            {
+                "photoReference": "AUjq9jn5qt13U7z1fDBp3k6u1MZq0_i0kH0e7qcEfCc5oKaFlqWh-PyEre6cd75nBYdGXmUjlT3oCLaLwvNiRy5_tqb4VAms6Cwauq8YD5IuN_exoIGmjawpc429ow5ZMK4riot7jEddSxnr6MD7oMlKJHXCMgN8BMupaPvn4zV6Pr-Rb46q",
+                "height": 1280,
+                "width": 1920,
+                "htmlAttributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/100135302354002291208\">Zielona Weranda</a>"
+                ]
+            }
+        ],
+        "vicinity": "Paderewskiego 7, Poznań",
+        "permanentlyClosed": false,
+        "userRatingsTotal": 2500,
+        "businessStatus": "OPERATIONAL"
+    },
+    {
+        "formattedAddress": null,
+        "geometry": {
+            "bounds": null,
+            "location": {
+                "lat": 52.40754029999999,
+                "lng": 16.9339818
+            },
+            "locationType": null,
+            "viewport": {
+                "northeast": {
+                    "lat": 52.4088236802915,
+                    "lng": 16.93688015
+                },
+                "southwest": {
+                    "lat": 52.4061257197085,
+                    "lng": 16.93301275
+                }
+            }
+        },
+        "name": "Ratuszova Restauracja & Apartamenty A.D. 1954",
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+        "placeId": "ChIJaxfyUT9bBEcRP26il9WA75k",
+        "scope": "GOOGLE",
+        "rating": 4.6,
+        "types": [
+            "cafe",
+            "lodging",
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "openingHours": {
+            "openNow": false,
+            "periods": null,
+            "specialDays": null,
+            "type": null,
+            "weekdayText": null
+        },
+        "photos": [
+            {
+                "photoReference": "AUjq9jlXudJ1votR7gCfzlDlDg98L82LDKyKj47LA-YSFdVCY166pJDAqgYkWO66BNwxYQDO8KEDOZdpnkxSIqGHvI0gaDJL_tM_wk8_1Iw-27W2NMuAdHZUs-FIt4pOmxzkDw3Vci2hPda1ZRxAN-N444K06YDRnZeMwGSYXnOyiEx0gsv1",
+                "height": 734,
+                "width": 1100,
+                "htmlAttributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/117243470211701281551\">Ratuszova Restauracja &amp; Apartamenty A.D. 1954</a>"
+                ]
+            }
+        ],
+        "vicinity": "Stary Rynek 55, Poznań",
+        "permanentlyClosed": false,
+        "userRatingsTotal": 1541,
+        "businessStatus": "OPERATIONAL"
+    },
+    {
+        "formattedAddress": null,
+        "geometry": {
+            "bounds": null,
+            "location": {
+                "lat": 52.40920149999999,
+                "lng": 16.9358537
+            },
+            "locationType": null,
+            "viewport": {
+                "northeast": {
+                    "lat": 52.4104025302915,
+                    "lng": 16.9374754802915
+                },
+                "southwest": {
+                    "lat": 52.4077045697085,
+                    "lng": 16.93477751970849
+                }
+            }
+        },
+        "name": "The Mexican",
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+        "placeId": "ChIJQfI9uEBbBEcR6oEI4MF-V1o",
+        "scope": "GOOGLE",
+        "rating": 4.5,
+        "types": [
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "openingHours": {
+            "openNow": false,
+            "periods": null,
+            "specialDays": null,
+            "type": null,
+            "weekdayText": null
+        },
+        "photos": [
+            {
+                "photoReference": "AUjq9jnS40QhgOfalZwqva8FyY_S5x5TGaa68EKFOuMfeUdtcs3WKFbMAo4fTlNKdgEdzM4KEMyEkaj6furrplSjaVuWRYjL3NVQa5PAxv2PGfS7XVZpHdInAGZP2f47MeBc-YXMEmBdC9OSdhBxzwVpeAX2bdzJQZ9iyhUqzadlIHasLaDB",
+                "height": 3024,
+                "width": 4032,
+                "htmlAttributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/111304047933332825406\">Thomas Lens</a>"
+                ]
+            }
+        ],
+        "vicinity": "Kramarska 19, Poznań",
+        "permanentlyClosed": false,
+        "userRatingsTotal": 7128,
+        "businessStatus": "OPERATIONAL"
+    },
+    {
+        "formattedAddress": null,
+        "geometry": {
+            "bounds": null,
+            "location": {
+                "lat": 52.40457499999999,
+                "lng": 16.8998409
+            },
+            "locationType": null,
+            "viewport": {
+                "northeast": {
+                    "lat": 52.40586868029149,
+                    "lng": 16.9012535302915
+                },
+                "southwest": {
+                    "lat": 52.4031707197085,
+                    "lng": 16.8985555697085
+                }
+            }
+        },
+        "name": "Monidło",
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+        "placeId": "ChIJbUvS0c1EBEcRinDh9d1wjSI",
+        "scope": "GOOGLE",
+        "rating": 4.6,
+        "types": [
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "openingHours": {
+            "openNow": false,
+            "periods": null,
+            "specialDays": null,
+            "type": null,
+            "weekdayText": null
+        },
+        "photos": [
+            {
+                "photoReference": "AUjq9jkRqeFNHi7-R3_luxNqyVixrYQ84TUv9HQ6GYokkEdxos-JqaESzneplihP2iFTYYQ9t3FFYn7z_BPQKytTc82p_dxQTvUyIzfXnQdAV9SOCXX_Y828NrrbVPmhvVzQCSlVEMbk0W_IuTuK6TDHBZplQJXIaabZQmgddZA157791huk",
+                "height": 800,
+                "width": 1203,
+                "htmlAttributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/117774660316551385304\">Monidło</a>"
+                ]
+            }
+        ],
+        "vicinity": "Matejki 68, Poznań",
+        "permanentlyClosed": false,
+        "userRatingsTotal": 590,
+        "businessStatus": "OPERATIONAL"
+    },
+    {
+        "formattedAddress": null,
+        "geometry": {
+            "bounds": null,
+            "location": {
+                "lat": 52.4268522,
+                "lng": 16.9170342
+            },
+            "locationType": null,
+            "viewport": {
+                "northeast": {
+                    "lat": 52.4281901802915,
+                    "lng": 16.9184848802915
+                },
+                "southwest": {
+                    "lat": 52.4254922197085,
+                    "lng": 16.9157869197085
+                }
+            }
+        },
+        "name": "Dobre Miejsce 65",
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+        "placeId": "ChIJbYpAhqxEBEcRFmarLvDnKjY",
+        "scope": "GOOGLE",
+        "rating": 4.5,
+        "types": [
+            "cafe",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "openingHours": {
+            "openNow": false,
+            "periods": null,
+            "specialDays": null,
+            "type": null,
+            "weekdayText": null
+        },
+        "photos": [
+            {
+                "photoReference": "AUjq9jkmwaqeT3HAH3jkPWpjv4nY-pdx-7zbYtZfAEcIqHlkALFjVo3lvUhupn79d7GQUatez7r2acNJNjzYCNL-3NEtRePExD9gh4LMQCAmUIHRQoLNsUBDTUzDP-3v3xo_rhLVrSMnjraoZ04n3lkJiGYE6f-f_lkugWqxBL7qyde-LZgI",
+                "height": 960,
+                "width": 960,
+                "htmlAttributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/112607680773529058325\">Dobre Miejsce 65</a>"
+                ]
+            }
+        ],
+        "vicinity": "Piątkowska 65A, Poznań",
+        "permanentlyClosed": false,
+        "userRatingsTotal": 648,
+        "businessStatus": "OPERATIONAL"
+    },
+    {
+        "formattedAddress": null,
+        "geometry": {
+            "bounds": null,
+            "location": {
+                "lat": 52.4063285,
+                "lng": 16.92601
+            },
+            "locationType": null,
+            "viewport": {
+                "northeast": {
+                    "lat": 52.4076325302915,
+                    "lng": 16.9273764802915
+                },
+                "southwest": {
+                    "lat": 52.4049345697085,
+                    "lng": 16.9246785197085
+                }
+            }
+        },
+        "name": "Mollini Ristorante kuchnia włoska",
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+        "placeId": "ChIJcddoyjlbBEcRwJjh3CtYqtA",
+        "scope": "GOOGLE",
+        "rating": 4.6,
+        "types": [
+            "restaurant",
+            "bar",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "openingHours": {
+            "openNow": false,
+            "periods": null,
+            "specialDays": null,
+            "type": null,
+            "weekdayText": null
+        },
+        "photos": [
+            {
+                "photoReference": "AUjq9jk8LTCww3NZLY8S95qlzvh-eNi-h73TEuSTBXIeU-d7KIeLxvt8PoAlNicDEkg1ITuSqLr9FzqHh2ZC31YcHLelAUluaZJ7mWft8KzvNSuG1y3Af408ylLGnF-_S9Afh4NZshs-tvQ5AvZ5S6YBYo9nhvC4TYUsPO2trw9GpvZCcMAi",
+                "height": 425,
+                "width": 725,
+                "htmlAttributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/104540285852113110470\">Mollini Ristorante kuchnia włoska</a>"
+                ]
+            }
+        ],
+        "vicinity": "Święty Marcin 34, Poznań",
+        "permanentlyClosed": false,
+        "userRatingsTotal": 776,
+        "businessStatus": "OPERATIONAL"
+    },
+    {
+        "formattedAddress": null,
+        "geometry": {
+            "bounds": null,
+            "location": {
+                "lat": 52.40539119999999,
+                "lng": 16.9195249
+            },
+            "locationType": null,
+            "viewport": {
+                "northeast": {
+                    "lat": 52.40662898029149,
+                    "lng": 16.9205699802915
+                },
+                "southwest": {
+                    "lat": 52.4039310197085,
+                    "lng": 16.9178720197085
+                }
+            }
+        },
+        "name": "Alibi Club",
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/bar-71.png",
+        "placeId": "ChIJ16580DZbBEcR6JmFj0PsZ0M",
+        "scope": "GOOGLE",
+        "rating": 4.3,
+        "types": [
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "openingHours": {
+            "openNow": false,
+            "periods": null,
+            "specialDays": null,
+            "type": null,
+            "weekdayText": null
+        },
+        "photos": [
+            {
+                "photoReference": "AUjq9jl-dE3i9dUpCKqK2UQLjSmb0TC-AP-LFq3PYdfouyzX_nu6H_SfnlHneNIsv3ljstUqJmx5qtvWYJVP0HEldfVa2RYnoPZ8fIlIPpYR8AwCArIUwGMQQqlx56Ocv2q4SVMgNBCy2y9rFU14KfEdEoghAMQ5MyOT-gkIdMauVSyOxbhY",
+                "height": 1066,
+                "width": 1600,
+                "htmlAttributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/112886722789377997320\">Alibi Club</a>"
+                ]
+            }
+        ],
+        "vicinity": "Aleja Niepodległości 8A, Poznań",
+        "permanentlyClosed": false,
+        "userRatingsTotal": 756,
+        "businessStatus": "OPERATIONAL"
+    },
+    {
+        "formattedAddress": null,
+        "geometry": {
+            "bounds": null,
+            "location": {
+                "lat": 52.4224483,
+                "lng": 16.9059609
+            },
+            "locationType": null,
+            "viewport": {
+                "northeast": {
+                    "lat": 52.4237453802915,
+                    "lng": 16.9074432802915
+                },
+                "southwest": {
+                    "lat": 52.4210474197085,
+                    "lng": 16.9047453197085
+                }
+            }
+        },
+        "name": "Francuski Łącznik",
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+        "placeId": "ChIJS5QZzbFEBEcR8bPNz8tD3uE",
+        "scope": "GOOGLE",
+        "rating": 4.3,
+        "types": [
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "openingHours": {
+            "openNow": true,
+            "periods": null,
+            "specialDays": null,
+            "type": null,
+            "weekdayText": null
+        },
+        "photos": [
+            {
+                "photoReference": "AUjq9jkmoXGgGOuDpFIzQ4FtvH4EtboIjqv-N3F7R2ru_GoVxfHDq390UHvOCwy1GSPDo2FYH4VIvK26EiBnY_NDHXRCHYH2XREcQa4d28WQ79oDo2oehAJHuHmJgVjR-wN1P4eu8d2IvP613pK5vZvbihfNWK6S5CnZQJD3Wf6XCLbPTe7W",
+                "height": 3651,
+                "width": 5477,
+                "htmlAttributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/111857960323018955733\">Francuski Łącznik</a>"
+                ]
+            }
+        ],
+        "vicinity": "Plac Spiski 1, Poznań",
+        "permanentlyClosed": false,
+        "userRatingsTotal": 1190,
+        "businessStatus": "OPERATIONAL"
+    },
+    {
+        "formattedAddress": null,
+        "geometry": {
+            "bounds": null,
+            "location": {
+                "lat": 52.4066313,
+                "lng": 16.9197718
+            },
+            "locationType": null,
+            "viewport": {
+                "northeast": {
+                    "lat": 52.4080221302915,
+                    "lng": 16.9209927802915
+                },
+                "southwest": {
+                    "lat": 52.4053241697085,
+                    "lng": 16.91829481970849
+                }
+            }
+        },
+        "name": "Ptasie Radio",
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+        "placeId": "ChIJB7T44zZbBEcR1yge5KHLwYk",
+        "scope": "GOOGLE",
+        "rating": 4.6,
+        "types": [
+            "restaurant",
+            "cafe",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "openingHours": {
+            "openNow": true,
+            "periods": null,
+            "specialDays": null,
+            "type": null,
+            "weekdayText": null
+        },
+        "photos": [
+            {
+                "photoReference": "AUjq9jk-xX74l9IqsxC6ek8OPYNJJQN8t2NhrK15u8oP0GGuQH6k_zMv7JdU2RjglKb_pN7z5JYKaG16jztlR8NfuSIEWyepWSJQRlWXsjPq5h0g9e7naO6Par5eqNoap6BZlq_hsUgjluvrMecQc4xtoiiOhk-wxI4DRcyOHJ4mezNXpznz",
+                "height": 4032,
+                "width": 3024,
+                "htmlAttributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/103789822833205866289\">Ptasie Radio</a>"
+                ]
+            }
+        ],
+        "vicinity": "Kościuszki 74/3, Poznań",
+        "permanentlyClosed": false,
+        "userRatingsTotal": 2626,
+        "businessStatus": "OPERATIONAL"
+    },
+    {
+        "formattedAddress": null,
+        "geometry": {
+            "bounds": null,
+            "location": {
+                "lat": 52.4024119,
+                "lng": 16.9306308
+            },
+            "locationType": null,
+            "viewport": {
+                "northeast": {
+                    "lat": 52.4037140302915,
+                    "lng": 16.93193753029151
+                },
+                "southwest": {
+                    "lat": 52.4010160697085,
+                    "lng": 16.9292395697085
+                }
+            }
+        },
+        "name": "Manekin",
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+        "placeId": "ChIJARowDzxbBEcRynOySXf9fMg",
+        "scope": "GOOGLE",
+        "rating": 4.5,
+        "types": [
+            "restaurant",
+            "food",
+            "store",
+            "point_of_interest",
+            "establishment"
+        ],
+        "openingHours": {
+            "openNow": true,
+            "periods": null,
+            "specialDays": null,
+            "type": null,
+            "weekdayText": null
+        },
+        "photos": [
+            {
+                "photoReference": "AUjq9jmx3h_WYTPI2JGfGc_d69_r-lPWE2LH3b5Is7J6j2M7jS2CXxnaKsU-rDsTa19-KIZ7bLeiIWbILgYlAannoRXdBMCSRdoVqZXR8SlNAoBLk9t-xP0Tl_E07ibiKLa78uwYBOU45sWDPSYFltkSd9lJwlcCoeKiOciqrV3UpGA08yOU",
+                "height": 9000,
+                "width": 12000,
+                "htmlAttributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/115061356802021056150\">Алексей Быцанев</a>"
+                ]
+            }
+        ],
+        "vicinity": "Kwiatowa 3, Poznań",
+        "permanentlyClosed": false,
+        "userRatingsTotal": 9873,
+        "businessStatus": "OPERATIONAL"
+    },
+    {
+        "formattedAddress": null,
+        "geometry": {
+            "bounds": null,
+            "location": {
+                "lat": 52.4048598,
+                "lng": 16.9360489
+            },
+            "locationType": null,
+            "viewport": {
+                "northeast": {
+                    "lat": 52.4065172802915,
+                    "lng": 16.9374791802915
+                },
+                "southwest": {
+                    "lat": 52.4038193197085,
+                    "lng": 16.93478121970849
+                }
+            }
+        },
+        "name": "12ft",
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/generic_business-71.png",
+        "placeId": "ChIJjbXjVD5bBEcRd7srpOLCeYI",
+        "scope": "GOOGLE",
+        "rating": 4.8,
+        "types": [
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "openingHours": {
+            "openNow": false,
+            "periods": null,
+            "specialDays": null,
+            "type": null,
+            "weekdayText": null
+        },
+        "photos": [
+            {
+                "photoReference": "AUjq9jnvzfRSR_lzojIC0QdL-syLCjennw4oSOKAyzTzrBt5OJkY2zSk7dsieRjdIUdklDvILo8LyIvx1-0qfmFrMvgVMppDZ4wRBdhSFja5wIX4xDEwmvkAzqzwqWZ6CYRw7Imodsq4X2MZCs9cZCTYesPUkgopeEpWzVyfEIH9m4ezAhbg",
+                "height": 480,
+                "width": 640,
+                "htmlAttributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/111665170607768525504\">12ft</a>"
+                ]
+            }
+        ],
+        "vicinity": "Za Bramką 10/11, Poznań",
+        "permanentlyClosed": false,
+        "userRatingsTotal": 338,
+        "businessStatus": "OPERATIONAL"
+    },
+    {
+        "formattedAddress": null,
+        "geometry": {
+            "bounds": null,
+            "location": {
+                "lat": 52.4004351,
+                "lng": 16.8933358
+            },
+            "locationType": null,
+            "viewport": {
+                "northeast": {
+                    "lat": 52.4017768302915,
+                    "lng": 16.89457173029151
+                },
+                "southwest": {
+                    "lat": 52.3990788697085,
+                    "lng": 16.8918737697085
+                }
+            }
+        },
+        "name": "Whisky Bar 88",
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/bar-71.png",
+        "placeId": "ChIJf5XYCdFEBEcRZP7Oc02Z6UU",
+        "scope": "GOOGLE",
+        "rating": 4.7,
+        "types": [
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "openingHours": {
+            "openNow": false,
+            "periods": null,
+            "specialDays": null,
+            "type": null,
+            "weekdayText": null
+        },
+        "photos": [
+            {
+                "photoReference": "AUjq9jn_t0m2jbAn09jvBBaPon1nAQELsElsxIxc2trYw7qcZEgz4Gp1ibqDZqiqbdktADjstGhkAKRiCX0fRQU5z943exXWDTpJ6XuCj5-50nraw2DPsHpW2RolUxrcXL_ILmSio_Mc5azOlkt9EZDLnok6MtK7l_JAc3Z4PqhQFcFZEv51",
+                "height": 1600,
+                "width": 2400,
+                "htmlAttributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/105449788554436248913\">Whisky Bar 88</a>"
+                ]
+            }
+        ],
+        "vicinity": "Stanisława Wyspiańskiego 26A, Poznań",
+        "permanentlyClosed": false,
+        "userRatingsTotal": 245,
+        "businessStatus": "OPERATIONAL"
+    },
+    {
+        "formattedAddress": null,
+        "geometry": {
+            "bounds": null,
+            "location": {
+                "lat": 52.40008,
+                "lng": 16.9852309
+            },
+            "locationType": null,
+            "viewport": {
+                "northeast": {
+                    "lat": 52.4013532302915,
+                    "lng": 16.98656628029151
+                },
+                "southwest": {
+                    "lat": 52.39865526970851,
+                    "lng": 16.9838683197085
+                }
+            }
+        },
+        "name": "3 Kolory Malta",
+        "icon": "https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/restaurant-71.png",
+        "placeId": "ChIJ4atLrqJbBEcRqVwNQBjSLcE",
+        "scope": "GOOGLE",
+        "rating": 4.3,
+        "types": [
+            "meal_delivery",
+            "bar",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "openingHours": {
+            "openNow": false,
+            "periods": null,
+            "specialDays": null,
+            "type": null,
+            "weekdayText": null
+        },
+        "photos": [
+            {
+                "photoReference": "AUjq9jnIw74N_n1pb6F0qHAIcJMas_3Z3jCgcBBYZzqtq9buh-oBKO7ErGt6OxItpY-JwMNinqh-m4BcMYroMZMxCm1UMMfRT88cO9TyW_fMCCd7tbIMbAUc9mAAuRHg5qzlCYnKhUBPENkZm69Ek8HtwqKJ4OUFUBIcorlIOGFFToAg8QkT",
+                "height": 720,
+                "width": 528,
+                "htmlAttributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/105248822442417863058\">3 Kolory Malta</a>"
+                ]
+            }
+        ],
+        "vicinity": "Wiankowa 3, Poznań",
+        "permanentlyClosed": false,
+        "userRatingsTotal": 1010,
+        "businessStatus": "OPERATIONAL"
+    }
+]
