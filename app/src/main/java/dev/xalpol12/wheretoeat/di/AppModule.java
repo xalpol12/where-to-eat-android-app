@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 @InstallIn(SingletonComponent.class)
 public class AppModule {
-    private final String BASE_URL = ""; // TODO: add baseURL
+    public static final String BASE_URL = "https://google.com/"; // TODO: add baseURL
 
     @Singleton
     @Provides
@@ -38,13 +38,18 @@ public class AppModule {
 
     @Singleton
     @Provides
-    public APIService getRetroInstance(OkHttpClient client) {
+    public Retrofit getRetrofitClient(OkHttpClient client) {
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(APIService.class);
+                .build();
+    }
+
+    @Singleton
+    @Provides
+    public APIService getAPIService(Retrofit retrofitClient) {
+        return retrofitClient.create(APIService.class);
     }
 
     @Singleton

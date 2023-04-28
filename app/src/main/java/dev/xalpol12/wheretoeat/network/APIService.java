@@ -13,11 +13,11 @@ import retrofit2.http.POST;
 
 public interface APIService {
 
-    @POST("/find")
+    @POST("/places/nearby")
     @Headers({"Accept:application/json", "Content-Type:application/json"})
     Call<List<Place>> getPlaceList(@Body PlaceRequestDTO placeRequestDTO);
 
-    @POST("/image")
+    @POST("/places/image")
     @Headers({"Accept:application/json", "Content-Type:application/json"})
     Call<ImageResult> getImage(@Body ImageRequestDTO imageRequestDTO);
 }
