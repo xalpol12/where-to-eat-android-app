@@ -2,6 +2,8 @@ package dev.xalpol12.wheretoeat.network;
 
 import java.util.List;
 
+import dev.xalpol12.wheretoeat.model.entity.ImageResult;
+import dev.xalpol12.wheretoeat.model.entity.dto.ImageRequestDTO;
 import dev.xalpol12.wheretoeat.model.entity.dto.PlaceRequestDTO;
 import dev.xalpol12.wheretoeat.model.entity.Place;
 import retrofit2.Call;
@@ -14,4 +16,8 @@ public interface APIService {
     @POST("/find")
     @Headers({"Accept:application/json", "Content-Type:application/json"})
     Call<List<Place>> getPlaceList(@Body PlaceRequestDTO placeRequestDTO);
+
+    @POST("/image")
+    @Headers({"Accept:application/json", "Content-Type:application/json"})
+    Call<ImageResult> getImage(@Body ImageRequestDTO imageRequestDTO);
 }

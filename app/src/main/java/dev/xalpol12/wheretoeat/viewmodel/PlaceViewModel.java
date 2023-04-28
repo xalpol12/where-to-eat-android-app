@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import dev.xalpol12.wheretoeat.model.entity.Place;
 import dev.xalpol12.wheretoeat.model.entity.dto.PlaceRequestDTO;
@@ -18,8 +20,10 @@ public class PlaceViewModel extends ViewModel {
     APIService apiService;
     private final MutableLiveData<List<Place>> placeList;
 
-    public PlaceViewModel() {
-        placeList = new MutableLiveData<>();
+    @Inject
+    public PlaceViewModel(APIService apiService, MutableLiveData<List<Place>> placeList) {
+        this.apiService = apiService;
+        this.placeList = placeList;
     }
 
 
