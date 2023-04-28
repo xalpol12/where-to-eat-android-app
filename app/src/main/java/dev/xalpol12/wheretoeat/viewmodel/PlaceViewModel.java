@@ -5,32 +5,34 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import dev.xalpol12.wheretoeat.model.entity.ImageResult;
+import dagger.hilt.android.lifecycle.HiltViewModel;
 import dev.xalpol12.wheretoeat.model.entity.Place;
+import dev.xalpol12.wheretoeat.model.entity.dto.PlaceRequestDTO;
 import dev.xalpol12.wheretoeat.network.APIService;
-import dev.xalpol12.wheretoeat.network.RetroInstance;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@HiltViewModel
 public class PlaceViewModel extends ViewModel {
+    APIService apiService;
     private final MutableLiveData<List<Place>> placeList;
 
     public PlaceViewModel() {
         placeList = new MutableLiveData<>();
     }
 
-    public MutableLiveData<List<Place>> getPlaceListObserver() {
-        return placeList;
-    }
 
-    public void makeApiCall() {
-        APIService apiService = RetroInstance.getRetroClient().create(APIService.class);
-        Call<List<Place>> call = apiService.getPlaceList();
+    public void getPlaceList(PlaceRequestDTO placeRequestDTO) {
+        Call<List<Place>> call = apiService.getPlaceList(placeRequestDTO);
         call.enqueue(new Callback<List<Place>>() {
             @Override
             public void onResponse(Call<List<Place>> call, Response<List<Place>> response) {
-                placeList.postValue(response.body());
+                if (response.isSuccessful()) {
+                    placeList.postValue(response.body());
+                } else {
+                    placeList.postValue(null);
+                }
             }
 
             @Override
