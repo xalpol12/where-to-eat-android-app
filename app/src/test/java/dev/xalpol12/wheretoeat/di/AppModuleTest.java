@@ -15,8 +15,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 
-@HiltAndroidTest
-//@RunWith(JUnit4.class)
+@RunWith(JUnit4.class)
 public class AppModuleTest {
 
     Retrofit retrofitClient;

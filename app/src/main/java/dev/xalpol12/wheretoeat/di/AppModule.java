@@ -3,6 +3,7 @@ package dev.xalpol12.wheretoeat.di;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 
@@ -33,7 +34,12 @@ public class AppModule {
     @Singleton
     @Provides
     public OkHttpClient getOkHttpClient(HttpLoggingInterceptor interceptor) {
-        return new OkHttpClient.Builder().addInterceptor(interceptor).build();
+        return new OkHttpClient.Builder()
+                .addInterceptor(interceptor)
+                .connectTimeout(1, TimeUnit.SECONDS)
+                .readTimeout(1, TimeUnit.SECONDS)
+                .writeTimeout(1, TimeUnit.SECONDS)
+                .build();
     }
 
     @Singleton

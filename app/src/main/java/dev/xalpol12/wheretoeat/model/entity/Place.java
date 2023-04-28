@@ -1,8 +1,10 @@
 package dev.xalpol12.wheretoeat.model.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class Place {
     private String name;
     private String placeId;
