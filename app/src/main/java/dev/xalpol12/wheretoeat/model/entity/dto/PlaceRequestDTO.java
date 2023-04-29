@@ -11,5 +11,5 @@ public class PlaceRequestDTO {
     int distance;
     PriceLevel minPrice;
     PriceLevel maxPrice;
-    PlaceType placeType;
+    PlaceType type;
 }

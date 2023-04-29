@@ -22,7 +22,6 @@ import java.util.List;
 import dev.xalpol12.wheretoeat.di.AppModule;
 import dev.xalpol12.wheretoeat.model.entity.Place;
 import dev.xalpol12.wheretoeat.model.entity.dto.PlaceRequestDTO;
-import dev.xalpol12.wheretoeat.viewmodel.PlaceViewModel;
 import mockwebserver3.MockResponse;
 import mockwebserver3.MockWebServer;
 import okhttp3.OkHttpClient;
@@ -32,15 +31,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @RunWith(JUnit4.class)
 public class APIServiceTest extends TestCase {
-
     private final String RESOURCES_PATH = "src\\test\\java\\dev\\xalpol12\\wheretoeat\\resources\\";
-    private final String JSON_RESPONSE_PATH = RESOURCES_PATH + "apiresponse\\restaurant_response_200.json";
-    private final String REQUEST_PATH = RESOURCES_PATH + "request\\request_dto.json";
 
     private MockWebServer mockWebServer;
     private APIService apiService;
 
-    public Retrofit getMockRetrofit(OkHttpClient client) {
+    private Retrofit getMockRetrofitInstance(OkHttpClient client) {
         return new Retrofit.Builder()
                 .baseUrl(mockWebServer.url("/"))
                 .client(client)
@@ -48,7 +44,7 @@ public class APIServiceTest extends TestCase {
                 .build();
     }
 
-    public List<Place> getListOfPlace() {
+    private List<Place> getMockListOfPlace() {
         return List.of(new Place("Brovaria",
                                 "id1",
                                 "Stary Rynek 73-74, Poznań",
@@ -65,19 +61,25 @@ public class APIServiceTest extends TestCase {
                         "test2"));
     }
 
-    public PlaceRequestDTO getPlaceRequest() throws FileNotFoundException {
+    private PlaceRequestDTO getMockRequest(String placeRequestPath) throws FileNotFoundException {
         Gson gson = new Gson();
         return gson.fromJson(
-                new FileReader(REQUEST_PATH),
+                new FileReader(placeRequestPath),
                 PlaceRequestDTO.class);
     }
 
-    public String readResponseBody() throws FileNotFoundException {
+    private String getMockResponseBody(String jsonResponsePath) throws FileNotFoundException {
         Gson gson = new Gson();
         JsonElement json = gson.fromJson(
-                new FileReader(JSON_RESPONSE_PATH),
+                new FileReader(jsonResponsePath),
                 JsonElement.class);
         return gson.toJson(json);
+    }
+
+    private MockResponse getMockResponse(int statusCode, String responseBody) {
+        return new MockResponse()
+                .setResponseCode(statusCode)
+                .setBody(responseBody);
     }
 
 
@@ -86,7 +88,7 @@ public class APIServiceTest extends TestCase {
         mockWebServer = new MockWebServer();
         HttpLoggingInterceptor interceptor = new AppModule().getInterceptor();
         OkHttpClient client = new AppModule().getOkHttpClient(interceptor);
-        Retrofit retrofit = getMockRetrofit(client);
+        Retrofit retrofit = getMockRetrofitInstance(client);
         apiService = new AppModule().getAPIService(retrofit);
     }
 
@@ -98,19 +100,20 @@ public class APIServiceTest extends TestCase {
     @Test
     public void given200Response_shouldFetchPlacesCorrectly() throws IOException {
         // given
-        String responseBody = readResponseBody();
-        MockResponse response = new MockResponse()
-                .setResponseCode(HttpURLConnection.HTTP_OK)
-                .setBody(responseBody);
+        String jsonResponsePath = RESOURCES_PATH + "apiresponse\\restaurant_response_200.json";
+        String requestPath = RESOURCES_PATH + "request\\request_dto.json";
+
+        String responseBody = getMockResponseBody(jsonResponsePath);
+        MockResponse response = getMockResponse(HttpURLConnection.HTTP_OK, responseBody);
         mockWebServer.enqueue(response);
+        List<Place> expected = getMockListOfPlace();
+        PlaceRequestDTO placeRequestDTO = getMockRequest(requestPath);
 
-        List<Place> expected = getListOfPlace();
-
-        PlaceRequestDTO placeRequestDTO = getPlaceRequest();
 
         // when
         MutableLiveData<List<Place>> requested = new MutableLiveData<>(
                 apiService.getPlaceList(placeRequestDTO).execute().body());
+
 
         //then
         assertEquals(expected, requested.getValue());

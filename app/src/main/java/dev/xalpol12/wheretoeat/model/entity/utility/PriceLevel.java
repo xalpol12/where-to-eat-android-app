@@ -16,7 +16,6 @@ public enum PriceLevel {
         this.priceLevel = priceLevel;
     }
 
-    @NonNull
     public String toString() {
         return this.priceLevel;
     }

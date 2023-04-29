@@ -18,7 +18,7 @@ import retrofit2.Response;
 @HiltViewModel
 public class PlaceViewModel extends ViewModel {
     APIService apiService;
-    private final MutableLiveData<List<Place>> placeList;
+    final MutableLiveData<List<Place>> placeList;
 
     @Inject
     public PlaceViewModel(APIService apiService, MutableLiveData<List<Place>> placeList) {
@@ -27,7 +27,7 @@ public class PlaceViewModel extends ViewModel {
     }
 
 
-    public void getPlaceList(PlaceRequestDTO placeRequestDTO) {
+    public void makeCall(PlaceRequestDTO placeRequestDTO) {
         Call<List<Place>> call = apiService.getPlaceList(placeRequestDTO);
         call.enqueue(new Callback<List<Place>>() {
             @Override
