@@ -12,6 +12,7 @@ import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
 import dev.xalpol12.wheretoeat.model.entity.Place;
+import dev.xalpol12.wheretoeat.network.APIRepository;
 import dev.xalpol12.wheretoeat.network.APIService;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -56,6 +57,12 @@ public class AppModule {
     @Provides
     public APIService getAPIService(Retrofit retrofitClient) {
         return retrofitClient.create(APIService.class);
+    }
+
+    @Singleton
+    @Provides
+    public APIRepository getAPIRepository(APIService apiService) {
+        return new APIRepository(apiService);
     }
 
     @Singleton
