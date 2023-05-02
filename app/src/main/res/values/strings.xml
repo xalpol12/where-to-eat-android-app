@@ -2,7 +2,7 @@
     <string name="app_name">Where to Eat</string>
     <string name="find_my_location">Find my location</string>
     <string name="min_radius_distance">0.5 km</string>
-    <string name="max_radius_distance">50 km</string>
+    <string name="max_radius_distance">20 km</string>
     <string name="cheap_price_range">Cheap price range</string>
     <string name="inexpensive_price_range">Inexpensive price range</string>
     <string name="reasonable_price_range">Reasonable price range</string>
