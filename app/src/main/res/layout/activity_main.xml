@@ -66,7 +66,7 @@
                 android:backgroundTint="@color/secondary"
                 android:contentDescription="@string/radius_range_slider"
                 android:valueFrom="0.5"
-                android:valueTo="20"
+                android:valueTo="10"
                 android:stepSize="0.1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -227,7 +227,7 @@
                 android:drawableStart="@drawable/ic_beer"
                 android:paddingLeft="26dp"
                 android:paddingRight="26dp"
-                android:tag="pub"
+                android:tag="bar"
                 />
 
         </com.google.android.flexbox.FlexboxLayout>
