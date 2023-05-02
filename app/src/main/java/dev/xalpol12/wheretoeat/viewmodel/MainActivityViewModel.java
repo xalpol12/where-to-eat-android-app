@@ -3,6 +3,8 @@ package dev.xalpol12.wheretoeat.viewmodel;
 import androidx.lifecycle.ViewModel;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -17,9 +19,12 @@ public class MainActivityViewModel extends ViewModel {
 
     PlaceRequestDTO placeRequestDTO;
 
+    List<PlaceType> placeTypeTempList;
+
     @Inject
     public MainActivityViewModel(PlaceRequestDTO placeRequestDTO) {
         this.placeRequestDTO = placeRequestDTO;
+        this.placeTypeTempList = new ArrayList<>();
     }
 
     public void setRequestLocation(Location location) {
@@ -38,11 +43,23 @@ public class MainActivityViewModel extends ViewModel {
         placeRequestDTO.setMaxPrice(maxPrice);
     }
 
-    public void setRequestPlaceType(PlaceType type) {
-        placeRequestDTO.setType(type);
+    public void addToPlaceList(String buttonTag) {
+        PlaceType placeType = stringToPlaceType(buttonTag);
+        placeTypeTempList.add(placeType);
+    }
+
+    public void deleteFromPlaceList(String buttonTag) {
+        PlaceType placeType = stringToPlaceType(buttonTag);
+        placeTypeTempList.remove(placeType);
     }
 
     public void sendPlaceRequestDTO() {
+        placeRequestDTO.setType(placeTypeTempList);
+    }
+
+    public boolean isPlaceTypeAlreadyAdded(String buttonTag) {
+        PlaceType placeType = stringToPlaceType(buttonTag);
+        return placeTypeTempList.contains(placeType);
     }
 
     public boolean areAllFieldsNotNull() throws IllegalAccessException {
@@ -53,5 +70,9 @@ public class MainActivityViewModel extends ViewModel {
             }
         }
         return true;
+    }
+
+    private PlaceType stringToPlaceType(String str) {
+        return PlaceType.valueOf(str.toUpperCase());
     }
 }

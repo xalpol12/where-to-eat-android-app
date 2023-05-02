@@ -12,8 +12,8 @@ import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;
 @InstallIn(SingletonComponent.class)
 public class APICallModule {
 
-    @Provides
     @Singleton
+    @Provides
     public PlaceRequestDTO getPlaceRequestDTO() {
         return new PlaceRequestDTO();
     }

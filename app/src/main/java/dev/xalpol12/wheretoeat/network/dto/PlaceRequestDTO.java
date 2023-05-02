@@ -1,5 +1,7 @@
 package dev.xalpol12.wheretoeat.network.dto;
 
+import java.util.List;
+
 import dev.xalpol12.wheretoeat.data.utility.Location;
 import dev.xalpol12.wheretoeat.data.utility.PlaceType;
 import dev.xalpol12.wheretoeat.data.utility.PriceLevel;
@@ -17,5 +19,5 @@ public class PlaceRequestDTO {
     int distance;
     PriceLevel minPrice;
     PriceLevel maxPrice;
-    PlaceType type;
+    List<PlaceType> type;
 }
