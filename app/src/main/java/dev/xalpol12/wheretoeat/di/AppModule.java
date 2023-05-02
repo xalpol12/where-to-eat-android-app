@@ -11,7 +11,7 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
-import dev.xalpol12.wheretoeat.model.entity.Place;
+import dev.xalpol12.wheretoeat.data.Place;
 import dev.xalpol12.wheretoeat.network.APIRepository;
 import dev.xalpol12.wheretoeat.network.APIService;
 import okhttp3.OkHttpClient;

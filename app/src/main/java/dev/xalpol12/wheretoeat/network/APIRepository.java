@@ -6,8 +6,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import dev.xalpol12.wheretoeat.model.entity.Place;
-import dev.xalpol12.wheretoeat.model.entity.dto.PlaceRequestDTO;
+import dev.xalpol12.wheretoeat.data.Place;
+import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -1,8 +1,10 @@
-package dev.xalpol12.wheretoeat;
+package dev.xalpol12.wheretoeat.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import dev.xalpol12.wheretoeat.R;
 
 public class PlaceDetails extends AppCompatActivity {
 

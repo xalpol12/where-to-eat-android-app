@@ -13,10 +13,10 @@
         android:theme="@style/Theme.WhereToEat"
         tools:targetApi="31">
         <activity
-            android:name=".PlaceDetails"
+            android:name=".view.PlaceDetails"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

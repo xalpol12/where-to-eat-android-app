@@ -1,4 +1,4 @@
-package dev.xalpol12.wheretoeat.model.entity.dto;
+package dev.xalpol12.wheretoeat.network.dto;
 
 import lombok.Data;
 

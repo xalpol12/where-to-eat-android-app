@@ -1,4 +1,4 @@
-package dev.xalpol12.wheretoeat.model.entity.utility;
+package dev.xalpol12.wheretoeat.data.utility;
 
 public enum PlaceType {
     RESTAURANT("restaurant"),

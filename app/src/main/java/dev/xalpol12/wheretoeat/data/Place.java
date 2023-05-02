@@ -1,4 +1,4 @@
-package dev.xalpol12.wheretoeat.model.entity;
+package dev.xalpol12.wheretoeat.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

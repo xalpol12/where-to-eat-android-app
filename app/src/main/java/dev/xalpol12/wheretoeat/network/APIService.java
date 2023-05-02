@@ -2,10 +2,10 @@ package dev.xalpol12.wheretoeat.network;
 
 import java.util.List;
 
-import dev.xalpol12.wheretoeat.model.entity.ImageResult;
-import dev.xalpol12.wheretoeat.model.entity.dto.ImageRequestDTO;
-import dev.xalpol12.wheretoeat.model.entity.dto.PlaceRequestDTO;
-import dev.xalpol12.wheretoeat.model.entity.Place;
+import dev.xalpol12.wheretoeat.data.ImageResult;
+import dev.xalpol12.wheretoeat.network.dto.ImageRequestDTO;
+import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;
+import dev.xalpol12.wheretoeat.data.Place;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;
