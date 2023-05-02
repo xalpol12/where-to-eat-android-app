@@ -25,22 +25,25 @@ public class MainActivityViewModel extends ViewModel {
     public MainActivityViewModel(PlaceRequestDTO placeRequestDTO) {
         this.placeRequestDTO = placeRequestDTO;
         this.placeTypeTempList = new ArrayList<>();
+        setupVariables();
     }
 
-    public void setRequestLocation(Location location) {
-        placeRequestDTO.setLocation(location);
+    private void setupVariables() {
+        placeRequestDTO.setMinPrice(PriceLevel.INEXPENSIVE);
+    }
+
+    public void setRequestLocation(double lat, double lng) {
+        placeRequestDTO.setLocation(new Location(lat, lng));
     }
 
     public void setRequestDistance(int distance) {
         placeRequestDTO.setDistance(distance);
     }
 
-    public void setRequestMinPrice(PriceLevel minPrice) {
-        placeRequestDTO.setMinPrice(minPrice);
-    }
-
-    public void setRequestMaxPrice(PriceLevel maxPrice) {
-        placeRequestDTO.setMaxPrice(maxPrice);
+    public void setRequestMaxPrice(int maxPrice) {
+        PriceLevel[] priceLevels = PriceLevel.values();
+        PriceLevel priceLevel = priceLevels[maxPrice];
+        placeRequestDTO.setMaxPrice(priceLevel);
     }
 
     public void addToPlaceList(String buttonTag) {

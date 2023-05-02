@@ -8,6 +8,9 @@ import androidx.lifecycle.ViewModelProvider;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
+
+import com.google.android.material.slider.Slider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,24 +33,21 @@ public class MainActivity extends AppCompatActivity {
     // density bucket:      xhdpi
 
     private MainActivityViewModel viewModel;
-
     List<Integer> priceButtonIds = List.of(
                 R.id.price_1_button,
                 R.id.price_2_button,
                 R.id.price_3_button,
                 R.id.price_4_button);
     List<AppCompatButton> priceButtons = new ArrayList<>();
-
     List<Integer> placeButtonIds = List.of(
             R.id.place_type_restaurant,
             R.id.place_type_bakery,
             R.id.place_type_cafe,
             R.id.place_type_pub);
     List<AppCompatButton> placeButtons = new ArrayList<>();
-
     AppCompatButton btnFindLocation;
     AppCompatButton btnFindPlace;
-
+    Slider rangeSlider;
     int primaryColor;
     int accentColor;
 
@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private void initializeUI() {
         btnFindLocation = findViewById(R.id.find_location_button);
         btnFindPlace = findViewById(R.id.find_place_button);
+        rangeSlider = findViewById(R.id.range_slider);
 
         for (int id : priceButtonIds) {
             priceButtons.add(findViewById(id));
@@ -81,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener locationButtonClickListener = this::locationButtonClick;
         btnFindLocation.setOnClickListener(locationButtonClickListener);
 
+        Slider.OnChangeListener sliderChangeListener = this::sliderChange;
+        rangeSlider.addOnChangeListener(sliderChangeListener);
+
         View.OnClickListener priceButtonClickListener = this::priceButtonClick;
         for (AppCompatButton btn : priceButtons) {
             btn.setOnClickListener(priceButtonClickListener);
@@ -96,10 +100,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void locationButtonClick(View v) {
+        //TODO: Implement location based on GPS
+        double lat = 54.1;
+        double lng = 43.1;
+
+        viewModel.setRequestLocation(lat, lng);
+
+        v.setAlpha(1.f);
+    }
+
+    private void sliderChange(Slider slider, float v, boolean b) {
+        viewModel.setRequestDistance((int)(v * 1000));
     }
 
     private void priceButtonClick(View v) {
-        int selectedBtnIndex = Integer.parseInt((String) v.getTag());
+        String tag = (String) v.getTag();
+        int selectedBtnIndex = Integer.parseInt(tag);
+
+        viewModel.setRequestMaxPrice(selectedBtnIndex);
+
         for (int i = 0; i < selectedBtnIndex; i++) {
             priceButtons.get(i).getCompoundDrawables()[0].setColorFilter(accentColor, PorterDuff.Mode.SRC_ATOP);
         }
@@ -111,7 +130,9 @@ public class MainActivity extends AppCompatActivity {
     private void placeButtonClick(View v) {
         Object tag = v.getTag();
         String selectedBtnLabel = (String) v.getTag();
+
         AppCompatButton currentBtn = getCurrentPlaceButton(tag);
+
         if (viewModel.isPlaceTypeAlreadyAdded(selectedBtnLabel)) {
             viewModel.deleteFromPlaceList(selectedBtnLabel);
             Objects.requireNonNull(currentBtn).getCompoundDrawables()[0].setColorFilter(primaryColor, PorterDuff.Mode.SRC_ATOP);
@@ -131,5 +152,4 @@ public class MainActivity extends AppCompatActivity {
 
     private void findPlaceButtonClick(View v) {
     }
-
 }

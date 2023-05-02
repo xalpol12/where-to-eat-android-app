@@ -40,4 +40,19 @@
         <item name="android:textColor">@color/secondary</item>
     </style>
 
+    <style name="App.Slider" parent="@style/Widget.MaterialComponents.Slider">
+        <item name="labelStyle">@style/App.Tooltip</item>
+    </style>
+
+    <style name="App.Tooltip" parent="Widget.MaterialComponents.Tooltip">
+        <!-- background color of the Tooltip -->
+        <item name="backgroundTint">@color/secondary</item>
+        <!-- textAppearance of the Tooltip -->
+        <item name="android:textAppearance">@style/TextAppearance.App.Tooltip</item>
+    </style>
+
+    <style name="TextAppearance.App.Tooltip" parent="TextAppearance.MaterialComponents.Tooltip">
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
 </resources>

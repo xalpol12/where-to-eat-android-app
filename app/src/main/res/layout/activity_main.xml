@@ -57,6 +57,7 @@
             app:layout_constraintTop_toBottomOf="@+id/search_layout">
 
             <com.google.android.material.slider.Slider
+                style="@style/App.Slider"
                 android:id="@+id/range_slider"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
