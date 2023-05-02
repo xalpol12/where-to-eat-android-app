@@ -2,19 +2,26 @@ package dev.xalpol12.wheretoeat.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import dev.xalpol12.wheretoeat.R;
-import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;
+import dev.xalpol12.wheretoeat.viewmodel.MainActivityViewModel;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
+
     // screen diagonal:     5 inches
     // screen dimensions:   W 2.45 : H 4.36
     // aspect ratio:        16:9 (~294 ppi density)
@@ -22,22 +29,33 @@ public class MainActivity extends AppCompatActivity {
     // dp resolution:       391x587
     // density bucket:      xhdpi
 
-    AppCompatButton btnFindLocation;
-    AppCompatButton btnPrice1;
-    AppCompatButton btnPrice2;
-    AppCompatButton btnPrice3;
-    AppCompatButton btnPrice4;
-    AppCompatButton btnRestaurant;
-    AppCompatButton btnBakery;
-    AppCompatButton btnCafe;
-    AppCompatButton btnPub;
+    private MainActivityViewModel viewModel;
 
+    List<Integer> priceButtonIds = List.of(
+                R.id.price_1_button,
+                R.id.price_2_button,
+                R.id.price_3_button,
+                R.id.price_4_button);
+    List<AppCompatButton> priceButtons = new ArrayList<>();
+
+    List<Integer> placeButtonIds = List.of(
+            R.id.place_type_restaurant,
+            R.id.place_type_bakery,
+            R.id.place_type_cafe,
+            R.id.place_type_pub);
+    List<AppCompatButton> placeButtons = new ArrayList<>();
+
+    AppCompatButton btnFindLocation;
     AppCompatButton btnFindPlace;
+
+    int primaryColor;
+    int accentColor;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         setContentView(R.layout.activity_main);
         initializeUI();
         setOnClickListeners();
@@ -45,27 +63,73 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeUI() {
         btnFindLocation = findViewById(R.id.find_location_button);
-        btnPrice1 = findViewById(R.id.price_1_button);
-        btnPrice2 = findViewById(R.id.price_2_button);
-        btnPrice3 = findViewById(R.id.price_3_button);
-        btnPrice4 = findViewById(R.id.price_4_button);
-        btnRestaurant = findViewById(R.id.place_type_restaurant);
-        btnBakery = findViewById(R.id.place_type_bakery);
-        btnCafe = findViewById(R.id.place_type_cafe);
-        btnPub = findViewById(R.id.place_type_pub);
         btnFindPlace = findViewById(R.id.find_place_button);
+
+        for (int id : priceButtonIds) {
+            priceButtons.add(findViewById(id));
+        }
+
+        for (int id : placeButtonIds) {
+            placeButtons.add(findViewById(id));
+        }
+
+        primaryColor = ContextCompat.getColor(this, R.color.primary);
+        accentColor = ContextCompat.getColor(this, R.color.accent);
     }
 
     private void setOnClickListeners() {
+        View.OnClickListener locationButtonClickListener = this::locationButtonClick;
+        btnFindLocation.setOnClickListener(locationButtonClickListener);
+
         View.OnClickListener priceButtonClickListener = this::priceButtonClick;
-        btnPrice1.setOnClickListener(priceButtonClickListener);
-        btnPrice2.setOnClickListener(priceButtonClickListener);
-        btnPrice3.setOnClickListener(priceButtonClickListener);
-        btnPrice4.setOnClickListener(priceButtonClickListener);
+        for (AppCompatButton btn : priceButtons) {
+            btn.setOnClickListener(priceButtonClickListener);
+        }
+
+        View.OnClickListener placeButtonClickListener = this::placeButtonClick;
+        for (AppCompatButton btn : placeButtons) {
+            btn.setOnClickListener(placeButtonClickListener);
+        }
+
+        View.OnClickListener findPlaceButtonClickListener = this::findPlaceButtonClick;
+        btnFindPlace.setOnClickListener(findPlaceButtonClickListener);
     }
 
-    public void priceButtonClick(View v) {
-        Toast.makeText(this, (String) v.getTag(), Toast.LENGTH_SHORT).show();
+    private void locationButtonClick(View v) {
+    }
+
+    private void priceButtonClick(View v) {
+        int selectedBtnIndex = Integer.parseInt((String) v.getTag());
+        for (int i = 0; i < selectedBtnIndex; i++) {
+            priceButtons.get(i).getCompoundDrawables()[0].setColorFilter(accentColor, PorterDuff.Mode.SRC_ATOP);
+        }
+        for (int i = selectedBtnIndex; i < priceButtons.size(); i++) {
+            priceButtons.get(i).getCompoundDrawables()[0].setColorFilter(primaryColor, PorterDuff.Mode.SRC_ATOP);
+        }
+    }
+
+    private void placeButtonClick(View v) {
+        Object tag = v.getTag();
+        String selectedBtnLabel = (String) v.getTag();
+        AppCompatButton currentBtn = getCurrentPlaceButton(tag);
+        if (viewModel.isPlaceTypeAlreadyAdded(selectedBtnLabel)) {
+            viewModel.deleteFromPlaceList(selectedBtnLabel);
+            Objects.requireNonNull(currentBtn).getCompoundDrawables()[0].setColorFilter(primaryColor, PorterDuff.Mode.SRC_ATOP);
+        } else {
+            viewModel.addToPlaceList(selectedBtnLabel);
+            Objects.requireNonNull(currentBtn).getCompoundDrawables()[0].setColorFilter(accentColor, PorterDuff.Mode.SRC_ATOP);
+        }
+    }
+
+    private AppCompatButton getCurrentPlaceButton(Object tag) {
+        for (AppCompatButton btn : placeButtons) {
+            if (tag.equals(btn.getTag())) {
+                return btn;
+            }
+        } return null;
+    }
+
+    private void findPlaceButtonClick(View v) {
     }
 
 }
