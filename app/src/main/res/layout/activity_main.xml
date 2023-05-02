@@ -2,16 +2,239 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@color/primary"
+    android:backgroundTint="@color/primary"
+    tools:context=".view.MainActivity">
 
-    <include
-        layout="@layout/content_find_place"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/search_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/search_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/gps_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_search_location" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/find_location_button"
+                style="@style/button_standard_style"
+                android:alpha="0.6"
+                android:backgroundTint="@color/secondary"
+                android:backgroundTintMode="add"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:text="@string/find_my_location"
+                android:textColorHighlight="@color/secondary"
+                android:textColorHint="@color/secondary"
+                android:textColorLink="@color/secondary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.502"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/search_icon" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/radius_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_layout">
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/range_slider"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="40dp"
+                android:backgroundTint="@color/secondary"
+                android:contentDescription="@string/radius_range_slider"
+                android:valueFrom="0.5"
+                android:valueTo="20"
+                android:stepSize="0.1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:thumbColor="@color/accent"
+                app:trackColor="@color/secondary" />
+
+            <TextView
+                android:id="@+id/min_range_radius"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:fontFamily="@font/inter"
+                android:text="@string/min_radius_distance"
+                android:textColor="@color/secondary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/range_slider" />
+
+            <TextView
+                android:id="@+id/max_range_radius"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="40dp"
+                android:fontFamily="@font/inter"
+                android:text="@string/max_radius_distance"
+                android:textColor="@color/secondary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/range_slider" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/price_option_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:justifyContent="space_around"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radius_layout">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/price_1_button"
+                style="@style/button_small_rounded"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/secondary"
+                android:drawableStart="@drawable/ic_coin_1"
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp"
+                android:tag="1"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/price_2_button"
+                style="@style/button_small_rounded"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/secondary"
+                android:drawableStart="@drawable/ic_coin_2"
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp"
+                android:tag="2"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/price_3_button"
+                style="@style/button_small_rounded"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/secondary"
+                android:drawableStart="@drawable/ic_coin_3"
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp"
+                android:tag="3" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/price_4_button"
+                style="@style/button_small_rounded"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:backgroundTint="@color/secondary"
+                android:drawableStart="@drawable/ic_coin_4"
+                android:paddingLeft="13dp"
+                android:paddingRight="13dp"
+                android:tag="4"
+                />
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/place_type_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="80dp"
+            app:justifyContent="space_around"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/price_option_layout">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/place_type_restaurant"
+                style="@style/button_small_rounded"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:backgroundTint="@color/secondary"
+                android:drawableStart="@drawable/ic_restaurant"
+                android:paddingLeft="19dp"
+                android:paddingRight="19dp"
+                android:tag="restaurant"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/place_type_bakery"
+                style="@style/button_small_rounded"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:backgroundTint="@color/secondary"
+                android:drawableStart="@drawable/ic_cake"
+                android:paddingLeft="21dp"
+                android:paddingRight="21dp"
+                android:tag="bakery"/>
+
+        </com.google.android.flexbox.FlexboxLayout>
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/place_type_layout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="80dp"
+            app:justifyContent="space_around"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/place_type_layout">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/place_type_cafe"
+                style="@style/button_small_rounded"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:backgroundTint="@color/secondary"
+                android:drawableStart="@drawable/ic_cafe"
+                android:paddingLeft="19dp"
+                android:paddingRight="19dp"
+                android:tag="cafe"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/place_type_pub"
+                style="@style/button_small_rounded"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:backgroundTint="@color/secondary"
+                android:drawableStart="@drawable/ic_beer"
+                android:paddingLeft="26dp"
+                android:paddingRight="26dp"
+                android:tag="pub"
+                />
+
+        </com.google.android.flexbox.FlexboxLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+
+
         android:id="@+id/button_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,4 +258,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
