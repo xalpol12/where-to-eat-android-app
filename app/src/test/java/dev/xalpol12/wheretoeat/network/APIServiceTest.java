@@ -20,8 +20,8 @@ import java.net.HttpURLConnection;
 import java.util.List;
 
 import dev.xalpol12.wheretoeat.di.AppModule;
-import dev.xalpol12.wheretoeat.model.entity.Place;
-import dev.xalpol12.wheretoeat.model.entity.dto.PlaceRequestDTO;
+import dev.xalpol12.wheretoeat.data.Place;
+import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;
 import mockwebserver3.MockResponse;
 import mockwebserver3.MockWebServer;
 import okhttp3.OkHttpClient;
@@ -76,9 +76,9 @@ public class APIServiceTest extends TestCase {
         return gson.toJson(json);
     }
 
-    private MockResponse getMockResponse(int statusCode, String responseBody) {
+    private MockResponse getMockResponse(String responseBody) {
         return new MockResponse()
-                .setResponseCode(statusCode)
+                .setResponseCode(HttpURLConnection.HTTP_OK)
                 .setBody(responseBody);
     }
 
@@ -104,7 +104,7 @@ public class APIServiceTest extends TestCase {
         String requestPath = RESOURCES_PATH + "request\\request_dto.json";
 
         String responseBody = getMockResponseBody(jsonResponsePath);
-        MockResponse response = getMockResponse(HttpURLConnection.HTTP_OK, responseBody);
+        MockResponse response = getMockResponse(responseBody);
         mockWebServer.enqueue(response);
         List<Place> expected = getMockListOfPlace();
         PlaceRequestDTO placeRequestDTO = getMockRequest(requestPath);
