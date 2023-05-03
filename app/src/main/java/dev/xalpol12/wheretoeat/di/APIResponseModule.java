@@ -11,6 +11,7 @@ import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
+import dev.xalpol12.wheretoeat.data.ImageResult;
 import dev.xalpol12.wheretoeat.data.Place;
 import dev.xalpol12.wheretoeat.network.APIRepository;
 import dev.xalpol12.wheretoeat.network.APIService;
@@ -21,7 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 @InstallIn(SingletonComponent.class)
-public class AppModule {
+public class APIResponseModule {
     public static final String BASE_URL = "https://google.com/"; // TODO: add baseURL
 
     @Singleton
@@ -68,6 +69,12 @@ public class AppModule {
     @Singleton
     @Provides
     public MutableLiveData<List<Place>> getPlaceList() {
+        return new MutableLiveData<>();
+    }
+
+    @Singleton
+    @Provides
+    public MutableLiveData<ImageResult> getImageResult() {
         return new MutableLiveData<>();
     }
 }

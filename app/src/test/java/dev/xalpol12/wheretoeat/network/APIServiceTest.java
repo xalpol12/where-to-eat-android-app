@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.List;
 
-import dev.xalpol12.wheretoeat.di.AppModule;
+import dev.xalpol12.wheretoeat.di.APIResponseModule;
 import dev.xalpol12.wheretoeat.data.Place;
 import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;
 import mockwebserver3.MockResponse;
@@ -86,10 +86,10 @@ public class APIServiceTest extends TestCase {
     @Before
     public void init() {
         mockWebServer = new MockWebServer();
-        HttpLoggingInterceptor interceptor = new AppModule().getInterceptor();
-        OkHttpClient client = new AppModule().getOkHttpClient(interceptor);
+        HttpLoggingInterceptor interceptor = new APIResponseModule().getInterceptor();
+        OkHttpClient client = new APIResponseModule().getOkHttpClient(interceptor);
         Retrofit retrofit = getMockRetrofitInstance(client);
-        apiService = new AppModule().getAPIService(retrofit);
+        apiService = new APIResponseModule().getAPIService(retrofit);
     }
 
     @After
