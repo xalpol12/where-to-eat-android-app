@@ -32,23 +32,23 @@ public class MainActivity extends AppCompatActivity {
     // density bucket:      xhdpi
 
     private MainActivityViewModel viewModel;
-    List<Integer> priceButtonIds = List.of(
+    private final List<Integer> priceButtonIds = List.of(
                 R.id.price_1_button,
                 R.id.price_2_button,
                 R.id.price_3_button,
                 R.id.price_4_button);
-    List<AppCompatButton> priceButtons = new ArrayList<>();
-    List<Integer> placeButtonIds = List.of(
+    private final List<AppCompatButton> priceButtons = new ArrayList<>();
+    private final List<Integer> placeButtonIds = List.of(
             R.id.place_type_restaurant,
             R.id.place_type_bakery,
             R.id.place_type_cafe,
             R.id.place_type_pub);
-    List<AppCompatButton> placeButtons = new ArrayList<>();
-    AppCompatButton btnFindLocation;
-    AppCompatButton btnFindPlace;
-    Slider rangeSlider;
-    int primaryColor;
-    int accentColor;
+    private final List<AppCompatButton> placeButtons = new ArrayList<>();
+    private AppCompatButton btnFindLocation;
+    private AppCompatButton btnFindPlace;
+    private Slider rangeSlider;
+    private int primaryColor;
+    private int accentColor;
 
 
     @Override
