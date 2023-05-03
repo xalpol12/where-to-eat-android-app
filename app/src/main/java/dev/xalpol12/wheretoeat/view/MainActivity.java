@@ -5,6 +5,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
@@ -142,10 +143,15 @@ public class MainActivity extends AppCompatActivity {
     private void findPlaceButtonClick(View v) {
         try {
             if (viewModel.areAllFieldsNotNull()) {
-                Toast.makeText(this, "Data sent :)", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "Data sent :)", Toast.LENGTH_SHORT).show();
+                openPlaceActivity();
             }
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void openPlaceActivity() {
+        startActivity(new Intent(MainActivity.this, PlaceActivity.class));
     }
 }

@@ -17,6 +17,9 @@
             android:name=".view.PlaceDetails"
             android:exported="false" />
         <activity
+            android:name=".view.PlaceActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
