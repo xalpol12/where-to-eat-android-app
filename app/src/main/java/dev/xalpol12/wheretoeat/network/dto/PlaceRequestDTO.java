@@ -1,7 +1,5 @@
 package dev.xalpol12.wheretoeat.network.dto;
 
-import java.util.List;
-
 import dev.xalpol12.wheretoeat.data.utility.Location;
 import dev.xalpol12.wheretoeat.data.utility.PlaceType;
 import dev.xalpol12.wheretoeat.data.utility.PriceLevel;

@@ -3,8 +3,6 @@ package dev.xalpol12.wheretoeat.viewmodel;
 import androidx.lifecycle.ViewModel;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -19,12 +17,9 @@ public class MainActivityViewModel extends ViewModel {
 
     PlaceRequestDTO placeRequestDTO;
 
-    List<PlaceType> placeTypeTempList;
-
     @Inject
     public MainActivityViewModel(PlaceRequestDTO placeRequestDTO) {
         this.placeRequestDTO = placeRequestDTO;
-        this.placeTypeTempList = new ArrayList<>();
         setupVariables();
     }
 
@@ -46,28 +41,17 @@ public class MainActivityViewModel extends ViewModel {
         placeRequestDTO.setMaxPrice(priceLevel);
     }
 
-    public void addToPlaceList(String buttonTag) {
+    public void setPlaceType(String buttonTag) {
         PlaceType placeType = stringToPlaceType(buttonTag);
-        placeTypeTempList.add(placeType);
-    }
-
-    public void deleteFromPlaceList(String buttonTag) {
-        PlaceType placeType = stringToPlaceType(buttonTag);
-        placeTypeTempList.remove(placeType);
+        placeRequestDTO.setPlaceType(placeType);
     }
 
     public void sendPlaceRequestDTO() {
-        placeRequestDTO.setType(placeTypeTempList);
-    }
-
-    public boolean isPlaceTypeAlreadyAdded(String buttonTag) {
-        PlaceType placeType = stringToPlaceType(buttonTag);
-        return placeTypeTempList.contains(placeType);
     }
 
     public boolean areAllFieldsNotNull() throws IllegalAccessException {
         for (Field field : PlaceRequestDTO.class.getDeclaredFields()) {
-//            field.setAccessible(true);
+            field.setAccessible(true);
             if(field.get(placeRequestDTO) == null) {
                 return false;
             }

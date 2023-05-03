@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.inject.Inject;
-
 import dagger.hilt.android.AndroidEntryPoint;
 import dev.xalpol12.wheretoeat.R;
 import dev.xalpol12.wheretoeat.viewmodel.MainActivityViewModel;
@@ -131,25 +129,23 @@ public class MainActivity extends AppCompatActivity {
         Object tag = v.getTag();
         String selectedBtnLabel = (String) v.getTag();
 
-        AppCompatButton currentBtn = getCurrentPlaceButton(tag);
-
-        if (viewModel.isPlaceTypeAlreadyAdded(selectedBtnLabel)) {
-            viewModel.deleteFromPlaceList(selectedBtnLabel);
-            Objects.requireNonNull(currentBtn).getCompoundDrawables()[0].setColorFilter(primaryColor, PorterDuff.Mode.SRC_ATOP);
-        } else {
-            viewModel.addToPlaceList(selectedBtnLabel);
-            Objects.requireNonNull(currentBtn).getCompoundDrawables()[0].setColorFilter(accentColor, PorterDuff.Mode.SRC_ATOP);
+        for (AppCompatButton btn : placeButtons) {
+            if (btn.getTag().equals(selectedBtnLabel)) {
+                viewModel.setPlaceType(selectedBtnLabel);
+                Objects.requireNonNull(btn).getCompoundDrawables()[0].setColorFilter(accentColor, PorterDuff.Mode.SRC_ATOP);
+            } else {
+                Objects.requireNonNull(btn).getCompoundDrawables()[0].setColorFilter(primaryColor, PorterDuff.Mode.SRC_ATOP);
+            }
         }
     }
 
-    private AppCompatButton getCurrentPlaceButton(Object tag) {
-        for (AppCompatButton btn : placeButtons) {
-            if (tag.equals(btn.getTag())) {
-                return btn;
-            }
-        } return null;
-    }
-
     private void findPlaceButtonClick(View v) {
+        try {
+            if (viewModel.areAllFieldsNotNull()) {
+                Toast.makeText(this, "Data sent :)", Toast.LENGTH_SHORT).show();
+            }
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
