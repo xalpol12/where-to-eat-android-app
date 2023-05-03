@@ -15,9 +15,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PlaceRequestDTO {
-    Location location;
-    int distance;
-    PriceLevel minPrice;
-    PriceLevel maxPrice;
-    List<PlaceType> type;
+    private Location location;
+    private int distance;
+    private PriceLevel minPrice;
+    private PriceLevel maxPrice;
+    private PlaceType placeType;
 }
