@@ -14,6 +14,7 @@
     <color name="secondary">#181818</color>
     <color name="secondary_30_tint">#6a6a6a</color>
     <color name="accent">#1C5C3A</color>
+
     <color name="light_blue_600">#FF039BE5</color>
     <color name="light_blue_900">#FF01579B</color>
     <color name="light_blue_A200">#FF40C4FF</color>

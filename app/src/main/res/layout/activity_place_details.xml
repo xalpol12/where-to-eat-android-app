@@ -82,7 +82,7 @@
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/open_now"
             style="@style/text_style"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
