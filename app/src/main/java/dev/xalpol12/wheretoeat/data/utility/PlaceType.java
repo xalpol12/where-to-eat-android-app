@@ -1,10 +1,12 @@
 package dev.xalpol12.wheretoeat.data.utility;
 
+import androidx.annotation.NonNull;
+
 public enum PlaceType {
-    RESTAURANT("restaurant"),
-    BAKERY("bakery"),
-    CAFE("cafe"),
-    BAR("bar");
+    RESTAURANT("RESTAURANT"),
+    BAKERY("BAKERY"),
+    CAFE("CAFE"),
+    BAR("BAR");
 
     private final String placeType;
 
@@ -12,6 +14,7 @@ public enum PlaceType {
         this.placeType = placeType;
     }
 
+    @NonNull
     public String toString() {
         return this.placeType;
     }
