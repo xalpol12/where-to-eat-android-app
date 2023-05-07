@@ -5,8 +5,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 
 @RunWith(JUnit4.class)
@@ -16,8 +16,8 @@ public class AppModuleTest {
 
     @Before
     public void init() {
-        HttpLoggingInterceptor interceptor = new APIResponseModule().getInterceptor();
-        OkHttpClient client = new APIResponseModule().getOkHttpClient(interceptor);
+        Interceptor interceptor = new APIResponseModule().getInterceptorDebug();
+        OkHttpClient client = new APIResponseModule().getOkHttpClientDebug(interceptor);
         retrofitClient = new APIResponseModule().getRetrofitClient(client);
     }
 
