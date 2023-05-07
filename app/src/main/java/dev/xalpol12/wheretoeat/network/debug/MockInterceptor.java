@@ -33,18 +33,39 @@ public class MockInterceptor implements Interceptor {
 
     public static JsonArray getSampleResponse() {
         JsonArray sampleResponse = new JsonArray();
-        JsonObject object = new JsonObject();
-        object.addProperty("name", "Zielona Weranda");
-        object.addProperty("placeId", "ChIJBUn2SD9bBEcRThe9iausrn8");
-        object.addProperty("vicinity", "Paderewskiego 7, Poznań");
-        object.addProperty("rating", 4.4f);
-        object.addProperty("userRatingsTotal", 2524);
-        object.addProperty("openNow", true);
-        object.addProperty("photoReference", "AZose0km65w3gBpnFu7nDoPAczA1Ih" +
+        JsonObject firstObject = getFirstJsonObject();
+        JsonObject secondObject = getSecondJsonObject();
+
+        sampleResponse.add(firstObject);
+        sampleResponse.add(secondObject);
+        return sampleResponse;
+    }
+
+    private static JsonObject getFirstJsonObject() {
+        JsonObject firstObject = new JsonObject();
+        firstObject.addProperty("name", "Zielona Weranda");
+        firstObject.addProperty("placeId", "ChIJBUn2SD9bBEcRThe9iausrn8");
+        firstObject.addProperty("vicinity", "Paderewskiego 7, Poznań");
+        firstObject.addProperty("rating", 4.4f);
+        firstObject.addProperty("userRatingsTotal", 2524);
+        firstObject.addProperty("openNow", true);
+        firstObject.addProperty("photoReference", "AZose0km65w3gBpnFu7nDoPAczA1Ih" +
                 "dwLJ0DFcC0uRI17clR8jlNogV04tvpTcV870ER4ELWk1ZTnCD5P7fsPHZgZ6hs6KAM2Ei_xdNZhGBx39" +
                 "-mTGDwLQDbmDODFz5-6eUq6vCUN5-0zi9XigvZWR-A_uqEWOrCCmYgTNof9JAzi4DrWEVh");
-        sampleResponse.add(object);
-        sampleResponse.add(object);
-        return sampleResponse;
+        return firstObject;
+    }
+
+    private static JsonObject getSecondJsonObject() {
+        JsonObject secondObject = new JsonObject();
+        secondObject.addProperty("name", "Ptasie Radio");
+        secondObject.addProperty("placeId", "ChIJB7T44zZbBEcR1yge5KHLwYk");
+        secondObject.addProperty("vicinity", "Kościuszki 74/3, Poznań");
+        secondObject.addProperty("rating", 4.6f);
+        secondObject.addProperty("userRatingsTotal", 2635);
+        secondObject.addProperty("openNow", true);
+        secondObject.addProperty("photoReference", "AZose0lamWfrp_Lc-TVDgYWAJEbR_PgTRQH9" +
+                "_mkRMc5rk6LrfvUoIqPylB6nkd4E8o9EZ-AlXqbY44jKHlWFRymkOuDURGzOHjxq2RMhqmI6cPvWZkms_A_" +
+                "dFl6OGTRFDH2zPncupH1PYId0i6ON8IICeN0CTdJurT6S-b9UKCGlUDSaR5Mc");
+        return secondObject;
     }
 }
