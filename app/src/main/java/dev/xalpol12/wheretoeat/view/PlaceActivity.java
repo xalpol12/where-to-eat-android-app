@@ -12,7 +12,6 @@ import android.view.View;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import dev.xalpol12.wheretoeat.R;
-import dev.xalpol12.wheretoeat.view.adapter.RecyclerViewAdapter;
 import dev.xalpol12.wheretoeat.viewmodel.PlaceActivityViewModel;
 
 @AndroidEntryPoint
@@ -31,28 +30,8 @@ public class PlaceActivity extends AppCompatActivity {
 //        viewModel = (PlaceActivityViewModel) getIntent().getSerializableExtra("placeViewModel");
         viewModel = new ViewModelProvider(this).get(PlaceActivityViewModel.class);
         setContentView(R.layout.activity_place);
-        setImagesObserver();
         initializeUI();
         setOnClickListeners();
-    }
-
-    private void setImagesObserver() {
-//        viewModel.getImages().observe(this, new Observer<ImageResult>() {
-//            @Override
-//            public void onChanged(ImageResult imageResult) {
-//                if (imageResult != null) {
-//                    PlaceDetailsViewModel.Factory factory = new PlaceDetailsViewModel
-//                            .Factory(nextPlace, imageResult.getImageData());
-//                    PlaceDetailsViewModel detailsViewModel = new ViewModelProvider(
-//                            PlaceActivity.this, factory).get(PlaceDetailsViewModel.class);
-//                    PlaceDetails placeDetails = new PlaceDetails(PlaceActivity.this);
-//                    placeDetails.setViewModel(detailsViewModel);
-//                    ConstraintLayout layout = findViewById(R.id.place_main_layout);
-//                    layout.addView(placeDetails);
-//                }
-//            }
-//        });
-
     }
 
     private void initializeUI() {
