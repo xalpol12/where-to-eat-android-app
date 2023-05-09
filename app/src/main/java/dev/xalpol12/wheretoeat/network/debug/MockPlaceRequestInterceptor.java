@@ -7,14 +7,13 @@ import com.google.gson.JsonObject;
 
 import java.io.IOException;
 
-import dev.xalpol12.wheretoeat.BuildConfig;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Protocol;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 
-public class MockInterceptor implements Interceptor {
+public class MockPlaceRequestInterceptor implements Interceptor {
     @NonNull
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {

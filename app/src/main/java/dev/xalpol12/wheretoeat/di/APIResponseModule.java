@@ -17,7 +17,7 @@ import dev.xalpol12.wheretoeat.data.ImageResult;
 import dev.xalpol12.wheretoeat.data.Place;
 import dev.xalpol12.wheretoeat.network.APIRepository;
 import dev.xalpol12.wheretoeat.network.APIService;
-import dev.xalpol12.wheretoeat.network.debug.MockInterceptor;
+import dev.xalpol12.wheretoeat.network.debug.MockPlaceRequestInterceptor;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -33,7 +33,7 @@ public class APIResponseModule {
     @Provides
     @Named("InterceptorDebug")
     public Interceptor getInterceptorDebug() {
-        return new MockInterceptor();
+        return new MockPlaceRequestInterceptor();
     }
 
     @Singleton

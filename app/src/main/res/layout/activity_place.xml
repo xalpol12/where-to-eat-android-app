@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/place_main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary"
@@ -15,12 +16,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <include
-            layout="@layout/activity_place_details"
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/place_fragment_container"
+            android:name="dev.xalpol12.wheretoeat.viewmodel.PlaceFragment"
             android:layout_width="wrap_content"
-            android:layout_marginTop="19dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp" />
+            android:layout_height="match_parent"
+            android:layout_above="@+id/secondary_buttons_layout"
+            android:layout_marginBottom="0dp"
+            tools:layout="@layout/fragment_place" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/secondary_buttons_layout"
@@ -41,10 +45,10 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/back_button" />
+                app:layout_constraintStart_toEndOf="@+id/previous_button" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/back_button"
+                android:id="@+id/previous_button"
                 style="@style/button_small_rounded"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
@@ -79,6 +83,8 @@
             android:text="@string/go_there">
 
         </androidx.appcompat.widget.AppCompatButton>
+
+
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

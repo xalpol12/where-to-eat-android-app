@@ -3,6 +3,7 @@ package dev.xalpol12.wheretoeat.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -13,13 +14,16 @@ import android.widget.Toast;
 
 import com.google.android.material.slider.Slider;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import dev.xalpol12.wheretoeat.R;
+import dev.xalpol12.wheretoeat.data.Place;
 import dev.xalpol12.wheretoeat.viewmodel.MainActivityViewModel;
+import dev.xalpol12.wheretoeat.viewmodel.PlaceActivityViewModel;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
@@ -31,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
     // dp resolution:       391x587
     // density bucket:      xhdpi
 
-    private MainActivityViewModel viewModel;
+    private MainActivityViewModel mainViewModel;
+    private PlaceActivityViewModel placeViewModel;
     private final List<Integer> priceButtonIds = List.of(
                 R.id.price_1_button,
                 R.id.price_2_button,
@@ -54,10 +59,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        mainViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        placeViewModel = new ViewModelProvider(this).get(PlaceActivityViewModel.class);
         setContentView(R.layout.activity_main);
+        configurePlaceViewModelObserver();
         initializeUI();
         setOnClickListeners();
+    }
+
+    private void configurePlaceViewModelObserver() {
+        placeViewModel.getPlaceList().observe(this, new Observer<List<Place>>() {
+            @Override
+            public void onChanged(List<Place> places) {
+                if (places != null && !places.isEmpty()) {
+                    startActivity(new Intent(MainActivity.this, PlaceActivity.class));
+//                            .putExtra("placeViewModel", (Serializable) placeViewModel));
+                    Toast.makeText(MainActivity.this, "call successful", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void initializeUI() {
@@ -100,23 +120,23 @@ public class MainActivity extends AppCompatActivity {
 
     private void locationButtonClick(View v) {
         //TODO: Implement location based on GPS
-        double lat = 54.1;
-        double lng = 43.1;
+        double lat = 52.402;
+        double lng = 16.93521;
 
-        viewModel.setRequestLocation(lat, lng);
+        mainViewModel.setRequestLocation(lat, lng);
 
         v.setAlpha(1.f);
     }
 
     private void sliderChange(Slider slider, float v, boolean b) {
-        viewModel.setRequestDistance((int)(v * 1000));
+        mainViewModel.setRequestDistance((int)(v * 1000));
     }
 
     private void priceButtonClick(View v) {
         String tag = (String) v.getTag();
         int selectedBtnIndex = Integer.parseInt(tag);
 
-        viewModel.setRequestMaxPrice(selectedBtnIndex);
+        mainViewModel.setRequestMaxPrice(selectedBtnIndex);
 
         for (int i = 0; i < selectedBtnIndex; i++) {
             priceButtons.get(i).getCompoundDrawables()[0].setColorFilter(accentColor, PorterDuff.Mode.SRC_ATOP);
@@ -132,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (AppCompatButton btn : placeButtons) {
             if (btn.getTag().equals(selectedBtnLabel)) {
-                viewModel.setPlaceType(selectedBtnLabel);
+                mainViewModel.setPlaceType(selectedBtnLabel.toUpperCase());
                 Objects.requireNonNull(btn).getCompoundDrawables()[0].setColorFilter(accentColor, PorterDuff.Mode.SRC_ATOP);
             } else {
                 Objects.requireNonNull(btn).getCompoundDrawables()[0].setColorFilter(primaryColor, PorterDuff.Mode.SRC_ATOP);
@@ -142,8 +162,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void findPlaceButtonClick(View v) {
         try {
-            if (viewModel.areAllFieldsNotNull()) {
-//                Toast.makeText(this, "Data sent :)", Toast.LENGTH_SHORT).show();
+            if (mainViewModel.areAllFieldsNotNull()) {
                 openPlaceActivity();
             }
         } catch (IllegalAccessException e) {
@@ -152,6 +171,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openPlaceActivity() {
-        startActivity(new Intent(MainActivity.this, PlaceActivity.class));
+        placeViewModel.callFindPlaces(mainViewModel.getPlaceRequestDTO());
     }
 }

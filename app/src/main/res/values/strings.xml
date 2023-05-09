@@ -21,4 +21,6 @@
     <string name="_0_5_km_away">0.5 km away</string>
     <string name="open_now">Open now</string>
     <string name="closed_now">Closed now</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

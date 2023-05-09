@@ -1,5 +1,6 @@
 package dev.xalpol12.wheretoeat.viewmodel;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModel;
 
 import java.lang.reflect.Field;
@@ -13,7 +14,7 @@ import dev.xalpol12.wheretoeat.data.utility.PriceLevel;
 import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;
 
 @HiltViewModel
-public class MainActivityViewModel extends ViewModel {
+public class MainActivityViewModel extends ViewModel{
 
     PlaceRequestDTO placeRequestDTO;
 
@@ -46,7 +47,8 @@ public class MainActivityViewModel extends ViewModel {
         placeRequestDTO.setPlaceType(placeType);
     }
 
-    public void sendPlaceRequestDTO() {
+    public PlaceRequestDTO getPlaceRequestDTO() {
+        return placeRequestDTO;
     }
 
     public boolean areAllFieldsNotNull() throws IllegalAccessException {

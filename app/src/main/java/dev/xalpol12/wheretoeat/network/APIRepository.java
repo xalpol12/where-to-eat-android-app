@@ -1,5 +1,7 @@
 package dev.xalpol12.wheretoeat.network;
 
+import android.media.Image;
+
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
@@ -16,47 +18,61 @@ import retrofit2.Response;
 
 public class APIRepository {
     private final APIService apiService;
+    private final MutableLiveData<List<Place>> placeList;
+    private final MutableLiveData<ImageResult> images;
 
     @Inject
-    public APIRepository(APIService apiService) {
+    public APIRepository(APIService apiService,
+                         MutableLiveData<List<Place>> placeList,
+                         MutableLiveData<ImageResult> imageList) {
         this.apiService = apiService;
+        this.placeList = placeList;
+        this.images = imageList;
     }
 
-    public void makeCall(PlaceRequestDTO placeRequestDTO, MutableLiveData<List<Place>> data) {
+    public void makeCall(PlaceRequestDTO placeRequestDTO) {
         Call<List<Place>> call = apiService.getPlaceList(placeRequestDTO);
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<List<Place>> call, Response<List<Place>> response) {
                 if (response.isSuccessful()) {
-                    data.postValue(response.body());
+                    placeList.postValue(response.body());
                 } else {
-                    data.postValue(null);
+                    placeList.postValue(null);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Place>> call, Throwable t) {
-                data.postValue(null);
+                placeList.postValue(null);
             }
         });
     }
 
-    public void makeCall(ImageRequestDTO imageRequestDTO, MutableLiveData<ImageResult> imgData) {
+    public void makeCall(ImageRequestDTO imageRequestDTO) {
         Call<ImageResult> call = apiService.getImage(imageRequestDTO);
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ImageResult> call, Response<ImageResult> response) {
                 if (response.isSuccessful()) {
-                    imgData.postValue(response.body());
+                    images.postValue(response.body());
                 } else {
-                    imgData.postValue(null);
+                    images.postValue(null);
                 }
             }
 
             @Override
             public void onFailure(Call<ImageResult> call, Throwable t) {
-                imgData.postValue(null);
+                images.postValue(null);
             }
         });
+    }
+
+    public MutableLiveData<List<Place>> getPlaceList() {
+        return placeList;
+    }
+
+    public MutableLiveData<ImageResult> getImages() {
+        return images;
     }
 }
