@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 
@@ -18,8 +20,7 @@ import dev.xalpol12.wheretoeat.viewmodel.PlaceActivityViewModel;
 public class PlaceActivity extends AppCompatActivity {
 
     private PlaceActivityViewModel viewModel;
-    private ViewPager2 viewPager;
-    private RecyclerView recyclerView;
+    private PlaceFragment placeFragment;
     private AppCompatButton btnPrevious;
     private AppCompatButton btnRandom;
     private AppCompatButton btnGoThere;
@@ -35,6 +36,7 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void initializeUI() {
+        placeFragment = (PlaceFragment) getSupportFragmentManager().findFragmentById(R.id.place_fragment_container);
         btnPrevious = findViewById(R.id.previous_button);
         btnRandom = findViewById(R.id.random_button);
         btnGoThere = findViewById(R.id.go_there_button);
@@ -56,6 +58,8 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void randomButtonClick(View v) {
+        Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.img_default_place_photo);
+        placeFragment.changePlace(viewModel.getNextPlaceDetails(), image);
     }
 
     private void goThereButtonClick(View v) {

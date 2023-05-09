@@ -61,7 +61,7 @@ public class MockPlaceRequestInterceptor implements Interceptor {
         secondObject.addProperty("vicinity", "Kościuszki 74/3, Poznań");
         secondObject.addProperty("rating", 4.6f);
         secondObject.addProperty("userRatingsTotal", 2635);
-        secondObject.addProperty("openNow", true);
+        secondObject.addProperty("openNow", false);
         secondObject.addProperty("photoReference", "AZose0lamWfrp_Lc-TVDgYWAJEbR_PgTRQH9" +
                 "_mkRMc5rk6LrfvUoIqPylB6nkd4E8o9EZ-AlXqbY44jKHlWFRymkOuDURGzOHjxq2RMhqmI6cPvWZkms_A_" +
                 "dFl6OGTRFDH2zPncupH1PYId0i6ON8IICeN0CTdJurT6S-b9UKCGlUDSaR5Mc");

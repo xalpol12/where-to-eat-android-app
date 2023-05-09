@@ -19,7 +19,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/place_fragment_container"
-            android:name="dev.xalpol12.wheretoeat.viewmodel.PlaceFragment"
+            android:name="dev.xalpol12.wheretoeat.view.PlaceFragment"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_above="@+id/secondary_buttons_layout"

@@ -1,5 +1,7 @@
 package dev.xalpol12.wheretoeat.viewmodel;
 
+import android.graphics.Bitmap;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -43,13 +45,14 @@ public class PlaceActivityViewModel extends ViewModel {
     }
 
     public Place getNextPlaceDetails() {
-        if (currentItemIndex < Objects.requireNonNull(repository.getPlaceList().getValue()).size() - 1) {
+        if (currentItemIndex < Objects.requireNonNull(repository.getPlaceList().getValue()).size()) {
             currentItemIndex++;
-        }
-        return repository.getPlaceList().getValue().get(currentItemIndex);
+        } else currentItemIndex = 1;
+        return repository.getPlaceList().getValue().get(currentItemIndex - 1);
     }
 
-//    public ImageResult getNextImage() {
-//        return repository.getImages().getValue();
+//    public Bitmap getNextImage() {
+////        repository.getImages.getValue() TODO: implement getNextImage() instead of mock Bitmap
+////        return repository.getImages().getValue();
 //    }
 }
