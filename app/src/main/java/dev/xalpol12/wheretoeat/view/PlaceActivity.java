@@ -28,10 +28,10 @@ public class PlaceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        viewModel = (PlaceActivityViewModel) getIntent().getSerializableExtra("placeViewModel");
         viewModel = new ViewModelProvider(this).get(PlaceActivityViewModel.class);
         setContentView(R.layout.activity_place);
         initializeUI();
+        setPlaceFragment();
         setOnClickListeners();
     }
 
@@ -40,6 +40,10 @@ public class PlaceActivity extends AppCompatActivity {
         btnPrevious = findViewById(R.id.previous_button);
         btnRandom = findViewById(R.id.random_button);
         btnGoThere = findViewById(R.id.go_there_button);
+    }
+
+    private void setPlaceFragment() {
+        placeFragment.changePlace(viewModel.getNextPlaceDetails());
     }
 
     private void setOnClickListeners() {
@@ -58,11 +62,16 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void randomButtonClick(View v) {
-        Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.img_default_place_photo);
-        placeFragment.changePlace(viewModel.getNextPlaceDetails(), image);
+        setNextPlace();
     }
 
     private void goThereButtonClick(View v) {
 
+    }
+
+    private void setNextPlace() {
+//        Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.img_default_place_photo);
+        placeFragment.changePlace(viewModel.getNextPlaceDetails());
+        placeFragment.updateUI();
     }
 }

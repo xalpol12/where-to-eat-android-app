@@ -51,13 +51,12 @@ public class PlaceFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_place, container, false);
         initializeUI(view);
+        updateUI();
         return view;
     }
 
-    public void changePlace(Place place, Bitmap image) {
+    public void changePlace(Place place) {
         this.place = place;
-//        this.image = image;
-        updateUI();
     }
 
     private void initializeUI(View view) {
@@ -71,8 +70,7 @@ public class PlaceFragment extends Fragment {
     }
 
     public void updateUI() {
-        if (currentPhoto == firstPhoto) { currentPhoto = secondPhoto; }
-        else currentPhoto = firstPhoto;
+        changeCurrentPhoto();
         imageView.setImageResource(currentPhoto);
         placeName.setText(place.getName());
         rating.setText(String.valueOf(place.getRating()));
@@ -88,4 +86,11 @@ public class PlaceFragment extends Fragment {
             openNow.setTextColor(getResources().getColor(R.color.secondary_30_tint));
         }
     };
+
+    private void changeCurrentPhoto() {
+        if (currentPhoto == firstPhoto) {
+            currentPhoto = secondPhoto;
+        }
+        else currentPhoto = firstPhoto;
+    }
 }

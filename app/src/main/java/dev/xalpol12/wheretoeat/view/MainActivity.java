@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
             public void onChanged(List<Place> places) {
                 if (places != null && !places.isEmpty()) {
                     startActivity(new Intent(MainActivity.this, PlaceActivity.class));
-                    Toast.makeText(MainActivity.this, "call successful", Toast.LENGTH_SHORT).show();
                 }
             }
         });

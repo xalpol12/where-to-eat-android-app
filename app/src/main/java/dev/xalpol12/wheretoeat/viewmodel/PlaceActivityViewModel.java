@@ -52,7 +52,7 @@ public class PlaceActivityViewModel extends ViewModel {
     }
 
 //    public Bitmap getNextImage() {
-////        repository.getImages.getValue() TODO: implement getNextImage() instead of mock Bitmap
+////        repository.getImages.getValue() TODO: implement getNextImage()
 ////        return repository.getImages().getValue();
 //    }
 }
