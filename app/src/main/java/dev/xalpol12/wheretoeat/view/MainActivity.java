@@ -68,12 +68,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configurePlaceViewModelObserver() {
-        placeViewModel.getPlaceList().observe(this, new Observer<>() {
-            @Override
-            public void onChanged(List<Place> places) {
-                if (places != null && !places.isEmpty()) {
-                    startActivity(new Intent(MainActivity.this, PlaceActivity.class));
-                }
+        placeViewModel.getPlaceList().observe(this, places -> {
+            if (places != null && !places.isEmpty()) {
+                startActivity(new Intent(MainActivity.this, PlaceActivity.class));
             }
         });
     }
