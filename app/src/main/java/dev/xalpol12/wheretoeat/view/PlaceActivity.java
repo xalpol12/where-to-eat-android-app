@@ -58,7 +58,7 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void previousButtonClick(View v) {
-
+        setPreviousPlace();
     }
 
     private void randomButtonClick(View v) {
@@ -66,12 +66,16 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void goThereButtonClick(View v) {
-
     }
 
     private void setNextPlace() {
 //        Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.img_default_place_photo);
         placeFragment.changePlace(viewModel.getNextPlaceDetails());
+        placeFragment.updateUI();
+    }
+
+    private void setPreviousPlace() {
+        placeFragment.changePlace(viewModel.getPreviousPlaceDetails());
         placeFragment.updateUI();
     }
 }
