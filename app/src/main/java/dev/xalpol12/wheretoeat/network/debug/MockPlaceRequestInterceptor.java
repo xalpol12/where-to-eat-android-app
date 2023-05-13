@@ -32,11 +32,9 @@ public class MockPlaceRequestInterceptor implements Interceptor {
 
     public static JsonArray getSampleResponse() {
         JsonArray sampleResponse = new JsonArray();
-        JsonObject firstObject = getFirstJsonObject();
-        JsonObject secondObject = getSecondJsonObject();
-
-        sampleResponse.add(firstObject);
-        sampleResponse.add(secondObject);
+        sampleResponse.add(getFirstJsonObject());
+        sampleResponse.add(getSecondJsonObject());
+        sampleResponse.add(getThirdJsonObject());
         return sampleResponse;
     }
 
@@ -66,5 +64,19 @@ public class MockPlaceRequestInterceptor implements Interceptor {
                 "_mkRMc5rk6LrfvUoIqPylB6nkd4E8o9EZ-AlXqbY44jKHlWFRymkOuDURGzOHjxq2RMhqmI6cPvWZkms_A_" +
                 "dFl6OGTRFDH2zPncupH1PYId0i6ON8IICeN0CTdJurT6S-b9UKCGlUDSaR5Mc");
         return secondObject;
+    }
+
+    private static JsonObject getThirdJsonObject() {
+        JsonObject thirdObject = new JsonObject();
+        thirdObject.addProperty("name", "Piece of Cake");
+        thirdObject.addProperty("placeId", "ChIJ3S-G0UBbBEcREu9sx0ZMlKk");
+        thirdObject.addProperty("vicinity", "Święty Wojciech 27, Poznań");
+        thirdObject.addProperty("rating", 4.7f);
+        thirdObject.addProperty("userRatingsTotal", 428);
+        thirdObject.addProperty("openNow", true);
+        thirdObject.addProperty("photoReference", "AZose0lamWfrp_Lc-TVDgYWAJEbR_PgTRQH9" +
+                "_mkRMc5rk6LrfvUoIqPylB6nkd4E8o9EZ-AlXqbY44jKHlWFRytmkOuDURGzOHjxq2RMhqmI6cPvWZkms_A_" +
+                "dFl6OGTRFDH2zPncupH1PYId0i6ON8IICeN0CTdJurT6S-b9UKCGlUDSaR5Mc");
+        return thirdObject;
     }
 }

@@ -51,6 +51,15 @@ public class PlaceActivityViewModel extends ViewModel {
         return repository.getPlaceList().getValue().get(currentItemIndex - 1);
     }
 
+    public Place getPreviousPlaceDetails() {
+        if (currentItemIndex != 1) currentItemIndex--;
+        else {
+            currentItemIndex = Objects.requireNonNull(
+                    repository.getPlaceList().getValue()).size();
+        }
+        return repository.getPlaceList().getValue().get(currentItemIndex - 1);
+    }
+
 //    public Bitmap getNextImage() {
 ////        repository.getImages.getValue() TODO: implement getNextImage()
 ////        return repository.getImages().getValue();

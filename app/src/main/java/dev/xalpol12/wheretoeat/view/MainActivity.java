@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configurePlaceViewModelObserver() {
-        placeViewModel.getPlaceList().observe(this, new Observer<List<Place>>() {
+        placeViewModel.getPlaceList().observe(this, new Observer<>() {
             @Override
             public void onChanged(List<Place> places) {
                 if (places != null && !places.isEmpty()) {
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void sliderChange(Slider slider, float v, boolean b) {
-        mainViewModel.setRequestDistance((int)(v * 1000));
+        mainViewModel.setRequestDistance((int) (v * 1000));
     }
 
     private void priceButtonClick(View v) {
