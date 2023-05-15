@@ -1,6 +1,5 @@
 package dev.xalpol12.wheretoeat.viewmodel;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModel;
 
 import java.lang.reflect.Field;
@@ -50,6 +49,12 @@ public class MainActivityViewModel extends ViewModel{
     public PlaceRequestDTO getPlaceRequestDTO() {
         return placeRequestDTO;
     }
+
+    //FOR DEBUG ONLY!!!
+    public Location getPlaceLocation() {
+        return placeRequestDTO.getLocation();
+    }
+    //
 
     public boolean areAllFieldsNotNull() throws IllegalAccessException {
         for (Field field : PlaceRequestDTO.class.getDeclaredFields()) {

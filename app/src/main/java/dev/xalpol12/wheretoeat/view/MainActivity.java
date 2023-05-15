@@ -1,27 +1,41 @@
 package dev.xalpol12.wheretoeat.view;
 
+import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Looper;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.Priority;
 import com.google.android.material.slider.Slider;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import dev.xalpol12.wheretoeat.R;
-import dev.xalpol12.wheretoeat.data.Place;
 import dev.xalpol12.wheretoeat.viewmodel.MainActivityViewModel;
 import dev.xalpol12.wheretoeat.viewmodel.PlaceActivityViewModel;
 
@@ -37,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
     private MainActivityViewModel mainViewModel;
     private PlaceActivityViewModel placeViewModel;
+    private LocationManager locationManager;
+    private FusedLocationProviderClient fusedLocationClient;
     private final List<Integer> priceButtonIds = List.of(
                 R.id.price_1_button,
                 R.id.price_2_button,
@@ -61,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mainViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         placeViewModel = new ViewModelProvider(this).get(PlaceActivityViewModel.class);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         setContentView(R.layout.activity_main);
         configurePlaceViewModelObserver();
         initializeUI();
@@ -114,13 +131,82 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void locationButtonClick(View v) {
-        //TODO: Implement location based on GPS
-        double lat = 52.402;
-        double lng = 16.93521;
-
-        mainViewModel.setRequestLocation(lat, lng);
-
+        getLastLocation();
         v.setAlpha(1.f);
+    }
+
+    @SuppressLint("MissingPermission")
+    private void getLastLocation() {
+
+        if (hasGPSPermissions()) {
+
+            if (isLocationEnabled()) {
+                fusedLocationClient.getLastLocation().addOnCompleteListener(task -> {
+                    Location location = task.getResult();
+                    if (location == null) {
+                        requestNewLocationData();
+                    } else {
+                        mainViewModel.setRequestLocation(location.getLatitude(), location.getLongitude());
+                        Toast.makeText(this, "Location requested successfully", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                Toast.makeText(this, "Please turn on" + "your location...", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+            }
+        } else {
+            requestGPSPermissions();
+        }
+    }
+
+    private boolean hasGPSPermissions() {
+        boolean hasCoarseLocation = ContextCompat.checkSelfPermission(MainActivity.this, ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+        boolean hasFineLocation = ContextCompat.checkSelfPermission(MainActivity.this, ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+        return hasCoarseLocation && hasFineLocation;
+    }
+
+    private void requestGPSPermissions() {
+        ActivityCompat.requestPermissions(this, new String[]{ACCESS_COARSE_LOCATION, ACCESS_FINE_LOCATION}, 1);
+    }
+
+    private boolean isLocationEnabled() {
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+    @SuppressLint("MissingPermission")
+    private void requestNewLocationData() {
+        LocationRequest locationRequest = new LocationRequest
+                .Builder(Priority.PRIORITY_HIGH_ACCURACY)
+                .setIntervalMillis(10000)
+                .setMinUpdateIntervalMillis(0)
+                .setMaxUpdates(1)
+                .build();
+        LocationCallback locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                Location lastLocation = locationResult.getLastLocation();
+                if (lastLocation != null ) {
+                    mainViewModel.setRequestLocation(lastLocation.getLatitude(), lastLocation.getLongitude());
+                }
+            }
+        };
+
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLastLocation();
+            } else {
+                Toast.makeText(this, "Location permission denied. App cannot function without access to GPS.", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void sliderChange(Slider slider, float v, boolean b) {
