@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
     private MainActivityViewModel mainViewModel;
     private PlaceActivityViewModel placeViewModel;
-    private LocationManager locationManager;
     private FusedLocationProviderClient fusedLocationClient;
     private final List<Integer> priceButtonIds = List.of(
                 R.id.price_1_button,
@@ -171,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isLocationEnabled() {
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
                 locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
