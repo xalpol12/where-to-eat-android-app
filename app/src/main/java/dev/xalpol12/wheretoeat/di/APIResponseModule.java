@@ -17,7 +17,7 @@ import dev.xalpol12.wheretoeat.data.ImageResult;
 import dev.xalpol12.wheretoeat.data.Place;
 import dev.xalpol12.wheretoeat.network.APIRepository;
 import dev.xalpol12.wheretoeat.network.APIService;
-import dev.xalpol12.wheretoeat.network.debug.MockPlaceRequestInterceptor;
+import dev.xalpol12.wheretoeat.network.debug.CustomInterceptor;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -33,7 +33,7 @@ public class APIResponseModule {
     @Provides
     @Named("InterceptorDebug")
     public Interceptor getInterceptorDebug() {
-        return new MockPlaceRequestInterceptor();
+        return new CustomInterceptor();
     }
 
     @Singleton
@@ -97,7 +97,7 @@ public class APIResponseModule {
 
     @Singleton
     @Provides
-    public MutableLiveData<ImageResult> getImageResult() {
+    public MutableLiveData<List<ImageResult>> getImageResult() {
         return new MutableLiveData<>();
     }
 
@@ -105,7 +105,7 @@ public class APIResponseModule {
     @Provides
     public APIRepository getAPIRepository(APIService apiService,
                                           MutableLiveData<List<Place>> placeList,
-                                          MutableLiveData<ImageResult> images) {
+                                          MutableLiveData<List<ImageResult>> images) {
         return new APIRepository(apiService, placeList, images);
     }
 }
