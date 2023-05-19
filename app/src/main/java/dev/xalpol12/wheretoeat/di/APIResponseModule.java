@@ -18,6 +18,7 @@ import dev.xalpol12.wheretoeat.data.Place;
 import dev.xalpol12.wheretoeat.network.APIRepository;
 import dev.xalpol12.wheretoeat.network.APIService;
 import dev.xalpol12.wheretoeat.network.debug.CustomInterceptor;
+import dev.xalpol12.wheretoeat.view.utility.AssetManagerWrapper;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -28,6 +29,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @InstallIn(SingletonComponent.class)
 public class APIResponseModule {
     public static final String BASE_URL = "https://where-to-eat.up.railway.app/";
+
+    @Singleton
+    @Provides
+    public AssetManagerWrapper getAssetManagerWrapper() {
+        return new AssetManagerWrapper();
+    }
 
     @Singleton
     @Provides

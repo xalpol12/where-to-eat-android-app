@@ -1,5 +1,7 @@
 package dev.xalpol12.wheretoeat.network.debug;
 
+import android.content.res.AssetManager;
+
 import androidx.annotation.NonNull;
 
 import com.google.gson.JsonArray;
@@ -7,12 +9,18 @@ import com.google.gson.JsonObject;
 
 import org.apache.commons.io.FileUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import javax.inject.Inject;
+
+import dev.xalpol12.wheretoeat.view.utility.AssetManagerWrapper;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Protocol;
@@ -20,15 +28,17 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 
 public class CustomInterceptor implements Interceptor {
-    private final static String projectDir = System.getProperty("user.dir");
-    private final static String pathToData = projectDir + File.separator + "src\\main\\res\\interceptor-data";
-    private final static String image1 = "\\first-image.txt";
-    private final static String image2 = "\\second-image.txt";
-    private final static String image3 = "\\third-image.txt";
+    private final static String path = "app" + File.separatorChar + "src" +
+            File.separatorChar + "main" + File.separatorChar + "assets" + File.separatorChar;
+    private final static String image1 = "first-image.txt";
+    private final static String image2 = "second-image.txt";
+    private final static String image3 = "third-image.txt";
     private final static List<String> imageFiles = List.of(image1, image2, image3);
     private final static String photoReference = "AZose0lamWfrp_Lc-TVDgYWAJEbR_PgTRQH9" +
             "_mkRMc5rk6LrfvUoIqPylB6nkd4E8o9EZ-AlXqbY44jKHlWFRytmkOuDURGzOHjxq2RMhqmI6cPvWZkms_A_" +
             "dFl6OGTRFDH2zPncupH1PYId0i6ON8IICeN0CTdJurT6S-b9UKCGlUDSaR5Mc";
+
+    private static AssetManagerWrapper assetManager;
 
     @NonNull
     @Override
@@ -110,9 +120,20 @@ public class CustomInterceptor implements Interceptor {
 
     private static JsonObject getImageResponse(String image) throws IOException {
         JsonObject object = new JsonObject();
-        File file = new File(pathToData + image);
-        object.addProperty("imageData", Arrays.toString(FileUtils.readFileToByteArray(file)));
+        InputStream inputStream = assetManager.openAssetFile(image);
+        object.addProperty("imageData", convertToString(inputStream));
         object.addProperty("photoReference", photoReference);
         return object;
+    }
+
+    private static String convertToString(InputStream stream) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            stringBuilder.append(line).append("");
+        }
+        reader.close();
+        return stringBuilder.toString();
     }
 }
