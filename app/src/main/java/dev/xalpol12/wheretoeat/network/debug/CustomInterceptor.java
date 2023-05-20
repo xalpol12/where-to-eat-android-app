@@ -17,10 +17,12 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.inject.Inject;
 
 import dev.xalpol12.wheretoeat.view.utility.AssetManagerWrapper;
+import hilt_aggregated_deps._dev_xalpol12_wheretoeat_view_PlaceActivity_GeneratedInjector;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Protocol;
@@ -33,14 +35,25 @@ public class CustomInterceptor implements Interceptor {
     private final static String image1 = "first-image.txt";
     private final static String image2 = "second-image.txt";
     private final static String image3 = "third-image.txt";
+    private final static String reference1 = "ref1";
+    private final static String reference2 = "ref2";
+    private final static String reference3 = "ref3";
     private final static List<String> imageFiles = List.of(image1, image2, image3);
-    private final static String photoReference = "AZose0lamWfrp_Lc-TVDgYWAJEbR_PgTRQH9" +
-            "_mkRMc5rk6LrfvUoIqPylB6nkd4E8o9EZ-AlXqbY44jKHlWFRytmkOuDURGzOHjxq2RMhqmI6cPvWZkms_A_" +
-            "dFl6OGTRFDH2zPncupH1PYId0i6ON8IICeN0CTdJurT6S-b9UKCGlUDSaR5Mc";
-
+    private final static List<String> refs = List.of(reference1, reference2, reference3);
     private final AssetManagerWrapper assetManager;
+    private int photoCounter;
 
-    private int imageCounter = 0;
+    static class Counter {
+        private static final AtomicInteger counter = new AtomicInteger(0);
+
+        static int getValue() {
+            return counter.get();
+        }
+
+        static void increment() {
+            counter.incrementAndGet();
+        }
+    }
 
     @Inject
     public CustomInterceptor(AssetManagerWrapper assetManagerWrapper) {
@@ -89,7 +102,7 @@ public class CustomInterceptor implements Interceptor {
         object.addProperty("rating", 4.4f);
         object.addProperty("userRatingsTotal", 2524);
         object.addProperty("openNow", true);
-        object.addProperty("photoReference", photoReference);
+        object.addProperty("photoReference", reference1);
         return object;
     }
 
@@ -101,7 +114,7 @@ public class CustomInterceptor implements Interceptor {
         object.addProperty("rating", 4.6f);
         object.addProperty("userRatingsTotal", 2635);
         object.addProperty("openNow", false);
-        object.addProperty("photoReference", photoReference);
+        object.addProperty("photoReference", reference2);
         return object;
     }
 
@@ -113,19 +126,21 @@ public class CustomInterceptor implements Interceptor {
         object.addProperty("rating", 4.7f);
         object.addProperty("userRatingsTotal", 428);
         object.addProperty("openNow", true);
-        object.addProperty("photoReference", photoReference);
+        object.addProperty("photoReference", reference3);
         return object;
     }
 
-    public JsonObject getImageResponse() throws IOException {
-        JsonObject response = getImageResponse(imageFiles.get(imageCounter));
-        if (imageCounter < imageFiles.size() - 1) {
-            imageCounter++;
+    public synchronized JsonObject getImageResponse() throws IOException {
+        JsonObject response = getImageResponse(imageFiles.get(photoCounter), refs.get(photoCounter));
+        if (photoCounter < imageFiles.size() - 1) {
+            photoCounter++;
+        } else {
+            photoCounter = 0;
         }
         return response;
     }
 
-    private JsonObject getImageResponse(String image) throws IOException {
+    private JsonObject getImageResponse(String image, String photoReference) throws IOException {
         JsonObject object = new JsonObject();
         InputStream inputStream = assetManager.openAssetFile(image);
         object.addProperty("imageData", convertToString(inputStream));

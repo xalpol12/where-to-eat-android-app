@@ -1,6 +1,8 @@
 package dev.xalpol12.wheretoeat.viewmodel;
 
-import android.media.Image;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -27,6 +29,10 @@ public class PlaceActivityViewModel extends ViewModel {
     public PlaceActivityViewModel(APIRepository repository) {
         this.repository = repository;
         currentItemIndex = 0;
+    }
+
+    public void clearImageList() {
+        repository.clearImageList();
     }
 
     public void callFindPlaces(PlaceRequestDTO placeRequestDTO) {
@@ -70,8 +76,16 @@ public class PlaceActivityViewModel extends ViewModel {
         return getPlaceList().getValue().get(currentItemIndex - 1);
     }
 
-//    public Bitmap getNextImage() {
-////        repository.getImages.getValue() TODO: implement getNextImage()
-////        return repository.getImages().getValue();
-//    }
+    public Bitmap getCorrespondingImage() {
+        String currentPlacePhotoReference = getPlaceList().getValue().get(currentItemIndex -1).getPhotoReference();
+
+        for (ImageResult image : Objects.requireNonNull(getImageList().getValue())) {
+            String photoReference = image.getPhotoReference();
+            if (photoReference.equals(currentPlacePhotoReference)) {
+                byte[] byteArray = Base64.decode(image.getImageData(), Base64.DEFAULT);
+                return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+            }
+        }
+        return null;
+    }
 }

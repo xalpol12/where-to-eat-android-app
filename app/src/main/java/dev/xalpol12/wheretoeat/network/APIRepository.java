@@ -79,4 +79,8 @@ public class APIRepository {
     public MutableLiveData<List<ImageResult>> getImageList() {
         return imageList;
     }
+
+    public void clearImageList() { //TODO: fix this
+        imageList.setValue(null);
+    }
 }

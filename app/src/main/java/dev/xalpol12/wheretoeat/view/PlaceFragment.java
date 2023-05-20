@@ -2,10 +2,13 @@ package dev.xalpol12.wheretoeat.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.AttributeSet;
@@ -23,7 +26,7 @@ public class PlaceFragment extends Fragment {
 
     private Place place;
 
-    private Bitmap image;
+    private Bitmap photo;
 
     private ImageView imageView;
     private TextView placeName;
@@ -33,10 +36,10 @@ public class PlaceFragment extends Fragment {
     private TextView distance;
     private TextView openNow;
 
-    private final int firstPhoto = R.drawable.zielona_weranda;
-    private final int secondPhoto = R.drawable.ptasie_radio;
-    private final int thirdPhoto = R.drawable.piece_of_cake;
-    private int currentPhoto = firstPhoto;
+    private final int defaultPhoto = R.drawable.zielona_weranda;
+//    private final int secondPhoto = R.drawable.ptasie_radio;
+//    private final int thirdPhoto = R.drawable.piece_of_cake;
+//    private int currentPhoto = firstPhoto;
 
     public PlaceFragment() {
         super(R.layout.fragment_place);
@@ -60,6 +63,14 @@ public class PlaceFragment extends Fragment {
         this.place = place;
     }
 
+    public void changePhoto(Bitmap photo) {
+        if (photo != null) {
+        this.photo = photo;
+        } else {
+            this.photo = BitmapFactory.decodeResource(getContext().getResources(), defaultPhoto);
+        }
+    }
+
     private void initializeUI(View view) {
         imageView = view.findViewById(R.id.place_image);
         placeName = view.findViewById(R.id.place_name);
@@ -71,8 +82,7 @@ public class PlaceFragment extends Fragment {
     }
 
     public void updateUI() {
-        changeCurrentPhoto();
-        imageView.setImageResource(currentPhoto);
+        imageView.setImageBitmap(photo);
         placeName.setText(place.getName());
         rating.setText(String.valueOf(place.getRating()));
         ratingCount.setText(String.valueOf(place.getUserRatingsTotal()));
@@ -88,17 +98,17 @@ public class PlaceFragment extends Fragment {
         }
     }
 
-    private void changeCurrentPhoto() {
-        switch (place.getName()) {
-            default:
-                currentPhoto = firstPhoto;
-                break;
-            case "Ptasie Radio":
-                currentPhoto = secondPhoto;
-                break;
-            case "Piece of Cake":
-                currentPhoto = thirdPhoto;
-                break;
-        }
-    }
+//    private void changeCurrentPhoto() {
+//        switch (place.getName()) {
+//            default:
+//                currentPhoto = firstPhoto;
+//                break;
+//            case "Ptasie Radio":
+//                currentPhoto = secondPhoto;
+//                break;
+//            case "Piece of Cake":
+//                currentPhoto = thirdPhoto;
+//                break;
+//        }
+//    }
 }

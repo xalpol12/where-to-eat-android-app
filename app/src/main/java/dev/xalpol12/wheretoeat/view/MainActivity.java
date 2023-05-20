@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void configureImageListObserver() {
         placeViewModel.getImageList().observe(this, images -> {
-            if (images != null && images.size() < 2) {
+            if (images != null && images.size() == 1) {
                 startActivity(new Intent(MainActivity.this, PlaceActivity.class));
             }
             if (images != null && images.size() == 3) {

@@ -2,13 +2,8 @@ package dev.xalpol12.wheretoeat.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 
@@ -36,6 +31,12 @@ public class PlaceActivity extends AppCompatActivity {
         setOnClickListeners();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        viewModel.clearImageList();
+    }
+
     private void initializeUI() {
         placeFragment = (PlaceFragment) getSupportFragmentManager().findFragmentById(R.id.place_fragment_container);
         btnPrevious = findViewById(R.id.previous_button);
@@ -45,6 +46,7 @@ public class PlaceActivity extends AppCompatActivity {
 
     private void setPlaceFragment() {
         placeFragment.changePlace(viewModel.getNextPlaceDetails());
+        placeFragment.changePhoto(viewModel.getCorrespondingImage());
     }
 
     private void setOnClickListeners() {
@@ -77,13 +79,14 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void setNextPlace() {
-//        Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.img_default_place_photo);
         placeFragment.changePlace(viewModel.getNextPlaceDetails());
+        placeFragment.changePhoto(viewModel.getCorrespondingImage());
         placeFragment.updateUI();
     }
 
     private void setPreviousPlace() {
         placeFragment.changePlace(viewModel.getPreviousPlaceDetails());
+        placeFragment.changePhoto(viewModel.getCorrespondingImage());
         placeFragment.updateUI();
     }
 }
