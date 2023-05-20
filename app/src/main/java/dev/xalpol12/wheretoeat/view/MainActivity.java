@@ -109,9 +109,6 @@ public class MainActivity extends AppCompatActivity {
             if (images != null && images.size() == 1) {
                 startActivity(new Intent(MainActivity.this, PlaceActivity.class));
             }
-            if (images != null && images.size() == 3) {
-                Toast.makeText(this, "images fetched successfully", Toast.LENGTH_SHORT).show();
-            }
         });
     }
 
