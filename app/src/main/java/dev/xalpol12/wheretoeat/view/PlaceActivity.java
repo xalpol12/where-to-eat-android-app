@@ -14,6 +14,7 @@ import android.view.View;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import dev.xalpol12.wheretoeat.R;
+import dev.xalpol12.wheretoeat.network.dto.ImageRequestDTO;
 import dev.xalpol12.wheretoeat.viewmodel.PlaceActivityViewModel;
 
 @AndroidEntryPoint
@@ -66,6 +67,13 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void goThereButtonClick(View v) {
+        ImageRequestDTO request = ImageRequestDTO
+                .builder()
+                .photoReference("aaaa")
+                .width(100)
+                .height(100)
+                .build();
+        viewModel.callFindImage(request);
     }
 
     private void setNextPlace() {

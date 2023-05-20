@@ -1,9 +1,9 @@
 package dev.xalpol12.wheretoeat.network;
 
-import android.media.Image;
-
 import androidx.lifecycle.MutableLiveData;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,15 +19,15 @@ import retrofit2.Response;
 public class APIRepository {
     private final APIService apiService;
     private final MutableLiveData<List<Place>> placeList;
-    private final MutableLiveData<ImageResult> images;
+    private final MutableLiveData<List<ImageResult>> imageList;
 
     @Inject
     public APIRepository(APIService apiService,
                          MutableLiveData<List<Place>> placeList,
-                         MutableLiveData<ImageResult> imageList) {
+                         MutableLiveData<List<ImageResult>> imageList) {
         this.apiService = apiService;
         this.placeList = placeList;
-        this.images = imageList;
+        this.imageList = imageList;
     }
 
     public void makeCall(PlaceRequestDTO placeRequestDTO) {
@@ -54,16 +54,20 @@ public class APIRepository {
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ImageResult> call, Response<ImageResult> response) {
-                if (response.isSuccessful()) {
-                    images.postValue(response.body());
-                } else {
-                    images.postValue(null);
+                if (response.isSuccessful() && response.body() != null) {
+                    if (imageList.getValue() != null) {
+                        List<ImageResult> currentList = imageList.getValue();
+                        currentList.add(response.body());
+                        imageList.setValue(currentList);
+                    } else {        //if MutableLiveData is empty create new list and insert response image
+                        imageList.setValue(new ArrayList<>(Arrays.asList(response.body())));
+                    }
                 }
             }
-
             @Override
             public void onFailure(Call<ImageResult> call, Throwable t) {
-                images.postValue(null);
+                //left empty on purpose, when call failed don't set anything, later if no image was found
+                //for this specific id, then display default image
             }
         });
     }
@@ -72,7 +76,7 @@ public class APIRepository {
         return placeList;
     }
 
-    public MutableLiveData<ImageResult> getImages() {
-        return images;
+    public MutableLiveData<List<ImageResult>> getImageList() {
+        return imageList;
     }
 }

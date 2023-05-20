@@ -1,6 +1,6 @@
 package dev.xalpol12.wheretoeat.viewmodel;
 
-import android.graphics.Bitmap;
+import android.media.Image;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -16,6 +16,7 @@ import dev.xalpol12.wheretoeat.data.Place;
 import dev.xalpol12.wheretoeat.network.dto.ImageRequestDTO;
 import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;
 import dev.xalpol12.wheretoeat.network.APIRepository;
+import dev.xalpol12.wheretoeat.view.utility.ScreenDimensions;
 
 @HiltViewModel
 public class PlaceActivityViewModel extends ViewModel {
@@ -32,6 +33,15 @@ public class PlaceActivityViewModel extends ViewModel {
         repository.makeCall(placeRequestDTO);
     }
 
+    public void callFindAllImages(ScreenDimensions dimensions) {
+        List<Place> places = Objects.requireNonNull(getPlaceList().getValue());
+        for (Place place : places) {
+            ImageRequestDTO request = new ImageRequestDTO(place.getPhotoReference(),
+                    dimensions.getHeight(), dimensions.getWidth());
+            callFindImage(request);
+        }
+    }
+
     public void callFindImage(ImageRequestDTO imageRequestDTO) {
         repository.makeCall(imageRequestDTO);
     }
@@ -40,24 +50,24 @@ public class PlaceActivityViewModel extends ViewModel {
         return repository.getPlaceList();
     }
 
-    public MutableLiveData<ImageResult> getImages() {
-        return repository.getImages();
+    public MutableLiveData<List<ImageResult>> getImageList() {
+        return repository.getImageList();
     }
 
     public Place getNextPlaceDetails() {
         if (currentItemIndex < Objects.requireNonNull(repository.getPlaceList().getValue()).size()) {
             currentItemIndex++;
         } else currentItemIndex = 1;
-        return repository.getPlaceList().getValue().get(currentItemIndex - 1);
+        return getPlaceList().getValue().get(currentItemIndex - 1);
     }
 
     public Place getPreviousPlaceDetails() {
         if (currentItemIndex != 1) currentItemIndex--;
         else {
             currentItemIndex = Objects.requireNonNull(
-                    repository.getPlaceList().getValue()).size();
+                    getPlaceList().getValue()).size();
         }
-        return repository.getPlaceList().getValue().get(currentItemIndex - 1);
+        return getPlaceList().getValue().get(currentItemIndex - 1);
     }
 
 //    public Bitmap getNextImage() {

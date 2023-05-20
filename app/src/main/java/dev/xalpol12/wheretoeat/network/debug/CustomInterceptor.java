@@ -38,7 +38,14 @@ public class CustomInterceptor implements Interceptor {
             "_mkRMc5rk6LrfvUoIqPylB6nkd4E8o9EZ-AlXqbY44jKHlWFRytmkOuDURGzOHjxq2RMhqmI6cPvWZkms_A_" +
             "dFl6OGTRFDH2zPncupH1PYId0i6ON8IICeN0CTdJurT6S-b9UKCGlUDSaR5Mc";
 
-    private static AssetManagerWrapper assetManager;
+    private final AssetManagerWrapper assetManager;
+
+    private int imageCounter = 0;
+
+    @Inject
+    public CustomInterceptor(AssetManagerWrapper assetManagerWrapper) {
+        assetManager = assetManagerWrapper;
+    }
 
     @NonNull
     @Override
@@ -56,7 +63,7 @@ public class CustomInterceptor implements Interceptor {
                 .build();
     }
 
-    private static String getResponseString(String currentUri) throws IOException {
+    private String getResponseString(String currentUri) throws IOException {
         if (currentUri.contains("places/find")) {
             return String.valueOf(getPlaceResponse());
         }
@@ -66,7 +73,7 @@ public class CustomInterceptor implements Interceptor {
         return null;
     }
 
-    public static JsonArray getPlaceResponse() {
+    public JsonArray getPlaceResponse() {
         JsonArray sampleResponse = new JsonArray();
         sampleResponse.add(getFirstPlaceResponse());
         sampleResponse.add(getSecondPlaceResponse());
@@ -74,7 +81,7 @@ public class CustomInterceptor implements Interceptor {
         return sampleResponse;
     }
 
-    private static JsonObject getFirstPlaceResponse() {
+    private JsonObject getFirstPlaceResponse() {
         JsonObject object = new JsonObject();
         object.addProperty("name", "Zielona Weranda");
         object.addProperty("placeId", "ChIJBUn2SD9bBEcRThe9iausrn8");
@@ -86,7 +93,7 @@ public class CustomInterceptor implements Interceptor {
         return object;
     }
 
-    private static JsonObject getSecondPlaceResponse() {
+    private JsonObject getSecondPlaceResponse() {
         JsonObject object = new JsonObject();
         object.addProperty("name", "Ptasie Radio");
         object.addProperty("placeId", "ChIJB7T44zZbBEcR1yge5KHLwYk");
@@ -98,7 +105,7 @@ public class CustomInterceptor implements Interceptor {
         return object;
     }
 
-    private static JsonObject getThirdPlaceResponse() {
+    private JsonObject getThirdPlaceResponse() {
         JsonObject object = new JsonObject();
         object.addProperty("name", "Piece of Cake");
         object.addProperty("placeId", "ChIJ3S-G0UBbBEcREu9sx0ZMlKk");
@@ -110,15 +117,15 @@ public class CustomInterceptor implements Interceptor {
         return object;
     }
 
-    public static JsonArray getImageResponse() throws IOException {
-        JsonArray sampleResponse = new JsonArray();
-        for (String file : imageFiles) {
-            sampleResponse.add(getImageResponse(file));
+    public JsonObject getImageResponse() throws IOException {
+        JsonObject response = getImageResponse(imageFiles.get(imageCounter));
+        if (imageCounter < imageFiles.size() - 1) {
+            imageCounter++;
         }
-        return sampleResponse;
+        return response;
     }
 
-    private static JsonObject getImageResponse(String image) throws IOException {
+    private JsonObject getImageResponse(String image) throws IOException {
         JsonObject object = new JsonObject();
         InputStream inputStream = assetManager.openAssetFile(image);
         object.addProperty("imageData", convertToString(inputStream));
@@ -126,7 +133,7 @@ public class CustomInterceptor implements Interceptor {
         return object;
     }
 
-    private static String convertToString(InputStream stream) throws IOException {
+    private String convertToString(InputStream stream) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
         StringBuilder stringBuilder = new StringBuilder();
         String line;

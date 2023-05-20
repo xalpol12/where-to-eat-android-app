@@ -1,14 +1,11 @@
 package dev.xalpol12.wheretoeat.data;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class ImageResult {
-    public final byte[] imageData;
-    public final String contentType;
-
-    public ImageResult(byte[] imageData, String contentType) {
-        this.imageData = imageData;
-        this.contentType = contentType;
-    }
+    private final String imageData;
+    private final String photoReference;
 }

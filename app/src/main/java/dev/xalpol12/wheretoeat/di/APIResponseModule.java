@@ -39,8 +39,8 @@ public class APIResponseModule {
     @Singleton
     @Provides
     @Named("InterceptorDebug")
-    public Interceptor getInterceptorDebug() {
-        return new CustomInterceptor();
+    public Interceptor getInterceptorDebug(AssetManagerWrapper assetManagerWrapper) {
+        return new CustomInterceptor(assetManagerWrapper);
     }
 
     @Singleton

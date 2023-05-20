@@ -36,6 +36,7 @@ import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import dev.xalpol12.wheretoeat.R;
+import dev.xalpol12.wheretoeat.view.utility.ScreenDensityHelper;
 import dev.xalpol12.wheretoeat.viewmodel.MainActivityViewModel;
 import dev.xalpol12.wheretoeat.viewmodel.PlaceActivityViewModel;
 
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     private MainActivityViewModel mainViewModel;
     private PlaceActivityViewModel placeViewModel;
     private FusedLocationProviderClient fusedLocationClient;
+    private ScreenDensityHelper screenHelper;
     private final List<Integer> priceButtonIds = List.of(
                 R.id.price_1_button,
                 R.id.price_2_button,
@@ -74,19 +76,41 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mainViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
-        placeViewModel = new ViewModelProvider(this).get(PlaceActivityViewModel.class);
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         setContentView(R.layout.activity_main);
-        configurePlaceViewModelObserver();
+        setDependencies();
+        configureObservers();
         initializeUI();
         setOnClickListeners();
     }
 
-    private void configurePlaceViewModelObserver() {
+    private void setDependencies() {
+        mainViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        placeViewModel = new ViewModelProvider(this).get(PlaceActivityViewModel.class);
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        screenHelper = new ScreenDensityHelper(getResources().getDisplayMetrics().densityDpi);
+        mainViewModel.setAssetManagerContext(this);
+    }
+
+    private void configureObservers() {
+        configurePlaceListObserver();
+        configureImageListObserver();
+    }
+
+    private void configurePlaceListObserver() {
         placeViewModel.getPlaceList().observe(this, places -> {
             if (places != null && !places.isEmpty()) {
+                placeViewModel.callFindAllImages(screenHelper.getScreenDimensions());
+            }
+        });
+    }
+
+    private void configureImageListObserver() {
+        placeViewModel.getImageList().observe(this, images -> {
+            if (images != null && images.size() < 2) {
                 startActivity(new Intent(MainActivity.this, PlaceActivity.class));
+            }
+            if (images != null && images.size() == 3) {
+                Toast.makeText(this, "images fetched successfully", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -150,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             } else {
-                Toast.makeText(this, "Please turn on" + "your location...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please turn on your location", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 startActivity(intent);
             }
