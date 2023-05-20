@@ -37,9 +37,6 @@ public class PlaceFragment extends Fragment {
     private TextView openNow;
 
     private final int defaultPhoto = R.drawable.zielona_weranda;
-//    private final int secondPhoto = R.drawable.ptasie_radio;
-//    private final int thirdPhoto = R.drawable.piece_of_cake;
-//    private int currentPhoto = firstPhoto;
 
     public PlaceFragment() {
         super(R.layout.fragment_place);
@@ -97,18 +94,4 @@ public class PlaceFragment extends Fragment {
             openNow.setTextColor(getResources().getColor(R.color.secondary_30_tint));
         }
     }
-
-//    private void changeCurrentPhoto() {
-//        switch (place.getName()) {
-//            default:
-//                currentPhoto = firstPhoto;
-//                break;
-//            case "Ptasie Radio":
-//                currentPhoto = secondPhoto;
-//                break;
-//            case "Piece of Cake":
-//                currentPhoto = thirdPhoto;
-//                break;
-//        }
-//    }
 }

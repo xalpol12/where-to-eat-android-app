@@ -64,14 +64,13 @@ public class APIResponseModule {
 
     @Singleton
     @Provides
-    @Named("OkHttpClientProd")
     public OkHttpClient getOkHttpClient(@Named("InterceptorProd")
-                                            Interceptor interceptor) {
+                                            HttpLoggingInterceptor interceptor) {
         return new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
-                .connectTimeout(2, TimeUnit.SECONDS)
-                .readTimeout(2, TimeUnit.SECONDS)
-                .writeTimeout(2, TimeUnit.SECONDS)
+                .connectTimeout(5, TimeUnit.SECONDS)
+                .readTimeout(5, TimeUnit.SECONDS)
+                .writeTimeout(5, TimeUnit.SECONDS)
                 .build();
     }
 
@@ -81,8 +80,7 @@ public class APIResponseModule {
     @Singleton
     @Provides
     @Inject
-    public Retrofit getRetrofitClient(@Named("OkHttpClientDebug")
-                                          OkHttpClient client) {
+    public Retrofit getRetrofitClient(OkHttpClient client) {
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(client)
