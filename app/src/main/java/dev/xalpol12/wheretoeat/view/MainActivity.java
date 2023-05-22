@@ -4,10 +4,14 @@ import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
@@ -20,6 +24,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -36,6 +41,7 @@ import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import dev.xalpol12.wheretoeat.R;
+import dev.xalpol12.wheretoeat.network.dto.ImageRequestDTO;
 import dev.xalpol12.wheretoeat.view.utility.ScreenDensityHelper;
 import dev.xalpol12.wheretoeat.viewmodel.MainActivityViewModel;
 import dev.xalpol12.wheretoeat.viewmodel.PlaceActivityViewModel;
@@ -54,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
     private PlaceActivityViewModel placeViewModel;
     private FusedLocationProviderClient fusedLocationClient;
     private ScreenDensityHelper screenHelper;
+    private DrawerLayout drawerLayout;
+    private Toolbar toolbar;
+    private ImageButton btnHamburger;
     private final List<Integer> priceButtonIds = List.of(
                 R.id.price_1_button,
                 R.id.price_2_button,
@@ -113,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializeUI() {
+        configureHamburgerMenu();
+        btnHamburger = findViewById(R.id.hamburger_button);
         btnFindLocation = findViewById(R.id.find_location_button);
         btnFindPlace = findViewById(R.id.find_place_button);
         rangeSlider = findViewById(R.id.range_slider);
@@ -129,7 +140,32 @@ public class MainActivity extends AppCompatActivity {
         accentColor = ContextCompat.getColor(this, R.color.accent);
     }
 
+    private void configureHamburgerMenu() {
+        toolbar = findViewById(R.id.toolbar);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        setSupportActionBar(toolbar);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+    }
+
+    private void hamburgerButtonClick(View v) {
+        if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.openDrawer(GravityCompat.START);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else super.onBackPressed();
+    }
+
     private void setOnClickListeners() {
+        View.OnClickListener hamburgetButtonClickListener = this::hamburgerButtonClick;
+        btnHamburger.setOnClickListener(hamburgetButtonClickListener);
+
         View.OnClickListener locationButtonClickListener = this::locationButtonClick;
         btnFindLocation.setOnClickListener(locationButtonClickListener);
 
