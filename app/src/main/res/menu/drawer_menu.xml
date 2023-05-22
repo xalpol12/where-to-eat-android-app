@@ -5,12 +5,17 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/activity_find_place"
+        <item android:id="@+id/nav_find_place"
             android:icon="@drawable/ic_search_location"
             android:title="@string/find_place"/>
-        <item android:id="@+id/activity_saved_places"
+        <item android:id="@+id/nav_saved_places"
             android:icon="@drawable/ic_saved"
             android:title="@string/saved_places"/>
+        <item
+            android:id="@+id/nav_about_me"
+            android:icon="@drawable/ic_about_me"
+            android:title="@string/about_me"
+            />
     </group>
 
     <item android:title="@string/customisation">
