@@ -64,6 +64,7 @@ public class APIResponseModule {
 
     @Singleton
     @Provides
+    @Named("OkHttpClientProd")
     public OkHttpClient getOkHttpClient(@Named("InterceptorProd")
                                             HttpLoggingInterceptor interceptor) {
         return new OkHttpClient.Builder()
@@ -80,7 +81,8 @@ public class APIResponseModule {
     @Singleton
     @Provides
     @Inject
-    public Retrofit getRetrofitClient(OkHttpClient client) {
+    public Retrofit getRetrofitClient(@Named("OkHttpClientProd")
+                                          OkHttpClient client) {
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(client)

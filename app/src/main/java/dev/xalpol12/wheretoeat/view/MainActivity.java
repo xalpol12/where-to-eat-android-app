@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
@@ -66,23 +67,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private Toolbar toolbar;
     private ImageButton btnHamburger;
-    private final List<Integer> priceButtonIds = List.of(
-                R.id.price_1_button,
-                R.id.price_2_button,
-                R.id.price_3_button,
-                R.id.price_4_button);
-    private final List<AppCompatButton> priceButtons = new ArrayList<>();
-    private final List<Integer> placeButtonIds = List.of(
-            R.id.place_type_restaurant,
-            R.id.place_type_bakery,
-            R.id.place_type_cafe,
-            R.id.place_type_pub);
-    private final List<AppCompatButton> placeButtons = new ArrayList<>();
-    private AppCompatButton btnFindLocation;
-    private AppCompatButton btnFindPlace;
-    private Slider rangeSlider;
-    private int primaryColor;
-    private int accentColor;
+
 
 
     @Override
@@ -110,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void configurePlaceListObserver() {
         placeViewModel.getPlaceList().observe(this, places -> {
+            Toast.makeText(this, "called successfully", Toast.LENGTH_SHORT).show();
             if (places != null && !places.isEmpty()) {
                 placeViewModel.callFindAllImages(screenHelper.getScreenDimensions());
             }
@@ -127,27 +113,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void initializeUI(Bundle savedInstanceState) {
         configureHamburgerMenu(savedInstanceState);
         btnHamburger = findViewById(R.id.hamburger_button);
-        btnFindLocation = findViewById(R.id.find_location_button);
-        btnFindPlace = findViewById(R.id.find_place_button);
-        rangeSlider = findViewById(R.id.range_slider);
-
-        for (int id : priceButtonIds) {
-            priceButtons.add(findViewById(id));
-        }
-
-        for (int id : placeButtonIds) {
-            placeButtons.add(findViewById(id));
-        }
-
-        primaryColor = ContextCompat.getColor(this, R.color.primary);
-        accentColor = ContextCompat.getColor(this, R.color.accent);
+        btnHamburger.bringToFront();
     }
 
     private void configureHamburgerMenu(Bundle savedInstanceState) {
         toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-
         navigationView.setNavigationItemSelectedListener(this);
 
         setSupportActionBar(toolbar);
@@ -156,8 +128,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new FindPlaceFragment()).commit();
+            replaceFragment(new FindPlaceFragment());
             navigationView.setCheckedItem(R.id.nav_find_place);
         }
     }
@@ -166,16 +137,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_find_place:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new FindPlaceFragment()).commit();
+                replaceFragment(new FindPlaceFragment());
+                item.setChecked(true);
+                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.nav_saved_places:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new SavedPlacesFragment()).commit();
+                replaceFragment(new SavedPlacesFragment());
+                item.setChecked(true);
+                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.nav_about_me:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new AboutMeFragment()).commit();
+                replaceFragment(new AboutMeFragment());
+                item.setChecked(true);
+                drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.nav_language:
                 Toast.makeText(this, "Language changed", Toast.LENGTH_SHORT).show();
@@ -185,9 +159,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
 
-        drawerLayout.closeDrawer(GravityCompat.START);
-
         return true;
+    }
+
+    private void replaceFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_activity_fragment_container, fragment)
+                .commit();
     }
 
     private void hamburgerButtonClick(View v) {
@@ -204,36 +183,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setOnClickListeners() {
-        View.OnClickListener hamburgetButtonClickListener = this::hamburgerButtonClick;
-        btnHamburger.setOnClickListener(hamburgetButtonClickListener);
-
-        View.OnClickListener locationButtonClickListener = this::locationButtonClick;
-        btnFindLocation.setOnClickListener(locationButtonClickListener);
-
-        Slider.OnChangeListener sliderChangeListener = this::sliderChange;
-        rangeSlider.addOnChangeListener(sliderChangeListener);
-
-        View.OnClickListener priceButtonClickListener = this::priceButtonClick;
-        for (AppCompatButton btn : priceButtons) {
-            btn.setOnClickListener(priceButtonClickListener);
-        }
-
-        View.OnClickListener placeButtonClickListener = this::placeButtonClick;
-        for (AppCompatButton btn : placeButtons) {
-            btn.setOnClickListener(placeButtonClickListener);
-        }
-
-        View.OnClickListener findPlaceButtonClickListener = this::findPlaceButtonClick;
-        btnFindPlace.setOnClickListener(findPlaceButtonClickListener);
-    }
-
-    private void locationButtonClick(View v) {
-        getLastLocation();
-        v.setAlpha(1.f);
+        View.OnClickListener hamburgerButtonClickListener = this::hamburgerButtonClick;
+        btnHamburger.setOnClickListener(hamburgerButtonClickListener);
     }
 
     @SuppressLint("MissingPermission")
-    private void getLastLocation() {
+    public void getLastLocation() {
 
         if (hasGPSPermissions()) {
 
@@ -305,51 +260,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
     }
-
-    private void sliderChange(Slider slider, float v, boolean b) {
-        mainViewModel.setRequestDistance((int) (v * 1000));
-    }
-
-    private void priceButtonClick(View v) {
-        String tag = (String) v.getTag();
-        int selectedBtnIndex = Integer.parseInt(tag);
-
-        mainViewModel.setRequestMaxPrice(selectedBtnIndex);
-
-        for (int i = 0; i < selectedBtnIndex; i++) {
-            priceButtons.get(i).getCompoundDrawables()[0].setColorFilter(accentColor, PorterDuff.Mode.SRC_ATOP);
-        }
-        for (int i = selectedBtnIndex; i < priceButtons.size(); i++) {
-            priceButtons.get(i).getCompoundDrawables()[0].setColorFilter(primaryColor, PorterDuff.Mode.SRC_ATOP);
-        }
-    }
-
-    private void placeButtonClick(View v) {
-        Object tag = v.getTag();
-        String selectedBtnLabel = (String) v.getTag();
-
-        for (AppCompatButton btn : placeButtons) {
-            if (btn.getTag().equals(selectedBtnLabel)) {
-                mainViewModel.setPlaceType(selectedBtnLabel.toUpperCase());
-                Objects.requireNonNull(btn).getCompoundDrawables()[0].setColorFilter(accentColor, PorterDuff.Mode.SRC_ATOP);
-            } else {
-                Objects.requireNonNull(btn).getCompoundDrawables()[0].setColorFilter(primaryColor, PorterDuff.Mode.SRC_ATOP);
-            }
-        }
-    }
-
-    private void findPlaceButtonClick(View v) {
-        try {
-            if (mainViewModel.areAllFieldsNotNull()) {
-                openPlaceActivity();
-            }
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void openPlaceActivity() {
-        placeViewModel.callFindPlaces(mainViewModel.getPlaceRequestDTO());
-    }
-
 }
