@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import dev.xalpol12.wheretoeat.data.ImageResult;
 import dev.xalpol12.wheretoeat.data.Place;
+import dev.xalpol12.wheretoeat.data.utility.Location;
 import dev.xalpol12.wheretoeat.network.dto.ImageRequestDTO;
 import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;
 import dev.xalpol12.wheretoeat.network.APIRepository;
@@ -87,5 +88,13 @@ public class PlaceActivityViewModel extends ViewModel {
             }
         }
         return null;
+    }
+
+    public String getCurrentPlaceName() {
+        return repository.getPlaceList().getValue().get(currentItemIndex).getName();
+    }
+
+    public Location getCurrentPlaceLocation() {
+        return repository.getPlaceList().getValue().get(currentItemIndex).getLocation();
     }
 }

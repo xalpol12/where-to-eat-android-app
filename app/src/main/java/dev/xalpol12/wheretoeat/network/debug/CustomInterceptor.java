@@ -21,6 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.inject.Inject;
 
+import dev.xalpol12.wheretoeat.data.utility.Location;
 import dev.xalpol12.wheretoeat.view.utility.AssetManagerWrapper;
 import hilt_aggregated_deps._dev_xalpol12_wheretoeat_view_PlaceActivity_GeneratedInjector;
 import okhttp3.Interceptor;
@@ -98,6 +99,7 @@ public class CustomInterceptor implements Interceptor {
         JsonObject object = new JsonObject();
         object.addProperty("name", "Zielona Weranda");
         object.addProperty("placeId", "ChIJBUn2SD9bBEcRThe9iausrn8");
+        object.add("location", createLocation());
         object.addProperty("vicinity", "Paderewskiego 7, Poznań");
         object.addProperty("rating", 4.4f);
         object.addProperty("userRatingsTotal", 2524);
@@ -110,6 +112,7 @@ public class CustomInterceptor implements Interceptor {
         JsonObject object = new JsonObject();
         object.addProperty("name", "Ptasie Radio");
         object.addProperty("placeId", "ChIJB7T44zZbBEcR1yge5KHLwYk");
+        object.add("location", createLocation());
         object.addProperty("vicinity", "Kościuszki 74/3, Poznań");
         object.addProperty("rating", 4.6f);
         object.addProperty("userRatingsTotal", 2635);
@@ -122,11 +125,19 @@ public class CustomInterceptor implements Interceptor {
         JsonObject object = new JsonObject();
         object.addProperty("name", "Piece of Cake");
         object.addProperty("placeId", "ChIJ3S-G0UBbBEcREu9sx0ZMlKk");
+        object.add("location", createLocation());
         object.addProperty("vicinity", "Święty Wojciech 27, Poznań");
         object.addProperty("rating", 4.7f);
         object.addProperty("userRatingsTotal", 428);
         object.addProperty("openNow", true);
         object.addProperty("photoReference", reference3);
+        return object;
+    }
+
+    private JsonObject createLocation() {
+        JsonObject object = new JsonObject();
+        object.addProperty("lat", 52.4f);
+        object.addProperty("lng", 16.93f);
         return object;
     }
 

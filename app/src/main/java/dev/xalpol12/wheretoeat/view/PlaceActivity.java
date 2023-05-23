@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import dev.xalpol12.wheretoeat.R;
+import dev.xalpol12.wheretoeat.data.utility.Location;
 import dev.xalpol12.wheretoeat.network.dto.ImageRequestDTO;
 import dev.xalpol12.wheretoeat.viewmodel.PlaceActivityViewModel;
 
@@ -69,13 +72,14 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void goThereButtonClick(View v) {
-        ImageRequestDTO request = ImageRequestDTO
-                .builder()
-                .photoReference("aaaa")
-                .width(100)
-                .height(100)
-                .build();
-        viewModel.callFindImage(request);
+        Location location = viewModel.getCurrentPlaceLocation();
+        String name = viewModel.getCurrentPlaceName();
+        String strUri = "http://maps.google.com/maps?q=loc:" + location.getLat() + "," + location.getLng() + " (" + name + ")";
+        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
+
+        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+
+        startActivity(intent);
     }
 
     private void setNextPlace() {
