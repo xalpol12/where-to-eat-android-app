@@ -23,6 +23,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.slider.Slider;
 
 import java.util.ArrayList;
@@ -47,7 +49,7 @@ import dev.xalpol12.wheretoeat.viewmodel.MainActivityViewModel;
 import dev.xalpol12.wheretoeat.viewmodel.PlaceActivityViewModel;
 
 @AndroidEntryPoint
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     // screen diagonal:     5 inches
     // screen dimensions:   W 2.45 : H 4.36
@@ -61,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationClient;
     private ScreenDensityHelper screenHelper;
     private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
     private Toolbar toolbar;
     private ImageButton btnHamburger;
     private final List<Integer> priceButtonIds = List.of(
@@ -88,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setDependencies();
         configureObservers();
-        initializeUI();
+        initializeUI(savedInstanceState);
         setOnClickListeners();
     }
 
@@ -121,8 +124,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initializeUI() {
-        configureHamburgerMenu();
+    private void initializeUI(Bundle savedInstanceState) {
+        configureHamburgerMenu(savedInstanceState);
         btnHamburger = findViewById(R.id.hamburger_button);
         btnFindLocation = findViewById(R.id.find_location_button);
         btnFindPlace = findViewById(R.id.find_place_button);
@@ -140,13 +143,51 @@ public class MainActivity extends AppCompatActivity {
         accentColor = ContextCompat.getColor(this, R.color.accent);
     }
 
-    private void configureHamburgerMenu() {
+    private void configureHamburgerMenu(Bundle savedInstanceState) {
         toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+
+        navigationView.setNavigationItemSelectedListener(this);
+
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new FindPlaceFragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_find_place);
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_find_place:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new FindPlaceFragment()).commit();
+                break;
+            case R.id.nav_saved_places:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new SavedPlacesFragment()).commit();
+                break;
+            case R.id.nav_about_me:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new AboutMeFragment()).commit();
+                break;
+            case R.id.nav_language:
+                Toast.makeText(this, "Language changed", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_theme_mode:
+                Toast.makeText(this, "Theme changed", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        return true;
     }
 
     private void hamburgerButtonClick(View v) {
@@ -310,4 +351,5 @@ public class MainActivity extends AppCompatActivity {
     private void openPlaceActivity() {
         placeViewModel.callFindPlaces(mainViewModel.getPlaceRequestDTO());
     }
+
 }
