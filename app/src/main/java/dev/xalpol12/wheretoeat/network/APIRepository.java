@@ -1,5 +1,7 @@
 package dev.xalpol12.wheretoeat.network;
 
+import android.location.Location;
+
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ public class APIRepository {
     private final APIService apiService;
     private final MutableLiveData<List<Place>> placeList;
     private final MutableLiveData<List<ImageResult>> imageList;
+    private Location currentDeviceLocation;
 
     @Inject
     public APIRepository(APIService apiService,
@@ -82,5 +85,13 @@ public class APIRepository {
 
     public void clearImageList() { //TODO: fix this
         imageList.setValue(null);
+    }
+
+    public void setCurrentDeviceLocation(Location location) {
+        currentDeviceLocation = location;
+    }
+
+    public Location getCurrentDeviceLocation() {
+        return currentDeviceLocation;
     }
 }
