@@ -1,6 +1,7 @@
 package dev.xalpol12.wheretoeat.view;
 
 import android.graphics.PorterDuff;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -115,8 +116,13 @@ public class FindPlaceFragment extends Fragment {
     }
 
     private void locationButtonClick(View v) {
-        ((MainActivity) requireActivity()).getLastLocation();
-//        mainViewModel.setRequestLocation(20.f, 20.f);  //Uncomment for debug purposes
+//        ((MainActivity) requireActivity()).getLastLocation();
+
+        mainViewModel.setRequestLocation(52.39f, 16.94f);  //Uncomment for debug purposes
+        android.location.Location location = new Location("provider");
+        location.setLatitude(52.39f);
+        location.setLongitude(16.94f);
+        placeViewModel.setCurrentLocation(location);
         v.setAlpha(1.f);
     }
 

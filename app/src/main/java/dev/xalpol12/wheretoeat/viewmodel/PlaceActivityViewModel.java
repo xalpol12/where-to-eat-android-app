@@ -24,6 +24,7 @@ import dev.xalpol12.wheretoeat.view.utility.ScreenDimensions;
 @HiltViewModel
 public class PlaceActivityViewModel extends ViewModel {
     APIRepository repository;
+    android.location.Location currentLocation;
     int currentItemIndex;
 
     @Inject
@@ -91,10 +92,18 @@ public class PlaceActivityViewModel extends ViewModel {
     }
 
     public String getCurrentPlaceName() {
-        return repository.getPlaceList().getValue().get(currentItemIndex).getName();
+        return repository.getPlaceList().getValue().get(currentItemIndex - 1).getName();
     }
 
     public Location getCurrentPlaceLocation() {
-        return repository.getPlaceList().getValue().get(currentItemIndex).getLocation();
+        return repository.getPlaceList().getValue().get(currentItemIndex - 1).getLocation();
+    }
+
+    public void setCurrentLocation(android.location.Location location) {
+        currentLocation = location;
+    }
+
+    public android.location.Location getCurrentLocation() {
+        return currentLocation;
     }
 }

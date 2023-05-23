@@ -242,6 +242,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Location lastLocation = locationResult.getLastLocation();
                 if (lastLocation != null ) {
                     mainViewModel.setRequestLocation(lastLocation.getLatitude(), lastLocation.getLongitude());
+                    placeViewModel.setCurrentLocation(lastLocation);
                 }
             }
         };

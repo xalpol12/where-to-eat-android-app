@@ -50,6 +50,7 @@ public class PlaceActivity extends AppCompatActivity {
     private void setPlaceFragment() {
         placeFragment.changePlace(viewModel.getNextPlaceDetails());
         placeFragment.changePhoto(viewModel.getCorrespondingImage());
+        placeFragment.setUserLocation(viewModel.getCurrentLocation());
     }
 
     private void setOnClickListeners() {

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.sql.Array;
+import java.text.DecimalFormat;
+
 import dev.xalpol12.wheretoeat.R;
 import dev.xalpol12.wheretoeat.data.Place;
 
@@ -27,6 +31,7 @@ public class PlaceFragment extends Fragment {
     private Place place;
 
     private Bitmap photo;
+    private Location userLocation;
 
     private ImageView imageView;
     private TextView placeName;
@@ -68,6 +73,10 @@ public class PlaceFragment extends Fragment {
         }
     }
 
+    public void setUserLocation(Location location) {
+        userLocation = location;
+    }
+
     private void initializeUI(View view) {
         imageView = view.findViewById(R.id.place_image);
         placeName = view.findViewById(R.id.place_name);
@@ -84,7 +93,7 @@ public class PlaceFragment extends Fragment {
         rating.setText(String.valueOf(place.getRating()));
         ratingCount.setText(String.valueOf(place.getUserRatingsTotal()));
         address.setText(place.getVicinity());
-        distance.setText("1 km away"); //TODO: fetch distance from place
+        distance.setText(calculateDistance());
 
         if (place.isOpenNow()) {
             openNow.setText(R.string.open_now);
@@ -93,5 +102,19 @@ public class PlaceFragment extends Fragment {
             openNow.setText(R.string.closed_now);
             openNow.setTextColor(getResources().getColor(R.color.secondary_30_tint));
         }
+    }
+
+    private String calculateDistance() {
+        Location location = new Location("provider");
+        location.setLatitude(place.getLocation().getLat());
+        location.setLongitude(place.getLocation().getLng());
+        float distance = userLocation.distanceTo(location);
+        return formatCalculatedDistance(distance);
+    }
+
+    private String formatCalculatedDistance(float solution) {
+        DecimalFormat format = new DecimalFormat("#.#");
+        format.setMaximumFractionDigits(1);
+        return format.format(solution);
     }
 }
