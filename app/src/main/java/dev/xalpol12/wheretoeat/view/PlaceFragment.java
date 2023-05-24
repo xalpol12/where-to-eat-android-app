@@ -115,6 +115,6 @@ public class PlaceFragment extends Fragment {
     private String formatCalculatedDistance(float solution) {
         DecimalFormat format = new DecimalFormat("#.#");
         format.setMaximumFractionDigits(1);
-        return format.format(solution) + " km away";
+        return format.format(solution) + getString(R.string.km_away);
     }
 }

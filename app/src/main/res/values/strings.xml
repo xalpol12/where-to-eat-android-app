@@ -21,7 +21,6 @@
     <string name="_0_5_km_away">0.5 km away</string>
     <string name="open_now">Open now</string>
     <string name="closed_now">Closed now</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="language">Language</string>
     <string name="customisation">Customisation</string>
@@ -36,4 +35,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="open_hamburger_menu">Open hamburger menu</string>
     <string name="about_me">About me</string>
+    <string name="km_away">\km away</string>
+    <string name="call_success">Called successfully</string>
+    <string name="theme_changed">Theme changed</string>
+    <string name="location_success">Location requested successfully</string>
+    <string name="turn_on_location">Please turn on your location</string>
+    <string name="location_denied">Location permission denied. App cannot function without access to GPS.</string>
 </resources>

@@ -16,7 +16,7 @@ import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;
 import dev.xalpol12.wheretoeat.view.utility.AssetManagerWrapper;
 
 @HiltViewModel
-public class MainActivityViewModel extends ViewModel{
+public class MainActivityViewModel extends ViewModel {
 
     PlaceRequestDTO placeRequestDTO;
     AssetManagerWrapper assetManager;

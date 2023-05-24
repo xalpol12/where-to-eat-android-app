@@ -20,19 +20,6 @@
 
     <item android:title="@string/customisation">
         <menu>
-            <item android:id="@+id/nav_language"
-                android:icon="@drawable/ic_lang_us"
-                android:title="@string/language"
-                app:showAsAction="always">
-<!--                <menu>-->
-<!--                    <item android:id="@+id/language_polish"-->
-<!--                        android:title="@string/polish"-->
-<!--                        android:icon="@drawable/ic_lang_pl"/>-->
-<!--                    <item android:id="@+id/language_english"-->
-<!--                        android:title="@string/english"-->
-<!--                        android:icon="@drawable/ic_lang_us"/>-->
-<!--                </menu>-->
-            </item>
             <item android:id="@+id/nav_theme_mode"
                 android:icon="@drawable/ic_light_mode"
                 android:title="@string/theme"/>
