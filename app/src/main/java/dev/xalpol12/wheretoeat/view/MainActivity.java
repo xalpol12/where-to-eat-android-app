@@ -199,6 +199,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         requestNewLocationData();
                     } else {
                         mainViewModel.setRequestLocation(location.getLatitude(), location.getLongitude());
+                        placeViewModel.setCurrentLocation(location);
                         Toast.makeText(this, R.string.location_success, Toast.LENGTH_SHORT).show();
                     }
                 });

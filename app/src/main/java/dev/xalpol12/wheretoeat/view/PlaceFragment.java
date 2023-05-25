@@ -97,7 +97,7 @@ public class PlaceFragment extends Fragment {
 
         if (place.isOpenNow()) {
             openNow.setText(R.string.open_now);
-            openNow.setTextColor(getResources().getColor(R.color.accent)); //TODO: color dependant on theme
+            openNow.setTextColor(getResources().getColor(R.color.accent));
         } else {
             openNow.setText(R.string.closed_now);
             openNow.setTextColor(getResources().getColor(R.color.secondary_30_tint));
@@ -105,16 +105,17 @@ public class PlaceFragment extends Fragment {
     }
 
     private String calculateDistance() {
+        float metersInKilometer = 1000f;
         Location location = new Location("provider");
         location.setLatitude(place.getLocation().getLat());
         location.setLongitude(place.getLocation().getLng());
-        float distance = userLocation.distanceTo(location);
+        float distance = userLocation.distanceTo(location) / metersInKilometer;
         return formatCalculatedDistance(distance);
     }
 
     private String formatCalculatedDistance(float solution) {
         DecimalFormat format = new DecimalFormat("#.#");
         format.setMaximumFractionDigits(1);
-        return format.format(solution) + getString(R.string.km_away);
+        return format.format(solution) + " " + getString(R.string.km_away); //yes, a workaround...
     }
 }
