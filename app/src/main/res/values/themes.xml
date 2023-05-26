@@ -16,22 +16,6 @@
         <item name="android:windowAnimationStyle">@style/CustomActivityAnimation</item>
     </style>
 
-    <style name="ConstraintLayoutColor">
-        <item name="android:background">@color/primary</item>
-        <item name="android:backgroundTint">@color/primary</item>
-    </style>
-    
-    <style name="NavigationDrawerStyle">
-        <item name="android:backgroundTint">@color/primary</item>
-    </style>
-
-    <style name="BigButtonStyle">
-        <item name="android:drawablePadding">45dp</item>
-        <item name="android:paddingLeft">20dp</item>
-        <item name="android:paddingRight">20dp</item>
-        <item name="android:backgroundTint">@color/accent</item>
-    </style>
-
     <style name="ThemeOverlay.WhereToEat.FullscreenContainer" parent="">
         <item name="fullscreenBackgroundColor">@color/primary</item>
         <item name="fullscreenTextColor">@color/primary</item>

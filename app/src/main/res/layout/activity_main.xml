@@ -32,7 +32,8 @@
         android:id="@+id/activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:theme="@style/ConstraintLayoutColor">
+        android:background="@color/primary"
+        android:backgroundTint="@color/primary">
 
         <ImageButton
             android:id="@+id/hamburger_button"
@@ -61,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:theme="@style/NavigationDrawerStyle"
+        android:backgroundTint="@color/primary"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/drawer_menu"
         app:itemIconTint="@color/drawer_item"
