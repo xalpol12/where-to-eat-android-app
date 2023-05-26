@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Where to Eat</string>
+    <string name="find_my_location">Trouver ma position</string>
+    <string name="min_radius_distance">0,5 km</string>
+    <string name="max_radius_distance">10 km</string>
+    <string name="cheap_price_range">Gamme de prix bon marché</string>
+    <string name="inexpensive_price_range">Gamme de prix abordable</string>
+    <string name="reasonable_price_range">Gamme de prix raisonnable</string>
+    <string name="expensive_price_range">Gamme de prix coûteuse</string>
+    <string name="radius_range_slider">Curseur de rayon de recherche</string>
+    <string name="find_a_place_to_eat">Trouver un endroit pour manger</string>
+    <string name="gps_icon">Icône GPS</string>
+    <string name="title_activity_place">Activité Lieu</string>
+    <string name="dummy_button">Bouton fictif</string>
+    <string name="dummy_content">CONTENU\nDUMMY</string>
+    <string name="rating_value">4,4</string>
+    <string name="title_value">Lorem Ipsum</string>
+    <string name="go_there">Aller là-bas</string>
+    <string name="dolor_sit_amet">dolor sit amet</string>
+    <string name="p_wiejska_42_pozna">Półwiejska 42, Poznań</string>
+    <string name="_0_5_km_away">à 0,5 km de distance</string>
+    <string name="open_now">Ouvert maintenant</string>
+    <string name="closed_now">Fermé maintenant</string>
+    <string name="hello_blank_fragment">Bonjour fragment vide</string>
+    <string name="language">Langue</string>
+    <string name="customisation">Personnalisation</string>
+    <string name="theme">Thème</string>
+    <string name="find_place">Trouver un lieu</string>
+    <string name="saved_places">Lieux enregistrés</string>
+    <string name="polish">Polonais</string>
+    <string name="english">Anglais</string>
+    <string name="dawid_stawiszy_ski">Dawid Stawiszyński</string>
+    <string name="github_com_xalpol12">github.com/xalpol12</string>
+    <string name="navigation_drawer_open">Ouvrir le tiroir de navigation</string>
+    <string name="navigation_drawer_close">Fermer le tiroir de navigation</string>
+    <string name="open_hamburger_menu">Ouvrir le menu hamburger</string>
+    <string name="about_me">À propos de moi</string>
+    <string name="km_away">\km de distance</string>
+    <string name="call_success">Appel réussi</string>
+    <string name="theme_changed">Thème modifié</string>
+    <string name="location_success">Localisation demandée avec succès</string>
+    <string name="turn_on_location">Veuillez activer votre localisation</string>
+    <string name="location_denied">Permission de localisation refusée. L\'application ne peut pas fonctionner sans accès au GPS.</string>
+</resources>

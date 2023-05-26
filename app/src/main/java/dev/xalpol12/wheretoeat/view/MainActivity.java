@@ -6,6 +6,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
@@ -16,8 +17,11 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.location.Location;
 import android.location.LocationManager;
@@ -27,6 +31,7 @@ import android.provider.Settings;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -40,6 +45,7 @@ import com.google.android.material.slider.Slider;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -69,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ImageButton btnHamburger;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void configurePlaceListObserver() {
         placeViewModel.getPlaceList().observe(this, places -> {
-            Toast.makeText(this, "called successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.call_success, Toast.LENGTH_SHORT).show();
             if (places != null && !places.isEmpty()) {
                 placeViewModel.callFindAllImages(screenHelper.getScreenDimensions());
             }
@@ -136,6 +141,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            default:
+                break;
             case R.id.nav_find_place:
                 replaceFragment(new FindPlaceFragment());
                 item.setChecked(true);
@@ -151,14 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 item.setChecked(true);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
-            case R.id.nav_language:
-                Toast.makeText(this, "Language changed", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_theme_mode:
-                Toast.makeText(this, "Theme changed", Toast.LENGTH_SHORT).show();
-                break;
         }
-
         return true;
     }
 
@@ -199,11 +199,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         requestNewLocationData();
                     } else {
                         mainViewModel.setRequestLocation(location.getLatitude(), location.getLongitude());
-                        Toast.makeText(this, "Location requested successfully", Toast.LENGTH_SHORT).show();
+                        placeViewModel.setCurrentLocation(location);
+                        Toast.makeText(this, R.string.location_success, Toast.LENGTH_SHORT).show();
                     }
                 });
             } else {
-                Toast.makeText(this, "Please turn on your location", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.turn_on_location, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 startActivity(intent);
             }
@@ -257,7 +258,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getLastLocation();
             } else {
-                Toast.makeText(this, "Location permission denied. App cannot function without access to GPS.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.location_denied, Toast.LENGTH_SHORT).show();
             }
         }
     }
