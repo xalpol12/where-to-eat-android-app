@@ -15,17 +15,17 @@ import lombok.Data;
 public class PlaceEntity {
     @PrimaryKey(autoGenerate = true)
     private int id;
-//
-//    @Embedded
-//    private Place place;
-//
-//    @Embedded
-//    private ImageResult image;
-//
-//    public PlaceEntity(Place place, ImageResult image) {
-//        this.place = place;
-//        this.image = image;
-//    }
+
+    @Embedded
+    private Place place;
+
+    @Embedded
+    private ImageResult image;
+
+    public PlaceEntity(Place place, ImageResult image) {
+        this.place = place;
+        this.image = image;
+    }
 }
 
 

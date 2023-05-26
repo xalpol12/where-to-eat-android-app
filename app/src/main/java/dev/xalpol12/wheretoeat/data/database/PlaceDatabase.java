@@ -12,11 +12,4 @@ import dev.xalpol12.wheretoeat.data.entity.PlaceEntity;
 public abstract class PlaceDatabase extends RoomDatabase {
     public abstract PlaceDao placeDao();
 
-//    private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {
-//        @Override
-//        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-//            super.onCreate(db);
-//            new PopulateDbAsyncTask(instance).execute();
-//        }
-//    };
 }
