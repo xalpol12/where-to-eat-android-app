@@ -1,7 +1,5 @@
 package dev.xalpol12.wheretoeat.data.utility;
 
-import java.util.Locale;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

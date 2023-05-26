@@ -15,8 +15,6 @@ import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import dev.xalpol12.wheretoeat.data.ImageResult;
 import dev.xalpol12.wheretoeat.data.Place;
-import dev.xalpol12.wheretoeat.data.dao.PlaceDao;
-import dev.xalpol12.wheretoeat.data.entity.PlaceEntity;
 import dev.xalpol12.wheretoeat.data.utility.Location;
 import dev.xalpol12.wheretoeat.network.dto.ImageRequestDTO;
 import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;

@@ -1,10 +1,6 @@
 package dev.xalpol12.wheretoeat.di;
 
-import android.app.Application;
-import android.content.Context;
-
 import androidx.lifecycle.MutableLiveData;
-import androidx.room.Room;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -16,12 +12,9 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
-import dagger.hilt.android.qualifiers.ApplicationContext;
 import dagger.hilt.components.SingletonComponent;
 import dev.xalpol12.wheretoeat.data.ImageResult;
 import dev.xalpol12.wheretoeat.data.Place;
-import dev.xalpol12.wheretoeat.data.dao.PlaceDao;
-import dev.xalpol12.wheretoeat.data.database.PlaceDatabase;
 import dev.xalpol12.wheretoeat.network.APIRepository;
 import dev.xalpol12.wheretoeat.network.APIService;
 import dev.xalpol12.wheretoeat.network.debug.CustomInterceptor;
@@ -87,7 +80,6 @@ public class APIResponseModule {
 
     @Singleton
     @Provides
-    @Inject
     public Retrofit getRetrofitClient(@Named("OkHttpClientProd")
                                           OkHttpClient client) {
         return new Retrofit.Builder()
@@ -115,33 +107,11 @@ public class APIResponseModule {
         return new MutableLiveData<>();
     }
 
-    @Provides
-    @Singleton
-    public Context getApplicationContext(Application application) {
-        return application.getApplicationContext();
-    }
-
     @Singleton
     @Provides
-    @Inject
-    public PlaceDatabase getPlaceDatabase(Context context) { //TODO: split dependencies into modules
-        return Room.databaseBuilder(context, PlaceDatabase.class, "place.db").build();
-    }
-
-    @Singleton
-    @Provides
-    @Inject
-    public PlaceDao getPlaceDao(PlaceDatabase db) {
-        return db.placeDao();
-    }
-
-    @Singleton
-    @Provides
-    @Inject
-    public APIRepository getAPIRepository(PlaceDao placeDao,
-                                          APIService apiService,
+    public APIRepository getAPIRepository(APIService apiService,
                                           MutableLiveData<List<Place>> placeList,
                                           MutableLiveData<List<ImageResult>> images) {
-        return new APIRepository(placeDao, apiService, placeList, images);
+        return new APIRepository(apiService, placeList, images);
     }
 }

@@ -1,4 +1,4 @@
-package dev.xalpol12.wheretoeat.view;
+package dev.xalpol12.wheretoeat.view.main;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -1,4 +1,4 @@
-package dev.xalpol12.wheretoeat.data.dao;
+package dev.xalpol12.wheretoeat.database.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -6,7 +6,7 @@ import androidx.room.Query;
 
 import java.util.List;
 
-import dev.xalpol12.wheretoeat.data.entity.PlaceEntity;
+import dev.xalpol12.wheretoeat.database.entity.PlaceEntity;
 
 @Dao
 public interface PlaceDao {

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary"
-    tools:context=".view.PlaceActivity">
+    tools:context=".view.placedisplay.PlaceActivity">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -19,7 +19,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/place_fragment_container"
-            android:name="dev.xalpol12.wheretoeat.view.PlaceFragment"
+            android:name="dev.xalpol12.wheretoeat.view.placedisplay.PlaceFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/secondary_buttons_layout"

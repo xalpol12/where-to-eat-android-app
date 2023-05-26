@@ -1,6 +1,4 @@
-package dev.xalpol12.wheretoeat.data.entity;
-
-import android.media.Image;
+package dev.xalpol12.wheretoeat.database.entity;
 
 import androidx.room.Embedded;
 import androidx.room.Entity;

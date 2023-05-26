@@ -1,4 +1,4 @@
-package dev.xalpol12.wheretoeat.view;
+package dev.xalpol12.wheretoeat.view.placedisplay;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
@@ -12,7 +12,6 @@ import android.view.View;
 import dagger.hilt.android.AndroidEntryPoint;
 import dev.xalpol12.wheretoeat.R;
 import dev.xalpol12.wheretoeat.data.utility.Location;
-import dev.xalpol12.wheretoeat.network.dto.ImageRequestDTO;
 import dev.xalpol12.wheretoeat.viewmodel.PlaceActivityViewModel;
 
 @AndroidEntryPoint

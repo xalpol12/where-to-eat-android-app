@@ -1,29 +1,22 @@
 package dev.xalpol12.wheretoeat.network.debug;
 
-import android.content.res.AssetManager;
-
 import androidx.annotation.NonNull;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
-import org.apache.commons.io.FileUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.inject.Inject;
 
-import dev.xalpol12.wheretoeat.data.utility.Location;
 import dev.xalpol12.wheretoeat.view.utility.AssetManagerWrapper;
-import hilt_aggregated_deps._dev_xalpol12_wheretoeat_view_PlaceActivity_GeneratedInjector;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Protocol;
