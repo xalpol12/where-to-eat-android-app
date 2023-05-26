@@ -15,6 +15,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.room.Room;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -48,8 +49,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
+import javax.inject.Inject;
+
 import dagger.hilt.android.AndroidEntryPoint;
 import dev.xalpol12.wheretoeat.R;
+import dev.xalpol12.wheretoeat.data.database.PlaceDatabase;
 import dev.xalpol12.wheretoeat.network.dto.ImageRequestDTO;
 import dev.xalpol12.wheretoeat.view.utility.ScreenDensityHelper;
 import dev.xalpol12.wheretoeat.viewmodel.MainActivityViewModel;

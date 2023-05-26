@@ -15,6 +15,8 @@ import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import dev.xalpol12.wheretoeat.data.ImageResult;
 import dev.xalpol12.wheretoeat.data.Place;
+import dev.xalpol12.wheretoeat.data.dao.PlaceDao;
+import dev.xalpol12.wheretoeat.data.entity.PlaceEntity;
 import dev.xalpol12.wheretoeat.data.utility.Location;
 import dev.xalpol12.wheretoeat.network.dto.ImageRequestDTO;
 import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;
@@ -23,7 +25,7 @@ import dev.xalpol12.wheretoeat.view.utility.ScreenDimensions;
 
 @HiltViewModel
 public class PlaceActivityViewModel extends ViewModel {
-    APIRepository repository;
+    private final APIRepository repository;
     int currentItemIndex;
 
     @Inject
@@ -104,5 +106,13 @@ public class PlaceActivityViewModel extends ViewModel {
 
     public android.location.Location getCurrentLocation() {
         return repository.getCurrentDeviceLocation();
+    }
+
+    public void savePlaceToDb(Place place, ImageResult image) {
+//        repository.insert(new PlaceEntity(place, image));
+    }
+
+    public void deletePlaceFromDb(Place place) {
+//        repository.deleteById(place.getPlaceId());
     }
 }

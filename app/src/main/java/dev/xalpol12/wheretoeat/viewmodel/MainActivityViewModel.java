@@ -3,12 +3,14 @@ package dev.xalpol12.wheretoeat.viewmodel;
 import android.content.Context;
 
 import androidx.lifecycle.ViewModel;
+import androidx.room.Room;
 
 import java.lang.reflect.Field;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import dev.xalpol12.wheretoeat.data.database.PlaceDatabase;
 import dev.xalpol12.wheretoeat.data.utility.Location;
 import dev.xalpol12.wheretoeat.data.utility.PlaceType;
 import dev.xalpol12.wheretoeat.data.utility.PriceLevel;

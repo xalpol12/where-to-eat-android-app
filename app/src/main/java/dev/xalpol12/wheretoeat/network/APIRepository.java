@@ -12,6 +12,9 @@ import javax.inject.Inject;
 
 import dev.xalpol12.wheretoeat.data.ImageResult;
 import dev.xalpol12.wheretoeat.data.Place;
+import dev.xalpol12.wheretoeat.data.dao.PlaceDao;
+import dev.xalpol12.wheretoeat.data.database.PlaceDatabase;
+import dev.xalpol12.wheretoeat.data.entity.PlaceEntity;
 import dev.xalpol12.wheretoeat.network.dto.ImageRequestDTO;
 import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;
 import retrofit2.Call;
@@ -19,15 +22,18 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class APIRepository {
+    private final PlaceDao placeDao;
     private final APIService apiService;
     private final MutableLiveData<List<Place>> placeList;
     private final MutableLiveData<List<ImageResult>> imageList;
     private Location currentDeviceLocation;
 
     @Inject
-    public APIRepository(APIService apiService,
+    public APIRepository(PlaceDao placeDao,
+                         APIService apiService,
                          MutableLiveData<List<Place>> placeList,
                          MutableLiveData<List<ImageResult>> imageList) {
+        this.placeDao = placeDao;
         this.apiService = apiService;
         this.placeList = placeList;
         this.imageList = imageList;
@@ -93,5 +99,12 @@ public class APIRepository {
 
     public Location getCurrentDeviceLocation() {
         return currentDeviceLocation;
+    }
+
+    public void insert(PlaceEntity place) {
+        placeDao.insertAll(place);
+    }
+
+    public void deleteById(String id) {
     }
 }
