@@ -16,6 +16,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 import dev.xalpol12.wheretoeat.data.ImageResult;
 import dev.xalpol12.wheretoeat.data.Place;
 import dev.xalpol12.wheretoeat.data.utility.Location;
+import dev.xalpol12.wheretoeat.database.PlaceRepository;
+import dev.xalpol12.wheretoeat.database.entity.PlaceEntity;
 import dev.xalpol12.wheretoeat.network.dto.ImageRequestDTO;
 import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;
 import dev.xalpol12.wheretoeat.network.APIRepository;
@@ -24,11 +26,13 @@ import dev.xalpol12.wheretoeat.view.utility.ScreenDimensions;
 @HiltViewModel
 public class PlaceActivityViewModel extends ViewModel {
     private final APIRepository repository;
+    private final PlaceRepository placeRepository;
     int currentItemIndex;
 
     @Inject
-    public PlaceActivityViewModel(APIRepository repository) {
+    public PlaceActivityViewModel(APIRepository repository, PlaceRepository placeRepository) {
         this.repository = repository;
+        this.placeRepository = placeRepository;
         currentItemIndex = 0;
     }
 
@@ -107,10 +111,14 @@ public class PlaceActivityViewModel extends ViewModel {
     }
 
     public void savePlaceToDb(Place place, ImageResult image) {
-//        repository.insert(new PlaceEntity(place, image));
+        placeRepository.insertPlace(new PlaceEntity(place, image));
     }
 
     public void deletePlaceFromDb(Place place) {
-//        repository.deleteById(place.getPlaceId());
+        placeRepository.deletePlaceById(place.getPlaceId());
+    }
+
+    public boolean isInDatabase(Place place) {
+        return placeRepository.isInDatabase(place.getPlaceId());
     }
 }

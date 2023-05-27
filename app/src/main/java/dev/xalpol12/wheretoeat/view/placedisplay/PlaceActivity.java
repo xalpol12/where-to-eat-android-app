@@ -2,12 +2,15 @@ package dev.xalpol12.wheretoeat.view.placedisplay;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import dev.xalpol12.wheretoeat.R;
@@ -19,6 +22,7 @@ public class PlaceActivity extends AppCompatActivity {
 
     private PlaceActivityViewModel viewModel;
     private PlaceFragment placeFragment;
+    private ImageView saveButton;
     private AppCompatButton btnPrevious;
     private AppCompatButton btnRandom;
     private AppCompatButton btnGoThere;
@@ -41,6 +45,7 @@ public class PlaceActivity extends AppCompatActivity {
 
     private void initializeUI() {
         placeFragment = (PlaceFragment) getSupportFragmentManager().findFragmentById(R.id.place_fragment_container);
+        saveButton = findViewById(R.id.place_save_button);
         btnPrevious = findViewById(R.id.previous_button);
         btnRandom = findViewById(R.id.random_button);
         btnGoThere = findViewById(R.id.go_there_button);
@@ -53,6 +58,10 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void setOnClickListeners() {
+        View.OnClickListener saveButtonClickListener = this::savePlaceButtonClick;
+        saveButton.setOnClickListener(saveButtonClickListener);
+        saveButton.bringToFront();
+
         View.OnClickListener previousButtonClickListener = this::previousButtonClick;
         btnPrevious.setOnClickListener(previousButtonClickListener);
 
@@ -61,6 +70,11 @@ public class PlaceActivity extends AppCompatActivity {
 
         View.OnClickListener goThereButtonClickListener = this::goThereButtonClick;
         btnGoThere.setOnClickListener(goThereButtonClickListener);
+    }
+
+    private void savePlaceButtonClick(View view) {
+        Toast.makeText(this, "Place saved", Toast.LENGTH_SHORT).show();
+        saveButton.setColorFilter(ContextCompat.getColor(this, R.color.accent));
     }
 
     private void previousButtonClick(View v) {

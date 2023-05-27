@@ -1,11 +1,9 @@
 package dev.xalpol12.wheretoeat.database;
 
-import android.os.AsyncTask;
-
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -39,4 +37,15 @@ public class PlaceRepository {
     public void deletePlaceById(String id) {
         placeDao.deleteById(id);
     }
+
+    public boolean isInDatabase(String placeId) {
+        LiveData<List<PlaceEntity>> entities = getAllPlaces();
+        for (PlaceEntity entity: Objects.requireNonNull(entities.getValue())) {
+            if (entity.getPlace().getPlaceId().equals(placeId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

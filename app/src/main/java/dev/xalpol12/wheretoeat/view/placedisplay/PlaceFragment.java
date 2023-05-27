@@ -22,10 +22,8 @@ import dev.xalpol12.wheretoeat.data.Place;
 public class PlaceFragment extends Fragment {
 
     private Place place;
-
     private Bitmap photo;
     private Location userLocation;
-
     private ImageView imageView;
     private TextView placeName;
     private TextView rating;
