@@ -6,7 +6,6 @@ import android.content.Context;
 
 import androidx.room.Room;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -15,7 +14,7 @@ import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
 import dev.xalpol12.wheretoeat.database.PlaceDatabase;
 import dev.xalpol12.wheretoeat.database.dao.PlaceDao;
-import dev.xalpol12.wheretoeat.database.repository.PlaceRepository;
+import dev.xalpol12.wheretoeat.database.PlaceRepository;
 
 @Module
 @InstallIn(SingletonComponent.class)

@@ -1,5 +1,6 @@
 package dev.xalpol12.wheretoeat.database.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -17,7 +18,7 @@ public interface PlaceDao {
     void insertAll(PlaceEntity... places);
 
     @Query("SELECT * FROM place")
-    List<PlaceEntity> getAllPlaces();
+    LiveData<List<PlaceEntity>> getAll();
 
     @Query("DELETE FROM place WHERE place.id = :placeId")
     void deleteById(String placeId);

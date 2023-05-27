@@ -2,9 +2,12 @@ package dev.xalpol12.wheretoeat.viewmodel;
 
 import android.content.Context;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -12,17 +15,23 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 import dev.xalpol12.wheretoeat.data.utility.Location;
 import dev.xalpol12.wheretoeat.data.utility.PlaceType;
 import dev.xalpol12.wheretoeat.data.utility.PriceLevel;
+import dev.xalpol12.wheretoeat.database.PlaceRepository;
+import dev.xalpol12.wheretoeat.database.entity.PlaceEntity;
 import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;
 import dev.xalpol12.wheretoeat.view.utility.AssetManagerWrapper;
 
 @HiltViewModel
 public class MainActivityViewModel extends ViewModel {
 
+    PlaceRepository placeRepository;
     PlaceRequestDTO placeRequestDTO;
     AssetManagerWrapper assetManager;
 
     @Inject
-    public MainActivityViewModel(PlaceRequestDTO placeRequestDTO, AssetManagerWrapper assetManager) {
+    public MainActivityViewModel(PlaceRepository placeRepository,
+                                 PlaceRequestDTO placeRequestDTO,
+                                 AssetManagerWrapper assetManager) {
+        this.placeRepository = placeRepository;
         this.placeRequestDTO = placeRequestDTO;
         this.assetManager = assetManager;
         setupVariables();
@@ -72,5 +81,21 @@ public class MainActivityViewModel extends ViewModel {
 
     private PlaceType stringToPlaceType(String str) {
         return PlaceType.valueOf(str.toUpperCase());
+    }
+
+    public void insertPlace(PlaceEntity place) {
+        placeRepository.insertPlace(place);
+    }
+
+    public void insertAllPlaces(PlaceEntity... places) {
+        placeRepository.insertAllPlaces(places);
+    }
+
+    public LiveData<List<PlaceEntity>> getAllPlaces() {
+        return placeRepository.getAllPlaces();
+    }
+
+    public void deletePlaceById(String id) {
+        placeRepository.deletePlaceById(id);
     }
 }

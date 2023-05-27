@@ -38,15 +38,14 @@
         <ImageButton
             android:id="@+id/hamburger_button"
             android:layout_width="wrap_content"
-            android:layout_height="54dp"
+            android:layout_height="40dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:background="@android:color/transparent"
+            android:contentDescription="@string/open_hamburger_menu"
             android:src="@drawable/ic_hamburger_menu_normal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints"
-            android:contentDescription="@string/open_hamburger_menu"/>
+            tools:ignore="MissingConstraints" />
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/main_activity_fragment_container"

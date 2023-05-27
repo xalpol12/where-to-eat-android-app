@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 

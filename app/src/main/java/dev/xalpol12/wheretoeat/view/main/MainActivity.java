@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void configureObservers() {
         configurePlaceListObserver();
         configureImageListObserver();
+        configurePlaceRepositoryObserver();
     }
 
     private void configurePlaceListObserver() {
@@ -99,6 +100,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (images != null && images.size() == 1) {
                 startActivity(new Intent(MainActivity.this, PlaceActivity.class));
             }
+        });
+    }
+
+    private void configurePlaceRepositoryObserver() {
+        mainViewModel.getAllPlaces().observe(this, places -> {
+
         });
     }
 
