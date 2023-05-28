@@ -24,34 +24,5 @@ public abstract class PlaceDatabase extends RoomDatabase {
     private static volatile PlaceDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     public static final ExecutorService dbWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
-    public static PlaceDatabase getInstance(final Context context) {
-        if (INSTANCE == null) {
-            synchronized (PlaceDatabase.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            PlaceDatabase.class, "place.db")
-                            .addCallback(insertEntitiesOnCreate)
-                            .build();
-                }
-            }
-        }
-        return INSTANCE;
-    }
 
-    private final static RoomDatabase.Callback insertEntitiesOnCreate = new RoomDatabase.Callback() {
-        @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
-            dbWriteExecutor.execute(() -> {
-                PlaceDao dao = INSTANCE.placeDao();
-                dao.deleteAll();
-
-                PlaceEntity place = new PlaceEntity(new Place(), new ImageResult());
-                dao.insert(place);
-
-                place = new PlaceEntity(new Place(), new ImageResult());
-                dao.insert(place);
-            });
-        }
-    };
 }
