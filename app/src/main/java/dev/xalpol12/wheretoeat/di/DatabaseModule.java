@@ -29,7 +29,7 @@ public class DatabaseModule {
     @Singleton
     @Provides
     public PlaceDatabase getPlaceDatabase(Context context) {
-        return Room.databaseBuilder(context, PlaceDatabase.class, "place.db").build();
+        return Room.databaseBuilder(context, PlaceDatabase.class, "place.db").allowMainThreadQueries().build();
     }
 
     @Singleton

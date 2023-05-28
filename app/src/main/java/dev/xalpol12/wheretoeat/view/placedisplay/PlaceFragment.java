@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 
 import dev.xalpol12.wheretoeat.R;
+import dev.xalpol12.wheretoeat.data.ImageResult;
 import dev.xalpol12.wheretoeat.data.Place;
 
 

@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 @Entity(tableName = "place")
 public class PlaceEntity {
+
     @PrimaryKey(autoGenerate = true)
     private int id;
 

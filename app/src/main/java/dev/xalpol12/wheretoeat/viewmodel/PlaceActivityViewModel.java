@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -94,6 +95,10 @@ public class PlaceActivityViewModel extends ViewModel {
         return null;
     }
 
+    public String getCurrentPlaceId() {
+        return repository.getPlaceList().getValue().get(currentItemIndex - 1).getPlaceId();
+    }
+
     public String getCurrentPlaceName() {
         return repository.getPlaceList().getValue().get(currentItemIndex - 1).getName();
     }
@@ -110,15 +115,21 @@ public class PlaceActivityViewModel extends ViewModel {
         return repository.getCurrentDeviceLocation();
     }
 
-    public void savePlaceToDb(Place place, ImageResult image) {
+    public LiveData<List<PlaceEntity>> getAllPlaces() {
+        return placeRepository.getAllPlaces();
+    }
+
+    public void savePlaceToDb() {
+        Place place = repository.getPlaceList().getValue().get(currentItemIndex - 1);
+        ImageResult image = repository.getImageList().getValue().get(currentItemIndex - 1);
         placeRepository.insertPlace(new PlaceEntity(place, image));
     }
 
-    public void deletePlaceFromDb(Place place) {
-        placeRepository.deletePlaceById(place.getPlaceId());
+    public void deletePlaceFromDb() {
+        placeRepository.deletePlaceById(getCurrentPlaceId());
     }
 
-    public boolean isInDatabase(Place place) {
-        return placeRepository.isInDatabase(place.getPlaceId());
+    public boolean isInDatabase() {
+        return placeRepository.isInDatabase(getCurrentPlaceId());
     }
 }

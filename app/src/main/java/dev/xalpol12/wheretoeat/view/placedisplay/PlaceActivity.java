@@ -5,16 +5,16 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.List;
+
 import dagger.hilt.android.AndroidEntryPoint;
 import dev.xalpol12.wheretoeat.R;
-import dev.xalpol12.wheretoeat.data.utility.Location;
+import dev.xalpol12.wheretoeat.database.entity.PlaceEntity;
 import dev.xalpol12.wheretoeat.viewmodel.PlaceActivityViewModel;
 
 @AndroidEntryPoint
@@ -51,6 +51,12 @@ public class PlaceActivity extends AppCompatActivity {
         btnGoThere = findViewById(R.id.go_there_button);
     }
 
+    private void initializeSaveRibbon() {
+        if (isPlaceInDb()) {
+            saveButton.setColorFilter(ContextCompat.getColor(this, R.color.secondary));
+        }
+    }
+
     private void setPlaceFragment() {
         placeFragment.changePlace(viewModel.getNextPlaceDetails());
         placeFragment.changePhoto(viewModel.getCorrespondingImage());
@@ -59,6 +65,7 @@ public class PlaceActivity extends AppCompatActivity {
 
     private void setOnClickListeners() {
         View.OnClickListener saveButtonClickListener = this::savePlaceButtonClick;
+        initializeSaveRibbon();
         saveButton.setOnClickListener(saveButtonClickListener);
         saveButton.bringToFront();
 
@@ -73,8 +80,19 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void savePlaceButtonClick(View view) {
-        Toast.makeText(this, "Place saved", Toast.LENGTH_SHORT).show();
-        saveButton.setColorFilter(ContextCompat.getColor(this, R.color.accent));
+        if (isPlaceInDb()) {
+            viewModel.deletePlaceFromDb();
+            saveButton.setColorFilter(ContextCompat.getColor(this, R.color.secondary));
+            Toast.makeText(this, "Place saved", Toast.LENGTH_SHORT).show();
+        } else {
+            viewModel.savePlaceToDb();
+            saveButton.setColorFilter(ContextCompat.getColor(this, R.color.accent));
+            Toast.makeText(this, "Place saved", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean isPlaceInDb() {
+        return viewModel.isInDatabase();
     }
 
     private void previousButtonClick(View v) {
@@ -86,14 +104,20 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void goThereButtonClick(View v) {
-        Location location = viewModel.getCurrentPlaceLocation();
-        String name = viewModel.getCurrentPlaceName();
-        String strUri = "http://maps.google.com/maps?q=loc:" + location.getLat() + "," + location.getLng() + " (" + name + ")";
-        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
-
-        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-
-        startActivity(intent);
+        List<PlaceEntity> savedPlaces = viewModel.getAllPlaces().getValue();
+        if (savedPlaces != null) {
+            Toast.makeText(this, savedPlaces.size(), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "null value", Toast.LENGTH_SHORT).show();
+        }
+//        Location location = viewModel.getCurrentPlaceLocation();
+//        String name = viewModel.getCurrentPlaceName();
+//        String strUri = "http://maps.google.com/maps?q=loc:" + location.getLat() + "," + location.getLng() + " (" + name + ")";
+//        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
+//
+//        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+//
+//        startActivity(intent);
     }
 
     private void setNextPlace() {

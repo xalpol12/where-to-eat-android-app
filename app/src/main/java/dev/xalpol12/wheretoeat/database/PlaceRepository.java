@@ -39,13 +39,6 @@ public class PlaceRepository {
     }
 
     public boolean isInDatabase(String placeId) {
-        LiveData<List<PlaceEntity>> entities = getAllPlaces();
-        for (PlaceEntity entity: Objects.requireNonNull(entities.getValue())) {
-            if (entity.getPlace().getPlaceId().equals(placeId)) {
-                return true;
-            }
-        }
-        return false;
+        return placeDao.existsById(placeId);
     }
-
 }

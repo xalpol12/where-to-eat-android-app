@@ -20,6 +20,9 @@ public interface PlaceDao {
     @Query("SELECT * FROM place")
     LiveData<List<PlaceEntity>> getAll();
 
-    @Query("DELETE FROM place WHERE place.id = :placeId")
+    @Query("SELECT EXISTS(SELECT * FROM place WHERE place.placeId = :placeId)")
+    boolean existsById(String placeId);
+
+    @Query("DELETE FROM place WHERE place.placeId = :placeId")
     void deleteById(String placeId);
 }
