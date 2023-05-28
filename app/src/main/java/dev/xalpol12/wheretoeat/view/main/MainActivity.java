@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setDependencies();
-        configureObservers();
+        setObservers();
         initializeUI(savedInstanceState);
         setOnClickListeners();
     }
@@ -80,13 +80,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mainViewModel.setAssetManagerContext(this);
     }
 
-    private void configureObservers() {
-        configurePlaceListObserver();
-        configureImageListObserver();
-        configurePlaceRepositoryObserver();
+    private void setObservers() {
+        setPlaceListObserver();
+        setImageListObserver();
+        setPlaceRepositoryObserver();
     }
 
-    private void configurePlaceListObserver() {
+    private void setPlaceListObserver() {
         placeViewModel.getPlaceList().observe(this, places -> {
             Toast.makeText(this, R.string.call_success, Toast.LENGTH_SHORT).show();
             if (places != null && !places.isEmpty()) {
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    private void configureImageListObserver() {
+    private void setImageListObserver() {
         placeViewModel.getImageList().observe(this, images -> {
             if (images != null && images.size() == 1) {
                 startActivity(new Intent(MainActivity.this, PlaceActivity.class));
@@ -103,8 +103,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    private void configurePlaceRepositoryObserver() {
-        mainViewModel.getAllPlaces().observe(this, places -> {
+    private void setPlaceRepositoryObserver(){
+        placeViewModel.getAllPlaces().observe(this, placeEntities -> {
 
         });
     }
