@@ -13,8 +13,8 @@ import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
 import dev.xalpol12.wheretoeat.database.PlaceDatabase;
-import dev.xalpol12.wheretoeat.database.dao.PlaceDao;
 import dev.xalpol12.wheretoeat.database.PlaceRepository;
+import dev.xalpol12.wheretoeat.database.dao.PlaceDao;
 
 @Module
 @InstallIn(SingletonComponent.class)
@@ -29,7 +29,8 @@ public class DatabaseModule {
     @Singleton
     @Provides
     public PlaceDatabase getPlaceDatabase(Context context) {
-        return Room.databaseBuilder(context, PlaceDatabase.class, "place.db").allowMainThreadQueries().build();
+        return Room.databaseBuilder(context.getApplicationContext(), PlaceDatabase.class, "place.db")
+                .build();
     }
 
     @Singleton
@@ -40,7 +41,7 @@ public class DatabaseModule {
 
     @Singleton
     @Provides
-    public PlaceRepository getPlaceRepository(PlaceDao placeDao) {
-        return new PlaceRepository(placeDao);
+    public PlaceRepository getPlaceRepository(PlaceDao dao) {
+        return new PlaceRepository(dao);
     }
 }

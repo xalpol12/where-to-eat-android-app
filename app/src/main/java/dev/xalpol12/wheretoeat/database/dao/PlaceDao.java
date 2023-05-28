@@ -23,6 +23,9 @@ public interface PlaceDao {
     @Query("SELECT EXISTS(SELECT * FROM place WHERE place.placeId = :placeId)")
     boolean existsById(String placeId);
 
+    @Query("DELETE FROM place")
+    void deleteAll();
+
     @Query("DELETE FROM place WHERE place.placeId = :placeId")
     void deleteById(String placeId);
 }

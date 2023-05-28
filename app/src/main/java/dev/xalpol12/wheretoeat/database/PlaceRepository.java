@@ -12,33 +12,51 @@ import dev.xalpol12.wheretoeat.database.entity.PlaceEntity;
 
 public class PlaceRepository {
     private final PlaceDao placeDao;
+    private final LiveData<List<PlaceEntity>> allPlaceEntities;
 
     @Inject
     public PlaceRepository(PlaceDao placeDao) {
         this.placeDao = placeDao;
+        allPlaceEntities = placeDao.getAll();
     }
 
-    public void insertPlace(PlaceEntity place) {
-        new Thread(() -> {
-            placeDao.insert(place);
-        }).start();
-    }
-
+    //Database operations:
     public void insertAllPlaces(PlaceEntity... places) {
-        new Thread(() -> {
-            placeDao.insertAll(places);
-        }).start();
-    }
-
-    public LiveData<List<PlaceEntity>> getAllPlaces() {
-        return placeDao.getAll();
+//        new Thread(() -> {
+//            placeDao.insertAll(places);
+//        }).start();
+        PlaceDatabase.dbWriteExecutor.execute(() -> placeDao.insertAll(places));
     }
 
     public void deletePlaceById(String id) {
-        placeDao.deleteById(id);
+        PlaceDatabase.dbWriteExecutor.execute(() -> placeDao.deleteById(id));
+    }
+
+    //Repository access:
+    public LiveData<List<PlaceEntity>> getAllPlaceEntities() {
+        return allPlaceEntities;
     }
 
     public boolean isInDatabase(String placeId) {
-        return placeDao.existsById(placeId);
+        if (dbIsNotNullAndNotZero()) {
+            return findPlaceWithGivenId(placeId);
+        }
+        return false;
+    }
+
+    private boolean dbIsNotNullAndNotZero() {
+        return (allPlaceEntities.getValue() != null &&
+                allPlaceEntities.getValue().size() != 0);
+    }
+
+    private boolean findPlaceWithGivenId(String placeId) {
+        //noinspection ConstantConditions
+        for (PlaceEntity entry : allPlaceEntities.getValue()) {
+            if (entry.getPlace().getPlaceId().equals(placeId)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
+

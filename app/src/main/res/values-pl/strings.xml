@@ -41,4 +41,6 @@
     <string name="location_success">Pomyślnie pobrano lokalizację</string>
     <string name="turn_on_location">Proszę włączyć lokalizację</string>
     <string name="location_denied">Odmowa dostępu do lokalizacji. Aplikacja nie może działać bez dostępu do GPS.</string>
+    <string name="place_deleted_prompt">Usunięto</string>
+    <string name="place_saved_prompt">Zapisano</string>
 </resources>

@@ -42,4 +42,6 @@
     <string name="location_success">Localisation demandée avec succès</string>
     <string name="turn_on_location">Veuillez activer votre localisation</string>
     <string name="location_denied">Permission de localisation refusée. L\'application ne peut pas fonctionner sans accès au GPS.</string>
+    <string name="place_deleted_prompt">Supprimé</string>
+    <string name="place_saved_prompt">Ajoutée</string>
 </resources>

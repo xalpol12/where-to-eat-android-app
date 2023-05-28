@@ -41,4 +41,6 @@
     <string name="location_success">Location requested successfully</string>
     <string name="turn_on_location">Please turn on your location</string>
     <string name="location_denied">Location permission denied. App cannot function without access to GPS.</string>
+    <string name="place_deleted_prompt">Place deleted</string>
+    <string name="place_saved_prompt">Place saved</string>
 </resources>

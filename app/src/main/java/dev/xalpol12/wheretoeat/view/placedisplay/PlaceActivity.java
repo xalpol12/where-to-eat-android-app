@@ -20,7 +20,7 @@ import dev.xalpol12.wheretoeat.viewmodel.PlaceActivityViewModel;
 @AndroidEntryPoint
 public class PlaceActivity extends AppCompatActivity {
 
-    private PlaceActivityViewModel viewModel;
+    private PlaceActivityViewModel placeViewModel;
     private PlaceFragment placeFragment;
     private ImageView saveButton;
     private AppCompatButton btnPrevious;
@@ -30,17 +30,27 @@ public class PlaceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(PlaceActivityViewModel.class);
+        placeViewModel = new ViewModelProvider(this).get(PlaceActivityViewModel.class);
         setContentView(R.layout.activity_place);
+        setObservers();
         initializeUI();
         setPlaceFragment();
         setOnClickListeners();
+//        bringButtonToFront();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        viewModel.clearImageList();
+        placeViewModel.clearImageList();
+    }
+
+    private void setObservers() {
+        setPlaceRepositoryObserver();
+    }
+
+    private void setPlaceRepositoryObserver() {
+        placeViewModel.getAllPlaces().observe(this, places -> updateRibbonColor());
     }
 
     private void initializeUI() {
@@ -49,25 +59,18 @@ public class PlaceActivity extends AppCompatActivity {
         btnPrevious = findViewById(R.id.previous_button);
         btnRandom = findViewById(R.id.random_button);
         btnGoThere = findViewById(R.id.go_there_button);
-    }
-
-    private void initializeSaveRibbon() {
-        if (isPlaceInDb()) {
-            saveButton.setColorFilter(ContextCompat.getColor(this, R.color.secondary));
-        }
+        saveButton.bringToFront();
     }
 
     private void setPlaceFragment() {
-        placeFragment.changePlace(viewModel.getNextPlaceDetails());
-        placeFragment.changePhoto(viewModel.getCorrespondingImage());
-        placeFragment.setUserLocation(viewModel.getCurrentLocation());
+        placeFragment.changePlace(placeViewModel.getNextPlaceDetails());
+        placeFragment.changePhoto(placeViewModel.getCorrespondingImage());
+        placeFragment.setUserLocation(placeViewModel.getCurrentLocation());
     }
 
     private void setOnClickListeners() {
         View.OnClickListener saveButtonClickListener = this::savePlaceButtonClick;
-        initializeSaveRibbon();
         saveButton.setOnClickListener(saveButtonClickListener);
-        saveButton.bringToFront();
 
         View.OnClickListener previousButtonClickListener = this::previousButtonClick;
         btnPrevious.setOnClickListener(previousButtonClickListener);
@@ -79,20 +82,35 @@ public class PlaceActivity extends AppCompatActivity {
         btnGoThere.setOnClickListener(goThereButtonClickListener);
     }
 
-    private void savePlaceButtonClick(View view) {
-        if (isPlaceInDb()) {
-            viewModel.deletePlaceFromDb();
-            saveButton.setColorFilter(ContextCompat.getColor(this, R.color.secondary));
-            Toast.makeText(this, "Place saved", Toast.LENGTH_SHORT).show();
-        } else {
-            viewModel.savePlaceToDb();
+//    private void bringButtonToFront() {
+//        saveButton.bringToFront();
+//    }
+
+    private void updateRibbonColor() {
+        if (isPlaceInDatabase()) {
             saveButton.setColorFilter(ContextCompat.getColor(this, R.color.accent));
-            Toast.makeText(this, "Place saved", Toast.LENGTH_SHORT).show();
+        } else {
+            saveButton.setColorFilter(ContextCompat.getColor(this, R.color.secondary));
         }
     }
 
-    private boolean isPlaceInDb() {
-        return viewModel.isInDatabase();
+    private void savePlaceButtonClick(View view) {
+        boolean isAlreadyInDb = isPlaceInDatabase();
+        executeDatabaseOperationOnCurrentPlace(isAlreadyInDb);
+    }
+
+    private void executeDatabaseOperationOnCurrentPlace(boolean isPlaceInDatabase) {
+        if (isPlaceInDatabase) {
+            placeViewModel.deletePlaceFromDb();
+            Toast.makeText(this, R.string.place_deleted_prompt, Toast.LENGTH_SHORT).show();
+        } else {
+            placeViewModel.savePlaceToDb();
+            Toast.makeText(this, R.string.place_saved_prompt, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean isPlaceInDatabase() {
+        return placeViewModel.isInDatabase();
     }
 
     private void previousButtonClick(View v) {
@@ -104,9 +122,9 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void goThereButtonClick(View v) {
-        List<PlaceEntity> savedPlaces = viewModel.getAllPlaces().getValue();
+        List<PlaceEntity> savedPlaces = placeViewModel.getAllPlaces().getValue();
         if (savedPlaces != null) {
-            Toast.makeText(this, savedPlaces.size(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, String.valueOf(savedPlaces.size()), Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "null value", Toast.LENGTH_SHORT).show();
         }
@@ -121,14 +139,16 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void setNextPlace() {
-        placeFragment.changePlace(viewModel.getNextPlaceDetails());
-        placeFragment.changePhoto(viewModel.getCorrespondingImage());
+        placeFragment.changePlace(placeViewModel.getNextPlaceDetails());
+        placeFragment.changePhoto(placeViewModel.getCorrespondingImage());
         placeFragment.updateUI();
+        updateRibbonColor();
     }
 
     private void setPreviousPlace() {
-        placeFragment.changePlace(viewModel.getPreviousPlaceDetails());
-        placeFragment.changePhoto(viewModel.getCorrespondingImage());
+        placeFragment.changePlace(placeViewModel.getPreviousPlaceDetails());
+        placeFragment.changePhoto(placeViewModel.getCorrespondingImage());
         placeFragment.updateUI();
+        updateRibbonColor();
     }
 }

@@ -19,55 +19,45 @@ import dev.xalpol12.wheretoeat.data.Place;
 import dev.xalpol12.wheretoeat.data.utility.Location;
 import dev.xalpol12.wheretoeat.database.PlaceRepository;
 import dev.xalpol12.wheretoeat.database.entity.PlaceEntity;
-import dev.xalpol12.wheretoeat.network.dto.ImageRequestDTO;
-import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;
 import dev.xalpol12.wheretoeat.network.APIRepository;
+import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;
 import dev.xalpol12.wheretoeat.view.utility.ScreenDimensions;
 
 @HiltViewModel
 public class PlaceActivityViewModel extends ViewModel {
-    private final APIRepository repository;
+    private final APIRepository apiRepository;
     private final PlaceRepository placeRepository;
     int currentItemIndex;
 
     @Inject
-    public PlaceActivityViewModel(APIRepository repository, PlaceRepository placeRepository) {
-        this.repository = repository;
+    public PlaceActivityViewModel(APIRepository apiRepository, PlaceRepository placeRepository) {
+        this.apiRepository = apiRepository;
         this.placeRepository = placeRepository;
         currentItemIndex = 0;
     }
 
     public void clearImageList() {
-        repository.clearImageList();
+        apiRepository.clearImageList();
     }
 
     public void callFindPlaces(PlaceRequestDTO placeRequestDTO) {
-        repository.makeCall(placeRequestDTO);
+        apiRepository.makeCall(placeRequestDTO);
     }
 
     public void callFindAllImages(ScreenDimensions dimensions) {
-        List<Place> places = Objects.requireNonNull(getPlaceList().getValue());
-        for (Place place : places) {
-            ImageRequestDTO request = new ImageRequestDTO(place.getPhotoReference(),
-                    dimensions.getHeight(), dimensions.getWidth());
-            callFindImage(request);
-        }
-    }
-
-    public void callFindImage(ImageRequestDTO imageRequestDTO) {
-        repository.makeCall(imageRequestDTO);
+        apiRepository.callFindAllImages(dimensions);
     }
 
     public MutableLiveData<List<Place>> getPlaceList() {
-        return repository.getPlaceList();
+        return apiRepository.getPlaceList();
     }
 
     public MutableLiveData<List<ImageResult>> getImageList() {
-        return repository.getImageList();
+        return apiRepository.getImageList();
     }
 
     public Place getNextPlaceDetails() {
-        if (currentItemIndex < Objects.requireNonNull(repository.getPlaceList().getValue()).size()) {
+        if (currentItemIndex < Objects.requireNonNull(apiRepository.getPlaceList().getValue()).size()) {
             currentItemIndex++;
         } else currentItemIndex = 1;
         return getPlaceList().getValue().get(currentItemIndex - 1);
@@ -84,45 +74,46 @@ public class PlaceActivityViewModel extends ViewModel {
 
     public Bitmap getCorrespondingImage() {
         String currentPlacePhotoReference = getPlaceList().getValue().get(currentItemIndex -1).getPhotoReference();
+        Bitmap decodedImage = null;
 
         for (ImageResult image : Objects.requireNonNull(getImageList().getValue())) {
             String photoReference = image.getPhotoReference();
             if (photoReference.equals(currentPlacePhotoReference)) {
                 byte[] byteArray = Base64.decode(image.getImageData(), Base64.DEFAULT);
-                return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                decodedImage = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
             }
         }
-        return null;
+        return decodedImage;
     }
 
     public String getCurrentPlaceId() {
-        return repository.getPlaceList().getValue().get(currentItemIndex - 1).getPlaceId();
+        return apiRepository.getPlaceList().getValue().get(currentItemIndex - 1).getPlaceId();
     }
 
     public String getCurrentPlaceName() {
-        return repository.getPlaceList().getValue().get(currentItemIndex - 1).getName();
+        return apiRepository.getPlaceList().getValue().get(currentItemIndex - 1).getName();
     }
 
     public Location getCurrentPlaceLocation() {
-        return repository.getPlaceList().getValue().get(currentItemIndex - 1).getLocation();
+        return apiRepository.getPlaceList().getValue().get(currentItemIndex - 1).getLocation();
     }
 
     public void setCurrentLocation(android.location.Location location) {
-        repository.setCurrentDeviceLocation(location);
+        apiRepository.setCurrentDeviceLocation(location);
     }
 
     public android.location.Location getCurrentLocation() {
-        return repository.getCurrentDeviceLocation();
+        return apiRepository.getCurrentDeviceLocation();
     }
 
     public LiveData<List<PlaceEntity>> getAllPlaces() {
-        return placeRepository.getAllPlaces();
+        return placeRepository.getAllPlaceEntities();
     }
 
     public void savePlaceToDb() {
-        Place place = repository.getPlaceList().getValue().get(currentItemIndex - 1);
-        ImageResult image = repository.getImageList().getValue().get(currentItemIndex - 1);
-        placeRepository.insertPlace(new PlaceEntity(place, image));
+        Place place = apiRepository.getPlaceList().getValue().get(currentItemIndex - 1);
+        ImageResult image = apiRepository.getImageList().getValue().get(currentItemIndex - 1);
+        placeRepository.insertAllPlaces(new PlaceEntity(place, image));
     }
 
     public void deletePlaceFromDb() {
