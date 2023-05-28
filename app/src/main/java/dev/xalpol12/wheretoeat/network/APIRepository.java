@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -14,6 +15,7 @@ import dev.xalpol12.wheretoeat.data.ImageResult;
 import dev.xalpol12.wheretoeat.data.Place;
 import dev.xalpol12.wheretoeat.network.dto.ImageRequestDTO;
 import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;
+import dev.xalpol12.wheretoeat.view.utility.ScreenDimensions;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -73,6 +75,19 @@ public class APIRepository {
                 //for this specific id, then display default image
             }
         });
+    }
+
+    public void callFindAllImages(ScreenDimensions dimensions) {
+        List<Place> places = Objects.requireNonNull(placeList.getValue());
+        for (Place place : places) {
+            ImageRequestDTO request = new ImageRequestDTO(place.getPhotoReference(),
+                    dimensions.getHeight(), dimensions.getWidth());
+            callFindImage(request);
+        }
+    }
+
+    private void callFindImage(ImageRequestDTO imageRequestDTO) {
+        makeCall(imageRequestDTO);
     }
 
     public MutableLiveData<List<Place>> getPlaceList() {
