@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary"
-    tools:context=".view.placedisplay.PlaceActivity">
+    tools:context=".view.place.PlaceActivity">
 
     <ImageView
         android:id="@+id/place_save_button"
@@ -28,7 +28,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/place_fragment_container"
-            android:name="dev.xalpol12.wheretoeat.view.placedisplay.PlaceFragment"
+            android:name="dev.xalpol12.wheretoeat.view.place.PlaceFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/secondary_buttons_layout"

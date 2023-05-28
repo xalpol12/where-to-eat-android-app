@@ -1,4 +1,4 @@
-package dev.xalpol12.wheretoeat.view.placedisplay;
+package dev.xalpol12.wheretoeat.view.place;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;

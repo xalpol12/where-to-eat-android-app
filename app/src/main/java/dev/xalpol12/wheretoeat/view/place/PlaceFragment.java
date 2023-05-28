@@ -1,4 +1,4 @@
-package dev.xalpol12.wheretoeat.view.placedisplay;
+package dev.xalpol12.wheretoeat.view.place;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,7 +16,6 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 
 import dev.xalpol12.wheretoeat.R;
-import dev.xalpol12.wheretoeat.data.ImageResult;
 import dev.xalpol12.wheretoeat.data.Place;
 
 

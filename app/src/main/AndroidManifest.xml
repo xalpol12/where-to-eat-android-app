@@ -19,7 +19,7 @@
         android:theme="@style/Theme.WhereToEat"
         tools:targetApi="31">
         <activity
-            android:name=".view.placedisplay.PlaceActivity"
+            android:name=".view.place.PlaceActivity"
             android:exported="false" />
         <activity
             android:name=".view.main.MainActivity"
