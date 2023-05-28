@@ -95,8 +95,7 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void savePlaceButtonClick(View view) {
-        boolean isAlreadyInDb = isPlaceInDatabase();
-        executeDatabaseOperationOnCurrentPlace(isAlreadyInDb);
+        executeDatabaseOperationOnCurrentPlace(isPlaceInDatabase());
     }
 
     private void executeDatabaseOperationOnCurrentPlace(boolean isPlaceInDatabase) {

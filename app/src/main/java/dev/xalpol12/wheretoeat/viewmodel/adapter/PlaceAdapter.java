@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -21,9 +22,9 @@ import dev.xalpol12.wheretoeat.database.entity.PlaceEntity;
 public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder> {
 
     Context context;
-    List<PlaceEntity> savedPlaces;
+    LiveData<List<PlaceEntity>> savedPlaces;
 
-    public PlaceAdapter(Context context, List<PlaceEntity> savedPlaces) {
+    public PlaceAdapter(Context context, LiveData<List<PlaceEntity>> savedPlaces) {
         this.context = context;
         this.savedPlaces = savedPlaces;
     }
@@ -38,30 +39,32 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        PlaceEntity currentEntry = savedPlaces.get(position);
+        PlaceEntity currentEntry = savedPlaces.getValue().get(position);
 
-        //Image rescaling for debug
-        float scaleFactor = 0.1f;
-        Bitmap image = BitmapFactory.decodeResource(context.getResources(), R.drawable.zielona_weranda);
-        int scaledWidth = (int) (image.getWidth() * scaleFactor);
-        int scaledHeight = (int) (image.getHeight() * scaleFactor);
+        float scaleFactor = 0.4f;
 
-        Bitmap newBitmap = Bitmap.createScaledBitmap(image, scaledWidth, scaledHeight, true);
-        holder.cardImage.setImageBitmap(newBitmap);
-//        Bitmap photo = decodeStringToBitmap(currentEntry.getImage().getImageData());
-        String title = savedPlaces.get(position).getPlace().getName();
-//        holder.cardImage.setImageBitmap(photo);
+        Bitmap photo = resizeBitmap(
+                decodeStringToBitmap(currentEntry.getImage().getImageData()),
+                scaleFactor);
+        String title = savedPlaces.getValue().get(position).getPlace().getName();
+        holder.cardImage.setImageBitmap(photo);
         holder.cardTitle.setText(title);
     }
 
     private Bitmap decodeStringToBitmap(String codedImage) {
-        byte[] byteArray = Base64.decode(codedImage, Base64.DEFAULT); //TODO: resize photo
+        byte[] byteArray = Base64.decode(codedImage, Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+    }
+
+    private Bitmap resizeBitmap(Bitmap image, float scaleFactor) {
+        int scaledWidth = (int) (image.getWidth() * scaleFactor);
+        int scaledHeight = (int) (image.getHeight() * scaleFactor);
+        return Bitmap.createScaledBitmap(image, scaledWidth, scaledHeight, true);
     }
 
     @Override
     public int getItemCount() {
-        return savedPlaces.size();
+        return savedPlaces.getValue().size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

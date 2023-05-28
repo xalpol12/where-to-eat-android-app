@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void setObservers() {
         setPlaceListObserver();
         setImageListObserver();
-        setPlaceRepositoryObserver();
+//        setPlaceRepositoryObserver();
     }
 
     private void setPlaceListObserver() {
@@ -103,11 +103,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-    private void setPlaceRepositoryObserver(){
-        placeViewModel.getAllPlaces().observe(this, placeEntities -> {
-
-        });
-    }
+//    private void setPlaceRepositoryObserver(){
+//        placeViewModel.getAllPlaces().observe(this, placeEntities -> {
+//
+//        });
+//    }
 
     private void initializeUI(Bundle savedInstanceState) {
         configureHamburgerMenu(savedInstanceState);
@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.nav_saved_places:
-                replaceFragment(new SavedPlacesFragment());
+                replaceFragment(new SavedPlacesFragment(placeViewModel.getAllPlaces()));
                 item.setChecked(true);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
