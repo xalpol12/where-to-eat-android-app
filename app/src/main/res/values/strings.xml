@@ -43,4 +43,5 @@
     <string name="location_denied">Location permission denied. App cannot function without access to GPS.</string>
     <string name="place_deleted_prompt">Place deleted</string>
     <string name="place_saved_prompt">Place saved</string>
+    <string name="todo">TODO</string>
 </resources>

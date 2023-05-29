@@ -44,7 +44,6 @@ public class SavedPlacesFragment extends Fragment implements RecyclerViewInterfa
         PlaceAdapter adapter = new PlaceAdapter(getContext(), savedPlaces, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
     }
     
     @Override
