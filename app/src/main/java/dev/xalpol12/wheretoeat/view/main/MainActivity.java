@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void setObservers() {
         setPlaceListObserver();
         setImageListObserver();
-//        setPlaceRepositoryObserver();
+        setPlaceRepositoryObserver();
     }
 
     private void setPlaceListObserver() {
@@ -103,11 +103,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
     }
 
-//    private void setPlaceRepositoryObserver(){
-//        placeViewModel.getAllPlaces().observe(this, placeEntities -> {
-//
-//        });
-//    }
+    private void setPlaceRepositoryObserver(){
+        placeViewModel.getAllPlaces().observe(this, placeEntities -> {
+        });
+    }
 
     private void initializeUI(Bundle savedInstanceState) {
         configureHamburgerMenu(savedInstanceState);
