@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,8 +19,9 @@ import java.util.List;
 import dev.xalpol12.wheretoeat.R;
 import dev.xalpol12.wheretoeat.database.entity.PlaceEntity;
 import dev.xalpol12.wheretoeat.viewmodel.adapter.PlaceAdapter;
+import dev.xalpol12.wheretoeat.viewmodel.adapter.RecyclerViewInterface;
 
-public class SavedPlacesFragment extends Fragment {
+public class SavedPlacesFragment extends Fragment implements RecyclerViewInterface {
 
     RecyclerView recyclerView;
     LiveData<List<PlaceEntity>> savedPlaces;
@@ -39,9 +41,14 @@ public class SavedPlacesFragment extends Fragment {
 
     private void initializeUI(View view) {
         recyclerView = view.findViewById(R.id.recycler_view);
-        PlaceAdapter adapter = new PlaceAdapter(getContext(), savedPlaces);
+        PlaceAdapter adapter = new PlaceAdapter(getContext(), savedPlaces, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+    }
+    
+    @Override
+    public void onItemClick(int position) {  //recyclerView method
+        Toast.makeText(getActivity(), String.valueOf(position), Toast.LENGTH_SHORT).show();
     }
 }

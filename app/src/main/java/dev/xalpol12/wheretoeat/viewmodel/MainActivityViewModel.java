@@ -65,7 +65,7 @@ public class MainActivityViewModel extends ViewModel {
     public boolean areAllFieldsNotNull() throws IllegalAccessException {
         for (Field field : PlaceRequestDTO.class.getDeclaredFields()) {
             field.setAccessible(true);
-            if(field.get(placeRequestDTO) == null) {
+            if (field.get(placeRequestDTO) == null) {
                 return false;
             }
         }

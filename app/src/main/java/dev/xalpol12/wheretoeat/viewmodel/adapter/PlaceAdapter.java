@@ -21,12 +21,16 @@ import dev.xalpol12.wheretoeat.database.entity.PlaceEntity;
 
 public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder> {
 
-    Context context;
-    LiveData<List<PlaceEntity>> savedPlaces;
+    private final Context context;
+    private final RecyclerViewInterface recyclerViewInterface;
+    private final LiveData<List<PlaceEntity>> savedPlaces;
 
-    public PlaceAdapter(Context context, LiveData<List<PlaceEntity>> savedPlaces) {
+    public PlaceAdapter(Context context,
+                        LiveData<List<PlaceEntity>> savedPlaces,
+                        RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
         this.savedPlaces = savedPlaces;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
     @NonNull
@@ -34,7 +38,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.recycler_view_row, parent, false);
-        return new MyViewHolder(view);
+        return new MyViewHolder(view, recyclerViewInterface);
     }
 
     @Override
@@ -72,11 +76,20 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder
         ImageView cardImage;
         TextView cardTitle;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
 
             cardImage = itemView.findViewById(R.id.recycler_item_image_view);
             cardTitle = itemView.findViewById(R.id.recycler_item_title);
+
+            itemView.setOnClickListener(view -> {
+                if (recyclerViewInterface != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        recyclerViewInterface.onItemClick(position);
+                    }
+                }
+            });
         }
     }
 }

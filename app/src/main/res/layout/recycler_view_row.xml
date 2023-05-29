@@ -17,7 +17,7 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@color/primary">
+            android:background="@color/secondary_30_tint">
 
             <ImageView
                 android:id="@+id/recycler_item_image_view"
@@ -33,6 +33,7 @@
                 <TextView
                     android:id="@+id/recycler_item_title"
                     style="@style/text_style"
+                    android:textColor="@color/primary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/title_value"
