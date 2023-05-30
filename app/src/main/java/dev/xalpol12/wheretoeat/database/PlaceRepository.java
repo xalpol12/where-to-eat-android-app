@@ -3,7 +3,6 @@ package dev.xalpol12.wheretoeat.database;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
-import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -22,9 +21,6 @@ public class PlaceRepository {
 
     //Database operations:
     public void insertAllPlaces(PlaceEntity... places) {
-//        new Thread(() -> {
-//            placeDao.insertAll(places);
-//        }).start();
         PlaceDatabase.dbWriteExecutor.execute(() -> placeDao.insertAll(places));
     }
 

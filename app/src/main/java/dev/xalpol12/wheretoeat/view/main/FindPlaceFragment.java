@@ -1,7 +1,6 @@
 package dev.xalpol12.wheretoeat.view.main;
 
 import android.graphics.PorterDuff;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,6 @@ import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import dev.xalpol12.wheretoeat.R;
-import dev.xalpol12.wheretoeat.view.main.MainActivity;
 import dev.xalpol12.wheretoeat.viewmodel.MainActivityViewModel;
 import dev.xalpol12.wheretoeat.viewmodel.PlaceActivityViewModel;
 
@@ -42,7 +40,6 @@ public class FindPlaceFragment extends Fragment {
             R.id.place_type_cafe,
             R.id.place_type_pub);
     private final List<AppCompatButton> placeButtons = new ArrayList<>();
-    private AppCompatButton btnFindLocation;
     private AppCompatButton btnFindPlace;
     private Slider rangeSlider;
     private int primaryColor;
@@ -75,7 +72,6 @@ public class FindPlaceFragment extends Fragment {
     }
 
     private void initializeUI(View view) {
-        btnFindLocation = view.findViewById(R.id.find_location_button);
         btnFindPlace = view.findViewById(R.id.find_place_button);
         rangeSlider = view.findViewById(R.id.range_slider);
 
@@ -92,9 +88,6 @@ public class FindPlaceFragment extends Fragment {
     }
 
     private void setOnClickListeners() {
-        View.OnClickListener locationButtonClickListener = this::locationButtonClick;
-        btnFindLocation.setOnClickListener(locationButtonClickListener);
-
         Slider.OnChangeListener sliderChangeListener = this::sliderChange;
         rangeSlider.addOnChangeListener(sliderChangeListener);
 
@@ -110,18 +103,6 @@ public class FindPlaceFragment extends Fragment {
 
         View.OnClickListener findPlaceButtonClickListener = this::findPlaceButtonClick;
         btnFindPlace.setOnClickListener(findPlaceButtonClickListener);
-    }
-
-    private void locationButtonClick(View v) {
-//        ((MainActivity) requireActivity()).getLastLocation();
-
-        mainViewModel.setRequestLocation(52.39f, 16.94f);  //Uncomment for debug purposes
-        android.location.Location location = new Location("provider");
-        location.setLatitude(56.39f);
-        location.setLongitude(10.94f);
-        placeViewModel.setCurrentLocation(location);
-
-        v.setAlpha(1.f);
     }
 
     private void sliderChange(Slider slider, float v, boolean b) {

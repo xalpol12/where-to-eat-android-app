@@ -11,20 +11,12 @@ import dev.xalpol12.wheretoeat.database.entity.PlaceEntity;
 
 @Dao
 public interface PlaceDao {
-    @Insert
-    void insert(PlaceEntity place);
 
     @Insert
     void insertAll(PlaceEntity... places);
 
     @Query("SELECT * FROM place")
     LiveData<List<PlaceEntity>> getAll();
-
-    @Query("SELECT EXISTS(SELECT * FROM place WHERE place.placeId = :placeId)")
-    boolean existsById(String placeId);
-
-    @Query("DELETE FROM place")
-    void deleteAll();
 
     @Query("DELETE FROM place WHERE place.placeId = :placeId")
     void deleteById(String placeId);

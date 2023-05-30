@@ -24,7 +24,7 @@ public class DatabaseModule {
     @Singleton
     public Context getApplicationContext(Application application) {
         return application.getApplicationContext();
-    }
+}
 
     @Singleton
     @Provides

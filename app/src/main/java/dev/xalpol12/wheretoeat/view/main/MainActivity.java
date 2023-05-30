@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setObservers();
         initializeUI(savedInstanceState);
         setOnClickListeners();
+        getGpsLocation();
     }
 
     private void setDependencies() {
@@ -179,6 +180,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void setOnClickListeners() {
         View.OnClickListener hamburgerButtonClickListener = this::hamburgerButtonClick;
         btnHamburger.setOnClickListener(hamburgerButtonClickListener);
+    }
+
+    private void getGpsLocation() {
+        //getLastLocation();
+
+        mainViewModel.setRequestLocation(52.39f, 16.94f);  //Uncomment for debug purposes
+        android.location.Location location = new Location("provider");
+        location.setLatitude(56.39f);
+        location.setLongitude(10.94f);
+        placeViewModel.setCurrentLocation(location);
     }
 
     @SuppressLint("MissingPermission")
