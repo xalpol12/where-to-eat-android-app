@@ -18,6 +18,7 @@ import java.util.List;
 
 import dev.xalpol12.wheretoeat.R;
 import dev.xalpol12.wheretoeat.database.entity.PlaceEntity;
+import dev.xalpol12.wheretoeat.view.utility.ImageDecoder;
 
 public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder> {
 
@@ -48,16 +49,11 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder
         float scaleFactor = 0.4f;
 
         Bitmap photo = resizeBitmap(
-                decodeStringToBitmap(currentEntry.getImage().getImageData()),
+                ImageDecoder.decode(currentEntry.getImage().getImageData()),
                 scaleFactor);
         String title = savedPlaces.get(position).getPlace().getName();
         holder.cardImage.setImageBitmap(photo);
         holder.cardTitle.setText(title);
-    }
-
-    private Bitmap decodeStringToBitmap(String codedImage) {
-        byte[] byteArray = Base64.decode(codedImage, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
     }
 
     private Bitmap resizeBitmap(Bitmap image, float scaleFactor) {

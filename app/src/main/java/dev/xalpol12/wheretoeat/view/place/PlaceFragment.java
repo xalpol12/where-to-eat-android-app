@@ -17,6 +17,7 @@ import java.text.DecimalFormat;
 
 import dev.xalpol12.wheretoeat.R;
 import dev.xalpol12.wheretoeat.data.Place;
+import dev.xalpol12.wheretoeat.database.entity.PlaceEntity;
 
 
 public class PlaceFragment extends Fragment {
@@ -36,6 +37,13 @@ public class PlaceFragment extends Fragment {
 
     public PlaceFragment() {
         super(R.layout.fragment_place);
+    }
+
+    public PlaceFragment(Place place, Bitmap photo, Location location) {
+        super(R.layout.fragment_place);
+        this.place = place;
+        this.photo = photo;
+        userLocation = location;
     }
 
     @Override

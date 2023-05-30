@@ -1,5 +1,7 @@
 package dev.xalpol12.wheretoeat.view.main;
 
+import android.graphics.Bitmap;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +20,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import dev.xalpol12.wheretoeat.R;
+import dev.xalpol12.wheretoeat.data.Place;
 import dev.xalpol12.wheretoeat.database.entity.PlaceEntity;
+import dev.xalpol12.wheretoeat.view.place.PlaceFragment;
+import dev.xalpol12.wheretoeat.view.utility.ImageDecoder;
 import dev.xalpol12.wheretoeat.viewmodel.PlaceActivityViewModel;
 import dev.xalpol12.wheretoeat.viewmodel.adapter.PlaceAdapter;
 import dev.xalpol12.wheretoeat.viewmodel.adapter.RecyclerViewInterface;
@@ -28,6 +33,7 @@ public class SavedPlacesFragment extends Fragment implements RecyclerViewInterfa
     RecyclerView recyclerView;
     PlaceAdapter adapter;
     PlaceActivityViewModel placeActivityViewModel;
+    PlaceFragment placeFragment;
     List<PlaceEntity> savedPlaces;
 
     public SavedPlacesFragment(PlaceActivityViewModel placeActivityViewModel) {
@@ -71,8 +77,27 @@ public class SavedPlacesFragment extends Fragment implements RecyclerViewInterfa
     }
     
     @Override
-    public void onItemClick(int position) {  //recyclerView method
-        Toast.makeText(getActivity(), String.valueOf(position), Toast.LENGTH_SHORT).show();
+    public void onItemClick(int position) {
+        setUpNewFragment(position);
     }
+
+    private void setUpNewFragment(int itemPosition) {
+        int currentLayoutId = ((ViewGroup) getView().getParent()).getId();
+        placeFragment = createNewFragment(itemPosition);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(currentLayoutId, placeFragment, "Selected place fragment")
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private PlaceFragment createNewFragment(int itemPosition) {
+        PlaceEntity placeEntity = savedPlaces.get(itemPosition);
+        Place place = placeEntity.getPlace();
+        Bitmap bitmap = ImageDecoder.decode(placeEntity.getImage().getImageData());
+        Location location = placeActivityViewModel.getCurrentLocation();
+        return new PlaceFragment(place, bitmap, location);
+    }
+
+
 
 }

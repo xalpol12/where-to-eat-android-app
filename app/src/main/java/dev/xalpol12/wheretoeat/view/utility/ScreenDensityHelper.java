@@ -3,8 +3,8 @@ package dev.xalpol12.wheretoeat.view.utility;
 
 public class ScreenDensityHelper {
     //xxxhdpi 640 dpi is my 1x value, scale accordingly
-    private final int originalWidth = 800;
-    private final int originalHeight = 1400;
+    private final int ORIGINAL_WIDTH = 800;
+    private final int ORIGINAL_HEIGHT = 1400;
     private float multiplier;
 
     public ScreenDensityHelper(int screenDensity) {
@@ -12,8 +12,8 @@ public class ScreenDensityHelper {
     }
 
     public ScreenDimensions getScreenDimensions() {
-        int width = (int) (originalWidth * multiplier);
-        int height = (int) (originalHeight * multiplier);
+        int width = (int) (ORIGINAL_WIDTH * multiplier);
+        int height = (int) (ORIGINAL_HEIGHT * multiplier);
         return new ScreenDimensions(width, height);
     }
 

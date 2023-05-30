@@ -21,6 +21,7 @@ import dev.xalpol12.wheretoeat.database.PlaceRepository;
 import dev.xalpol12.wheretoeat.database.entity.PlaceEntity;
 import dev.xalpol12.wheretoeat.network.APIRepository;
 import dev.xalpol12.wheretoeat.network.dto.PlaceRequestDTO;
+import dev.xalpol12.wheretoeat.view.utility.ImageDecoder;
 import dev.xalpol12.wheretoeat.view.utility.ScreenDimensions;
 
 @HiltViewModel
@@ -74,16 +75,15 @@ public class PlaceActivityViewModel extends ViewModel {
 
     public Bitmap getCorrespondingImage() {
         String currentPlacePhotoReference = getPlaceList().getValue().get(currentItemIndex -1).getPhotoReference();
-        Bitmap decodedImage = null;
+        Bitmap bitmap = null;
 
         for (ImageResult image : Objects.requireNonNull(getImageList().getValue())) {
             String photoReference = image.getPhotoReference();
             if (photoReference.equals(currentPlacePhotoReference)) {
-                byte[] byteArray = Base64.decode(image.getImageData(), Base64.DEFAULT);
-                decodedImage = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+                bitmap = ImageDecoder.decode(image.getImageData());
             }
         }
-        return decodedImage;
+        return bitmap;
     }
 
     public String getCurrentPlaceId() {
