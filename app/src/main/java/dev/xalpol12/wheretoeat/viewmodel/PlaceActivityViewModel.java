@@ -116,8 +116,8 @@ public class PlaceActivityViewModel extends ViewModel {
         placeRepository.insertAllPlaces(new PlaceEntity(place, image));
     }
 
-    public void deletePlaceFromDb() {
-        placeRepository.deletePlaceById(getCurrentPlaceId());
+    public void deletePlaceFromDb(String placeId) {
+        placeRepository.deletePlaceById(placeId);
     }
 
     public boolean isInDatabase() {

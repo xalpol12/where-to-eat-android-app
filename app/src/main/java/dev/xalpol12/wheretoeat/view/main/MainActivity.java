@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.nav_saved_places:
-                replaceFragment(new SavedPlacesFragment(placeViewModel.getAllPlaces()));
+                replaceFragment(new SavedPlacesFragment(placeViewModel));
                 item.setChecked(true);
                 drawerLayout.closeDrawer(GravityCompat.START);
                 break;

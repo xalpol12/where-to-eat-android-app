@@ -100,7 +100,7 @@ public class PlaceActivity extends AppCompatActivity {
 
     private void executeDatabaseOperationOnCurrentPlace(boolean isPlaceInDatabase) {
         if (isPlaceInDatabase) {
-            placeViewModel.deletePlaceFromDb();
+            placeViewModel.deletePlaceFromDb(placeViewModel.getCurrentPlaceId());
             Toast.makeText(this, R.string.place_deleted_prompt, Toast.LENGTH_SHORT).show();
         } else {
             placeViewModel.savePlaceToDb();

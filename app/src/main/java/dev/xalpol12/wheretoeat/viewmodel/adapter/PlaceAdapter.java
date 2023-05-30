@@ -23,10 +23,10 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder
 
     private final Context context;
     private final RecyclerViewInterface recyclerViewInterface;
-    private final LiveData<List<PlaceEntity>> savedPlaces;
+    private final List<PlaceEntity> savedPlaces;
 
     public PlaceAdapter(Context context,
-                        LiveData<List<PlaceEntity>> savedPlaces,
+                        List<PlaceEntity> savedPlaces,
                         RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
         this.savedPlaces = savedPlaces;
@@ -43,14 +43,14 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        PlaceEntity currentEntry = savedPlaces.getValue().get(position);
+        PlaceEntity currentEntry = savedPlaces.get(position);
 
         float scaleFactor = 0.4f;
 
         Bitmap photo = resizeBitmap(
                 decodeStringToBitmap(currentEntry.getImage().getImageData()),
                 scaleFactor);
-        String title = savedPlaces.getValue().get(position).getPlace().getName();
+        String title = savedPlaces.get(position).getPlace().getName();
         holder.cardImage.setImageBitmap(photo);
         holder.cardTitle.setText(title);
     }
@@ -68,7 +68,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder
 
     @Override
     public int getItemCount() {
-        return savedPlaces.getValue().size();
+        return savedPlaces.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
