@@ -9,17 +9,18 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/search_layout"
+        android:layout_marginTop="16dp"
+        android:id="@+id/radius_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <ImageView
             android:id="@+id/search_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/gps_icon"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,31 +28,29 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_search_location" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/radius_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_layout">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/search_radius"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/range_slider" />
 
         <com.google.android.material.slider.Slider
-            style="@style/App.Slider"
             android:id="@+id/range_slider"
+            style="@style/App.Slider"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="40dp"
             android:backgroundTint="@color/secondary"
             android:contentDescription="@string/radius_range_slider"
+            android:stepSize="0.1"
             android:valueFrom="0.5"
             android:valueTo="10"
-            android:stepSize="0.1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_icon"
             app:thumbColor="@color/accent"
             app:trackColor="@color/secondary" />
 
@@ -89,7 +88,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radius_layout">
+        app:layout_constraintTop_toBottomOf="@+id/radius_layout"
+        app:layout_constraintBottom_toTopOf="@+id/place_type_layout">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/price_1_button"
@@ -149,7 +149,8 @@
         app:justifyContent="space_around"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/price_option_layout">
+        app:layout_constraintTop_toBottomOf="@+id/price_option_layout"
+        app:layout_constraintBottom_toTopOf="@+id/place_type_layout2">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/place_type_restaurant"
@@ -183,6 +184,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="80dp"
         app:justifyContent="space_around"
+        app:layout_constraintBottom_toTopOf="@+id/button_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -197,7 +199,7 @@
             android:drawableStart="@drawable/ic_cafe"
             android:paddingLeft="19dp"
             android:paddingRight="19dp"
-            android:tag="cafe"/>
+            android:tag="cafe" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/place_type_pub"
@@ -208,10 +210,9 @@
             android:drawableStart="@drawable/ic_beer"
             android:paddingLeft="26dp"
             android:paddingRight="26dp"
-            android:tag="bar"
-            />
-
+            android:tag="bar" />
     </com.google.android.flexbox.FlexboxLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/button_layout"

@@ -44,4 +44,5 @@
     <string name="location_denied">Permission de localisation refusée. L\'application ne peut pas fonctionner sans accès au GPS.</string>
     <string name="place_deleted_prompt">Supprimé</string>
     <string name="place_saved_prompt">Ajoutée</string>
+    <string name="search_radius">Rayon de recherche</string>
 </resources>

@@ -43,4 +43,5 @@
     <string name="location_denied">Odmowa dostępu do lokalizacji. Aplikacja nie może działać bez dostępu do GPS.</string>
     <string name="place_deleted_prompt">Usunięto</string>
     <string name="place_saved_prompt">Zapisano</string>
+    <string name="search_radius">Promień wyszukiwania</string>
 </resources>
