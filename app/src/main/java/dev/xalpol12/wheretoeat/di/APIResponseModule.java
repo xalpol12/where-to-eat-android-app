@@ -79,7 +79,7 @@ public class APIResponseModule {
 
     @Singleton
     @Provides
-    public Retrofit getRetrofitClient(@Named("OkHttpClientDebug")
+    public Retrofit getRetrofitClient(@Named("OkHttpClientProd")
                                           OkHttpClient client) {
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)

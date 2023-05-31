@@ -5,21 +5,19 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
-import java.util.Objects;
 
 import dev.xalpol12.wheretoeat.R;
 import dev.xalpol12.wheretoeat.data.Place;
-import dev.xalpol12.wheretoeat.database.entity.PlaceEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -41,7 +39,19 @@ public class PlaceFragment extends Fragment {
     private ImageView saveButton;
     @Setter @Getter
     private View.OnClickListener saveButtonCallback;
-    private boolean isSaveButtonVisible = true;
+    private boolean isInitializedFromRecyclerView = false;
+
+    private AppCompatButton btnPrevious;
+    @Setter
+    private View.OnClickListener previousButtonCallback;
+
+    private AppCompatButton btnRandom;
+    @Setter
+    private View.OnClickListener randomButtonCallback;
+
+    private AppCompatButton btnGoThere;
+    @Setter
+    private View.OnClickListener goThereButtonCallback;
 
     public PlaceFragment() {
         super(R.layout.fragment_place);
@@ -52,7 +62,7 @@ public class PlaceFragment extends Fragment {
         this.place = place;
         this.photo = photo;
         userLocation = location;
-        isSaveButtonVisible = false;
+        isInitializedFromRecyclerView = true;
     }
 
     @Override
@@ -65,6 +75,7 @@ public class PlaceFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_place, container, false);
         initializeUI(view);
+        setOnClickListeners();
         updateUI();
         return view;
     }
@@ -93,17 +104,39 @@ public class PlaceFragment extends Fragment {
         address = view.findViewById(R.id.address);
         distance = view.findViewById(R.id.distance);
         openNow = view.findViewById(R.id.open_now);
+
         saveButton = view.findViewById(R.id.place_save_button);
-        saveButton.setOnClickListener(v -> {
-            saveButtonCallback.onClick(v);
-        });
         setSaveButtonVisibility();
+
+        btnPrevious = view.findViewById(R.id.previous_button);
+        btnRandom = view.findViewById(R.id.random_button);
+        btnGoThere = view.findViewById(R.id.go_there_button);
     }
 
     private void setSaveButtonVisibility() {
-        if (!isSaveButtonVisible) {
+        if (isInitializedFromRecyclerView) {
             saveButton.setVisibility(View.GONE);
+            btnPrevious.setVisibility(View.GONE);
+            btnRandom.setVisibility(View.GONE);
         }
+    }
+
+    private void setOnClickListeners() {
+        saveButton.setOnClickListener(v -> {
+            saveButtonCallback.onClick(v);
+        });
+
+        btnPrevious.setOnClickListener(v -> {
+            previousButtonCallback.onClick(v);
+        });
+
+        btnRandom.setOnClickListener(v -> {
+            randomButtonCallback.onClick(v);
+        });
+
+        btnGoThere.setOnClickListener(v -> {
+            goThereButtonCallback.onClick(v);
+        });
     }
 
     public void updateUI() {

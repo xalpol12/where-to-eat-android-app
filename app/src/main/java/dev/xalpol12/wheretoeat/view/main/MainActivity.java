@@ -36,6 +36,7 @@ import com.google.android.gms.location.Priority;
 import com.google.android.material.navigation.NavigationView;
 
 import dagger.hilt.android.AndroidEntryPoint;
+import dev.xalpol12.wheretoeat.LoadingScreenFragment;
 import dev.xalpol12.wheretoeat.R;
 import dev.xalpol12.wheretoeat.view.place.PlaceActivity;
 import dev.xalpol12.wheretoeat.view.utility.ScreenDensityHelper;
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private MainActivityViewModel mainViewModel;
     private PlaceActivityViewModel placeViewModel;
+    private Fragment currentFragment;
     private FusedLocationProviderClient fusedLocationClient;
     private ScreenDensityHelper screenHelper;
     private DrawerLayout drawerLayout;
@@ -100,6 +102,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void setImageListObserver() {
         placeViewModel.getImageList().observe(this, images -> {
             if (images != null && images.size() == 1) {
+                if (currentFragment.getClass().equals(FindPlaceFragment.class)){
+                    ((FindPlaceFragment) currentFragment).stopLoadingDialog();
+                }
                 startActivity(new Intent(MainActivity.this, PlaceActivity.class));
             }
         });
@@ -158,6 +163,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void replaceFragment(Fragment fragment) {
+        currentFragment = fragment;
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.main_activity_fragment_container, fragment)
@@ -183,13 +189,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void getGpsLocation() {
-        //getLastLocation();
-
-        mainViewModel.setRequestLocation(52.39f, 16.94f);  //Uncomment for debug purposes
-        android.location.Location location = new Location("provider");
-        location.setLatitude(56.39f);
-        location.setLongitude(10.94f);
-        placeViewModel.setCurrentLocation(location);
+        getLastLocation();
     }
 
     @SuppressLint("MissingPermission")

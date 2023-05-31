@@ -98,7 +98,7 @@ public class APIRepository {
         return imageList;
     }
 
-    public void clearImageList() { //TODO: fix this
+    public void clearImageList() {
         imageList.setValue(null);
     }
 

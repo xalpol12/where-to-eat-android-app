@@ -88,6 +88,7 @@ public class SavedPlacesFragment extends Fragment implements RecyclerViewInterfa
                 .replace(currentLayoutId, placeFragment, "Selected place fragment")
                 .addToBackStack(null)
                 .commit();
+        setButtonCallback();
     }
 
     private PlaceFragment createNewFragment(int itemPosition) {
@@ -98,6 +99,20 @@ public class SavedPlacesFragment extends Fragment implements RecyclerViewInterfa
         return new PlaceFragment(place, bitmap, location);
     }
 
+    private void setButtonCallback() {
+        View.OnClickListener goThereButtonClick = this::goThereButtonClick;
+        placeFragment.setGoThereButtonCallback(goThereButtonClick);
+    }
 
-
+    private void goThereButtonClick(View v) {
+        Toast.makeText(v.getContext(), "Button working properly", Toast.LENGTH_SHORT).show();
+//        Location location = viewModel.getCurrentPlaceLocation();
+//        String name = viewModel.getCurrentPlaceName();
+//        String strUri = "http://maps.google.com/maps?q=loc:" + location.getLat() + "," + location.getLng() + " (" + name + ")";
+//        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
+//
+//        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+//
+//        startActivity(intent);
+    }
 }

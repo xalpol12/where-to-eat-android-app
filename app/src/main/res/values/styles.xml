@@ -68,4 +68,10 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
+    <style name="LoadingDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/secondary</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>

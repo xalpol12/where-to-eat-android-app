@@ -8,6 +8,8 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
@@ -18,6 +20,7 @@ import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import dev.xalpol12.wheretoeat.R;
+import dev.xalpol12.wheretoeat.data.utility.Location;
 import dev.xalpol12.wheretoeat.database.entity.PlaceEntity;
 import dev.xalpol12.wheretoeat.viewmodel.PlaceActivityViewModel;
 import lombok.SneakyThrows;
@@ -27,9 +30,6 @@ public class PlaceActivity extends AppCompatActivity {
 
     private PlaceActivityViewModel placeViewModel;
     private PlaceFragment placeFragment;
-    private AppCompatButton btnPrevious;
-    private AppCompatButton btnRandom;
-    private AppCompatButton btnGoThere;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,14 +58,6 @@ public class PlaceActivity extends AppCompatActivity {
 
     private void initializeUI() {
         placeFragment = (PlaceFragment) getSupportFragmentManager().findFragmentById(R.id.place_fragment_container);
-
-        View.OnClickListener saveButtonClickListener = this::savePlaceButtonClick;
-        assert placeFragment != null;
-        placeFragment.setSaveButtonCallback(saveButtonClickListener);
-
-        btnPrevious = findViewById(R.id.previous_button);
-        btnRandom = findViewById(R.id.random_button);
-        btnGoThere = findViewById(R.id.go_there_button);
     }
 
     private void setPlaceFragment() {
@@ -75,14 +67,17 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void setOnClickListeners() {
+        View.OnClickListener saveButtonClickListener = this::savePlaceButtonClick;
+        placeFragment.setSaveButtonCallback(saveButtonClickListener);
+
         View.OnClickListener previousButtonClickListener = this::previousButtonClick;
-        btnPrevious.setOnClickListener(previousButtonClickListener);
+        placeFragment.setPreviousButtonCallback(previousButtonClickListener);
 
         View.OnClickListener randomButtonClickListener = this::randomButtonClick;
-        btnRandom.setOnClickListener(randomButtonClickListener);
+        placeFragment.setRandomButtonCallback(randomButtonClickListener);
 
         View.OnClickListener goThereButtonClickListener = this::goThereButtonClick;
-        btnGoThere.setOnClickListener(goThereButtonClickListener);
+        placeFragment.setGoThereButtonCallback(goThereButtonClickListener);
     }
 
     private void updateRibbonColor() {
@@ -120,20 +115,14 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void goThereButtonClick(View v) {
-        List<PlaceEntity> savedPlaces = placeViewModel.getAllPlaces().getValue();
-        if (savedPlaces != null) {
-            Toast.makeText(this, String.valueOf(savedPlaces.size()), Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "null value", Toast.LENGTH_SHORT).show();
-        }
-//        Location location = viewModel.getCurrentPlaceLocation();
-//        String name = viewModel.getCurrentPlaceName();
-//        String strUri = "http://maps.google.com/maps?q=loc:" + location.getLat() + "," + location.getLng() + " (" + name + ")";
-//        Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
-//
-//        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-//
-//        startActivity(intent);
+        Location location = placeViewModel.getCurrentPlaceLocation();
+        String name = placeViewModel.getCurrentPlaceName();
+        String strUri = "http://maps.google.com/maps?q=loc:" + location.getLat() + "," + location.getLng() + " (" + name + ")";
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(strUri));
+
+        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+
+        startActivity(intent);
     }
 
     private void setNextPlace() {
