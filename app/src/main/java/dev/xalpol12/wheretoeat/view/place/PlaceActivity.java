@@ -1,11 +1,15 @@
 package dev.xalpol12.wheretoeat.view.place;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -16,13 +20,13 @@ import dagger.hilt.android.AndroidEntryPoint;
 import dev.xalpol12.wheretoeat.R;
 import dev.xalpol12.wheretoeat.database.entity.PlaceEntity;
 import dev.xalpol12.wheretoeat.viewmodel.PlaceActivityViewModel;
+import lombok.SneakyThrows;
 
 @AndroidEntryPoint
 public class PlaceActivity extends AppCompatActivity {
 
     private PlaceActivityViewModel placeViewModel;
     private PlaceFragment placeFragment;
-    private ImageView saveButton;
     private AppCompatButton btnPrevious;
     private AppCompatButton btnRandom;
     private AppCompatButton btnGoThere;
@@ -36,7 +40,6 @@ public class PlaceActivity extends AppCompatActivity {
         initializeUI();
         setPlaceFragment();
         setOnClickListeners();
-//        bringButtonToFront();
     }
 
     @Override
@@ -55,11 +58,14 @@ public class PlaceActivity extends AppCompatActivity {
 
     private void initializeUI() {
         placeFragment = (PlaceFragment) getSupportFragmentManager().findFragmentById(R.id.place_fragment_container);
-        saveButton = findViewById(R.id.place_save_button);
+
+        View.OnClickListener saveButtonClickListener = this::savePlaceButtonClick;
+        assert placeFragment != null;
+        placeFragment.setSaveButtonCallback(saveButtonClickListener);
+
         btnPrevious = findViewById(R.id.previous_button);
         btnRandom = findViewById(R.id.random_button);
         btnGoThere = findViewById(R.id.go_there_button);
-        saveButton.bringToFront();
     }
 
     private void setPlaceFragment() {
@@ -69,9 +75,6 @@ public class PlaceActivity extends AppCompatActivity {
     }
 
     private void setOnClickListeners() {
-        View.OnClickListener saveButtonClickListener = this::savePlaceButtonClick;
-        saveButton.setOnClickListener(saveButtonClickListener);
-
         View.OnClickListener previousButtonClickListener = this::previousButtonClick;
         btnPrevious.setOnClickListener(previousButtonClickListener);
 
@@ -82,15 +85,11 @@ public class PlaceActivity extends AppCompatActivity {
         btnGoThere.setOnClickListener(goThereButtonClickListener);
     }
 
-//    private void bringButtonToFront() {
-//        saveButton.bringToFront();
-//    }
-
     private void updateRibbonColor() {
         if (isPlaceInDatabase()) {
-            saveButton.setColorFilter(ContextCompat.getColor(this, R.color.accent));
+            placeFragment.setColorFilterOnSaveButton(ContextCompat.getColor(this, R.color.accent));
         } else {
-            saveButton.setColorFilter(ContextCompat.getColor(this, R.color.secondary));
+            placeFragment.setColorFilterOnSaveButton(ContextCompat.getColor(this, R.color.secondary));
         }
     }
 

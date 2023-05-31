@@ -5,92 +5,140 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/place_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/place_save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="-20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:srcCompat="@drawable/ic_save_ribbon" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="362dp"
+        android:layout_height="0dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@id/place_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread"
+        app:layout_constraintVertical_weight="1">
 
         <ImageView
             android:id="@+id/place_image"
             android:layout_width="match_parent"
-            android:layout_height="175dp"
+            android:layout_height="match_parent"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/img_default_place_photo" />
 
-        <TextView
-            android:id="@+id/place_name"
-            style="@style/text_style"
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/place_layout"
+        android:layout_width="365dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintVertical_weight="2">
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/title_value"
-            android:textSize="22sp"
-            android:textStyle="bold" />
-
-        <com.google.android.flexbox.FlexboxLayout
-            android:id="@+id/rating_flexbox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:justifyContent="center">
-
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_star"
-                tools:layout_editor_absoluteX="32dp"
-                tools:layout_editor_absoluteY="206dp" />
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/rating_value"
-                android:textColor="@color/secondary"
-                android:textSize="18sp"
-                tools:layout_editor_absoluteX="76dp"
-                tools:layout_editor_absoluteY="206dp" />
+                android:id="@+id/place_name"
+                style="@style/text_style"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:text="@string/title_value"
+                android:textSize="22sp"
+                android:textStyle="bold" />
 
-        </com.google.android.flexbox.FlexboxLayout>
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/rating_flexbox"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                app:justifyContent="center">
 
-        <TextView
-            android:id="@+id/rating_count"
-            style="@style/text_style"
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_star"
+                    tools:layout_editor_absoluteX="32dp"
+                    tools:layout_editor_absoluteY="206dp" />
+
+                <TextView
+                    android:id="@+id/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rating_value"
+                    android:textColor="@color/secondary"
+                    android:textSize="18sp"
+                    tools:layout_editor_absoluteX="76dp"
+                    tools:layout_editor_absoluteY="206dp" />
+
+            </com.google.android.flexbox.FlexboxLayout>
+
+            <TextView
+                android:id="@+id/rating_count"
+                style="@style/text_style"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/dolor_sit_amet"
+                android:textSize="12sp" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/dolor_sit_amet"
-            android:textSize="12sp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/address"
-            style="@style/text_style"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/p_wiejska_42_pozna" />
+            <TextView
+                android:id="@+id/address"
+                style="@style/text_style"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="32dp"
+                android:layout_weight="1"
+                android:text="@string/p_wiejska_42_pozna" />
 
-        <TextView
-            android:id="@+id/distance"
-            style="@style/text_style"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/_0_5_km_away"
-            android:textSize="12sp" />
+            <TextView
+                android:id="@+id/distance"
+                style="@style/text_style"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/_0_5_km_away"
+                android:textSize="12sp" />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/open_now"
             style="@style/text_style"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_marginTop="24dp"
+            android:layout_weight="3"
             android:text="@string/open_now"
             android:textColor="@color/accent"
             android:textSize="11sp" />
 
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
