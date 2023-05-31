@@ -36,13 +36,11 @@ import com.google.android.gms.location.Priority;
 import com.google.android.material.navigation.NavigationView;
 
 import dagger.hilt.android.AndroidEntryPoint;
-import dev.xalpol12.wheretoeat.LoadingScreenFragment;
 import dev.xalpol12.wheretoeat.R;
 import dev.xalpol12.wheretoeat.view.place.PlaceActivity;
 import dev.xalpol12.wheretoeat.view.utility.ScreenDensityHelper;
 import dev.xalpol12.wheretoeat.viewmodel.MainActivityViewModel;
 import dev.xalpol12.wheretoeat.viewmodel.PlaceActivityViewModel;
-import dev.xalpol12.wheretoeat.viewmodel.adapter.RecyclerViewInterface;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {

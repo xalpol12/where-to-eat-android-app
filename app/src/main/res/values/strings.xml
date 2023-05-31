@@ -46,4 +46,5 @@
     <string name="todo" translatable="false">TODO</string>
     <string name="search_radius">Search radius</string>
     <string name="fetching_data_from_the_server">Fetching data from the server...</string>
+    <string name="my_github_profile">My github profile</string>
 </resources>

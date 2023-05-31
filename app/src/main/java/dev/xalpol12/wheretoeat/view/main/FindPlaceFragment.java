@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
-import dev.xalpol12.wheretoeat.LoadingScreenFragment;
 import dev.xalpol12.wheretoeat.R;
 import dev.xalpol12.wheretoeat.viewmodel.MainActivityViewModel;
 import dev.xalpol12.wheretoeat.viewmodel.PlaceActivityViewModel;

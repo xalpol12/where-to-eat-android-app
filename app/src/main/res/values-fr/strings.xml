@@ -45,5 +45,6 @@
     <string name="place_deleted_prompt">Supprimé</string>
     <string name="place_saved_prompt">Ajoutée</string>
     <string name="search_radius">Rayon de recherche</string>
-    <string name="fetching_data_from_the_server">Fetching data from the server...</string>
+    <string name="fetching_data_from_the_server">Récupération des données du serveur...</string>
+    <string name="my_github_profile">Mon profil github</string>
 </resources>

@@ -39,7 +39,7 @@ public class PlaceFragment extends Fragment {
     private ImageView saveButton;
     @Setter @Getter
     private View.OnClickListener saveButtonCallback;
-    private boolean isInitializedFromRecyclerView = false;
+    private boolean isInitializedFromRecyclerView = false; //not very clean-code of me...
 
     private AppCompatButton btnPrevious;
     @Setter
@@ -75,6 +75,7 @@ public class PlaceFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_place, container, false);
         initializeUI(view);
+        setSaveButtonVisibility();
         setOnClickListeners();
         updateUI();
         return view;
@@ -106,7 +107,6 @@ public class PlaceFragment extends Fragment {
         openNow = view.findViewById(R.id.open_now);
 
         saveButton = view.findViewById(R.id.place_save_button);
-        setSaveButtonVisibility();
 
         btnPrevious = view.findViewById(R.id.previous_button);
         btnRandom = view.findViewById(R.id.random_button);
@@ -122,21 +122,13 @@ public class PlaceFragment extends Fragment {
     }
 
     private void setOnClickListeners() {
-        saveButton.setOnClickListener(v -> {
-            saveButtonCallback.onClick(v);
-        });
+        saveButton.setOnClickListener(v -> saveButtonCallback.onClick(v));
 
-        btnPrevious.setOnClickListener(v -> {
-            previousButtonCallback.onClick(v);
-        });
+        btnPrevious.setOnClickListener(v -> previousButtonCallback.onClick(v));
 
-        btnRandom.setOnClickListener(v -> {
-            randomButtonCallback.onClick(v);
-        });
+        btnRandom.setOnClickListener(v -> randomButtonCallback.onClick(v));
 
-        btnGoThere.setOnClickListener(v -> {
-            goThereButtonCallback.onClick(v);
-        });
+        btnGoThere.setOnClickListener(v -> goThereButtonCallback.onClick(v));
     }
 
     public void updateUI() {
