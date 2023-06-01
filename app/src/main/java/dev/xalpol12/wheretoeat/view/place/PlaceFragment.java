@@ -23,7 +23,7 @@ import lombok.Setter;
 
 public class PlaceFragment extends Fragment {
     private final float METERS_IN_KILOMETER = 1000f;
-
+    @Getter
     private Place place;
     private Bitmap photo;
     private Location userLocation;
@@ -39,7 +39,7 @@ public class PlaceFragment extends Fragment {
     private ImageView saveButton;
     @Setter @Getter
     private View.OnClickListener saveButtonCallback;
-    private boolean isInitializedFromRecyclerView = false; //not very clean-code of me...
+    private boolean saveRibbonVisible = true; //not very clean-code of me...
 
     private AppCompatButton btnPrevious;
     @Setter
@@ -62,7 +62,6 @@ public class PlaceFragment extends Fragment {
         this.place = place;
         this.photo = photo;
         userLocation = location;
-        isInitializedFromRecyclerView = true;
     }
 
     @Override
@@ -75,7 +74,7 @@ public class PlaceFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_place, container, false);
         initializeUI(view);
-        setSaveButtonVisibility();
+        setComponentsVisibility();
         setOnClickListeners();
         updateUI();
         return view;
@@ -113,8 +112,12 @@ public class PlaceFragment extends Fragment {
         btnGoThere = view.findViewById(R.id.go_there_button);
     }
 
+    private void setComponentsVisibility() {
+        setSaveButtonVisibility();
+    }
+
     private void setSaveButtonVisibility() {
-        if (isInitializedFromRecyclerView) {
+        if (!saveRibbonVisible) {
             saveButton.setVisibility(View.GONE);
             btnPrevious.setVisibility(View.GONE);
             btnRandom.setVisibility(View.GONE);
@@ -164,5 +167,10 @@ public class PlaceFragment extends Fragment {
 
     public void setColorFilterOnSaveButton(int color) {
         saveButton.setColorFilter(color);
+    }
+
+    public PlaceFragment isSaveRibbonVisible(boolean saveRibbonVisible) {
+        this.saveRibbonVisible = saveRibbonVisible;
+        return this;
     }
 }

@@ -95,7 +95,8 @@ public class SavedPlacesFragment extends Fragment implements RecyclerViewInterfa
         Place place = placeEntity.getPlace();
         Bitmap bitmap = ImageDecoder.decode(placeEntity.getImage().getImageData());
         Location location = placeActivityViewModel.getCurrentLocation();
-        return new PlaceFragment(place, bitmap, location);
+        return new PlaceFragment(place, bitmap, location)
+                .isSaveRibbonVisible(false);
     }
 
     private void setButtonCallback() {
@@ -104,11 +105,11 @@ public class SavedPlacesFragment extends Fragment implements RecyclerViewInterfa
     }
 
     private void goThereButtonClick(View v) {
-        dev.xalpol12.wheretoeat.data.utility.Location location = placeActivityViewModel.getCurrentPlaceLocation();
-        String name = placeActivityViewModel.getCurrentPlaceName();
+        Place placeDisplayed = placeFragment.getPlace();
+        dev.xalpol12.wheretoeat.data.utility.Location location = placeDisplayed.getLocation();
+        String name = placeDisplayed.getName();
         String strUri = "http://maps.google.com/maps?q=loc:" + location.getLat() + "," + location.getLng() + " (" + name + ")";
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
-
         intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
 
         startActivity(intent);
