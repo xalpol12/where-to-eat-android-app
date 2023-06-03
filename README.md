@@ -1,12 +1,14 @@
 # Candy recognizer 
 ## Overview
-> Created as the end-of-semester project for Mobile Applications
+> The end-of-semester project for Mobile Applications
 
 This android app uses [Where-to-eat API](https://github.com/xalpol12/where-to-eat-backend) backend service to send and receive calls from
 
 Minimum supported Android version is: **Android 6.0**
 
-![Main view framed in phone mockup](./readme-scr/pixel_main_view.png)
+<p align="center">
+  <img src="./readme-scr/icon.png" />
+</p>
 
 ## General Information
 The application allows you to search for places nearby using the location provided by phone's GPS sensor. Request is sent to a remote server, which responds with a list of found, suitable places. The app then displays available results. 
@@ -19,6 +21,8 @@ User has the option to:
 All the details about the remote server endpoints can be found in [Where-to-eat API](https://github.com/xalpol12/where-to-eat-backend) documentation.
 
 Project is compliant with **MVVC** architecture and uses dependency injection provided by **Hilt**.
+
+App supports polish, english and french language.
 
 
 ## Technologies Used
@@ -37,11 +41,19 @@ Project is compliant with **MVVC** architecture and uses dependency injection pr
 
 ### Fragment: Place
 **Receives and displays a response from server**
+
+Click ribbon on the right to save currently displayed place to database
 ![Display found places](./readme-scr/place_display.png)
 
 ### Fragment: Saved places
 **Receives and displays a response from server**
-![Display saved places](./readme-scr/saved_places_scr.png)
+
+Swipe left to delete an entry, tap to display details
+![Display saved places](./readme-scr/saved_display.png)
+
+### Sidebar
+**Provides smooth navigation between fragments**
+![Sidebar](./readme-scr/sidebar_view.png)
 
 
 ## Setup
