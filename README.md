@@ -1,4 +1,4 @@
-# Candy recognizer 
+# Where to Eat - Android App
 ## Overview
 > The end-of-semester project for Mobile Applications
 
